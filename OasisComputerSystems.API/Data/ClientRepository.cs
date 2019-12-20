@@ -1,0 +1,87 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using OasisComputerSystems.API.Core;
+using OasisComputerSystems.API.Helpers;
+using OasisComputerSystems.API.Models;
+
+namespace OasisComputerSystems.API.Data
+{
+    public class ClientRepository : Repository<Client>, IClientRepository
+    {
+        private readonly DataContext _context;
+        public ClientRepository(DataContext context)
+            : base(context)
+        {
+            _context = context;
+        }
+
+        public async Task<PagedList<Client>> GetAll(ClientParams clientParams)
+        {
+            //Get Clients List
+            var clients = _context.Clients
+                .Where(c => c.IsDeleted == false)
+                .Include(c => c.Country)
+                .Include(c => c.CreatedBy)
+                .Include(c => c.UpdatedBy)
+                .Include(c => c.ClientsModules)
+                    .ThenInclude(c => c.SystemModule)
+                .Include(c => c.ClientContacts)
+                .Include(c => c.ClientContactSupports)
+                .OrderBy(c => c.NameEn)
+                .AsQueryable();
+
+            //Filter By
+            if (clientParams.Name != null)
+                clients = clients.Where(c => c.NameEn.Contains(clientParams.Name) || c.NameAr.Contains(clientParams.Name));
+
+            if (clientParams.CountryId.HasValue)
+                clients = clients.Where(c => c.CountryId == clientParams.CountryId);
+
+            if (clientParams.CreatedById.HasValue)
+                clients = clients.Where(c => c.CreatedById == clientParams.CreatedById);
+
+            //Order By
+            var columnsMap = OrderByColumnsMap();
+
+            if (clientParams.IsOrderAscending)
+                clients = clients.OrderBy(columnsMap[clientParams.OrderBy]);
+            else
+                clients = clients.OrderByDescending(columnsMap[clientParams.OrderBy]);
+
+            //Pagination
+            return await PagedList<Client>.CreateAsync(clients, clientParams.PageNumber, clientParams.PageSize);
+        }
+
+        public new async Task<Client> Get(int id)
+        {
+            return await _context.Clients
+                .Where(c => c.IsDeleted == false)
+                .Include(c => c.Country)
+                .Include(c => c.CreatedBy)
+                .Include(c => c.UpdatedBy)
+                .Include(c => c.ClientsModules)
+                    .ThenInclude(c => c.SystemModule)
+                .Include(c => c.ClientContacts)
+                .Include(c => c.ClientContactSupports)
+                .SingleOrDefaultAsync(c => c.Id == id);
+        }
+
+        private Dictionary<string, Expression<Func<Client, object>>> OrderByColumnsMap()
+        {
+            return new Dictionary<string, Expression<Func<Client, object>>>()
+            {
+                ["nameEn"] = c => c.NameEn,
+                ["nameAr"] = c => c.NameAr,
+                ["address"] = c => c.Address,
+                ["vATNo"] = c => c.VATNo,
+                ["telephoneNumber"] = c => c.TelephoneNumber,
+                ["createdBy"] = c => c.CreatedBy.FullNameEn,
+                ["updatedBy"] = c => c.UpdatedBy.FullNameEn
+            };
+        }
+    }
+}
