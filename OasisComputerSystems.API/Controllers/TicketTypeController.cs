@@ -10,23 +10,23 @@ namespace OasisComputerSystems.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PriorityController : ControllerBase
+    public class TicketTypeController : ControllerBase
     {
-        private readonly IPriorityRepository _repo;
+        private readonly ITicketTypeRepository _repo;
         private readonly IMapper _mapper;
 
-        public PriorityController(IPriorityRepository repo, IMapper mapper)
+        public TicketTypeController(ITicketTypeRepository repo, IMapper mapper)
         {
             _repo = repo;
             _mapper = mapper;
         }
 
         [HttpGet("[action]")]
-        public async Task<IActionResult> GetPriorities()
+        public async Task<IActionResult> GetTicketTypes()
         {
-            var priorities = await _repo.GetAll();
+            var ticketTypes = await _repo.GetAll();
 
-            var gendersToReturn = _mapper.Map<IEnumerable<KeyValuePairs>>(priorities);
+            var gendersToReturn = _mapper.Map<IEnumerable<KeyValuePairs>>(ticketTypes);
 
             return Ok(gendersToReturn);
         }

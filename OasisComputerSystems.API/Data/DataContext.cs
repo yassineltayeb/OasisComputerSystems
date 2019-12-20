@@ -22,6 +22,7 @@ namespace OasisComputerSystems.API.Data
         public DbSet<Priority> Priorities { get; set; }
         public DbSet<Religion> Religions { get; set; }
         public DbSet<SystemModule> SystemsModules { get; set; }
+        public DbSet<TicketType> TicketTypes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -108,6 +109,7 @@ namespace OasisComputerSystems.API.Data
                 new Priority { Id = 2, Name = "Normal" },
                 new Priority { Id = 3, Name = "High" }
             );
+
             //Roles
             builder.Entity<Role>().HasData(
                 new Role { Id = 1, Name = "Admin", NormalizedName = "ADMIN" },
@@ -130,6 +132,13 @@ namespace OasisComputerSystems.API.Data
                 new Role { Id = 11, Name = "Human Resources" },
                 new Role { Id = 12, Name = "Finance Management" },
                 new Role { Id = 13, Name = "System Administrator" }
+            );
+
+            //Ticket Types
+            builder.Entity<TicketType>().HasData(
+                new TicketType { Id = 1, Name = "Technical Support" },
+                new TicketType { Id = 2, Name = "System Bug" },
+                new TicketType { Id = 3, Name = "Change Request" }
             );
 
         }

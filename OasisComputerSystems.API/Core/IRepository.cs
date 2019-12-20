@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace OasisComputerSystems.API.Data
+namespace OasisComputerSystems.API.Core
 {
     public interface IRepository<T> where T : class
     {
