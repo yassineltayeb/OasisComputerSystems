@@ -19,6 +19,7 @@ namespace OasisComputerSystems.API.Data
         public DbSet<Gender> Genders { get; set; }
         public DbSet<MaritalStatus> MaritalStatuses { get; set; }
         public DbSet<Nationality> Nationalities { get; set; }
+        public DbSet<Priority> Priorities { get; set; }
         public DbSet<Religion> Religions { get; set; }
         public DbSet<SystemModule> SystemsModules { get; set; }
 
@@ -101,6 +102,12 @@ namespace OasisComputerSystems.API.Data
                 new Role { Id = 2, Name = "Non-Muslim" }
             );
 
+            //Priorities
+            builder.Entity<Priority>().HasData(
+                new Priority { Id = 1, Name = "Low" },
+                new Priority { Id = 2, Name = "Normal" },
+                new Priority { Id = 3, Name = "High" }
+            );
             //Roles
             builder.Entity<Role>().HasData(
                 new Role { Id = 1, Name = "Admin", NormalizedName = "ADMIN" },
