@@ -52,6 +52,7 @@ namespace OasisComputerSystems.API.Helpers
             CreateMap<Gender, KeyValuePairs>();
             CreateMap<MaritalStatus, KeyValuePairs>();
             CreateMap<Nationality, KeyValuePairs>();
+            CreateMap<Priority, KeyValuePairs>();
             CreateMap<Religion, KeyValuePairs>();
             CreateMap<SystemModule, KeyValuePairs>();
 
@@ -79,6 +80,7 @@ namespace OasisComputerSystems.API.Helpers
             CreateMap<KeyValuePairs, Gender>();
             CreateMap<KeyValuePairs, MaritalStatus>();
             CreateMap<KeyValuePairs, Nationality>();
+            CreateMap<KeyValuePairs, Priority>();
             CreateMap<KeyValuePairs, Religion>();
             CreateMap<KeyValuePairs, SystemModule>();
         }

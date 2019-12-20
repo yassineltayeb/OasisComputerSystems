@@ -40,6 +40,7 @@ namespace OasisComputerSystems.API
             services.AddScoped<IGenderRepository, GenderRepository>();
             services.AddScoped<IMaritalStatusRepository, MaritalStatusRepository>();
             services.AddScoped<INationalityRepository, NationalityRepository>();
+            services.AddScoped<IPriorityRepository, PriorityRepository>();
             services.AddScoped<IReligionRepository, ReligionRepository>();
             services.AddScoped<ISystemModuleRepository, SystemModuleRepository>();
 
