@@ -10,7 +10,7 @@ using OasisComputerSystems.API.Data;
 namespace OasisComputerSystems.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20191220160156_AddPriorities")]
+    [Migration("20191220161747_AddPriorities")]
     partial class AddPriorities
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -483,21 +483,21 @@ namespace OasisComputerSystems.API.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "6fb37bc7-2d35-44f3-88d8-1db6a5269d12",
+                            ConcurrencyStamp = "1a18a3e9-8c10-467e-af9a-8151569e2beb",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "2df7cfbb-0e89-47b4-98e5-a75bec95373f",
+                            ConcurrencyStamp = "aa79aef4-2a46-4225-89d7-bc348890e564",
                             Name = "Member",
                             NormalizedName = "MEMBER"
                         },
                         new
                         {
                             Id = 3,
-                            ConcurrencyStamp = "1ca9b968-e4c3-4b9b-a9f0-10e084d70a70",
+                            ConcurrencyStamp = "28b76dc4-a2a0-4c36-b21a-653454471c30",
                             Name = "Client",
                             NormalizedName = "CLIENT"
                         });

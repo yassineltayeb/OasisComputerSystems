@@ -24,21 +24,21 @@ namespace OasisComputerSystems.API.Migrations
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "ConcurrencyStamp",
-                value: "6fb37bc7-2d35-44f3-88d8-1db6a5269d12");
+                value: "1a18a3e9-8c10-467e-af9a-8151569e2beb");
 
             migrationBuilder.UpdateData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
                 keyValue: 2,
                 column: "ConcurrencyStamp",
-                value: "2df7cfbb-0e89-47b4-98e5-a75bec95373f");
+                value: "aa79aef4-2a46-4225-89d7-bc348890e564");
 
             migrationBuilder.UpdateData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
                 keyValue: 3,
                 column: "ConcurrencyStamp",
-                value: "1ca9b968-e4c3-4b9b-a9f0-10e084d70a70");
+                value: "28b76dc4-a2a0-4c36-b21a-653454471c30");
 
             migrationBuilder.InsertData(
                 table: "Priorities",
