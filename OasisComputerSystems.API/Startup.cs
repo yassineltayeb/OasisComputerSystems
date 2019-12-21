@@ -31,7 +31,10 @@ namespace OasisComputerSystems.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<DataContext>(options => 
+                options
+                .UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+                .EnableSensitiveDataLogging());
 
             //Add Repositories
             services.AddScoped<IAuthRepository, AuthRepository>();
@@ -43,6 +46,8 @@ namespace OasisComputerSystems.API
             services.AddScoped<IPriorityRepository, PriorityRepository>();
             services.AddScoped<IReligionRepository, ReligionRepository>();
             services.AddScoped<ISystemModuleRepository, SystemModuleRepository>();
+            services.AddScoped<ITicketRepository, TicketRepository>();
+            services.AddScoped<ITicketTypeRepository, TicketTypeRepository>();
 
             //To user custom user class
             services.AddIdentity<StaffProfile, Role>(options =>

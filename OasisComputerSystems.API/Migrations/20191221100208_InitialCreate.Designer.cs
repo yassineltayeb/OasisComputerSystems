@@ -10,8 +10,8 @@ using OasisComputerSystems.API.Data;
 namespace OasisComputerSystems.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20191220163139_AddTicketTypes")]
-    partial class AddTicketTypes
+    [Migration("20191221100208_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -123,8 +123,14 @@ namespace OasisComputerSystems.API.Migrations
                     b.Property<int>("CreatedById")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<int?>("DeletedById")
                         .HasColumnType("int");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -147,6 +153,9 @@ namespace OasisComputerSystems.API.Migrations
 
                     b.Property<int?>("UpdatedById")
                         .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("VATNo")
                         .HasColumnType("nvarchar(max)");
@@ -483,21 +492,21 @@ namespace OasisComputerSystems.API.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "9ae53380-63cc-4b7b-9f68-76e7cdb34c43",
+                            ConcurrencyStamp = "5b598fa4-da72-4e1b-9aa4-617f9b63df95",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "12ff3dc6-5ef3-4877-88b4-7c4055fcee0f",
+                            ConcurrencyStamp = "b182b802-5af3-43b3-b39f-dcb4e7df35e6",
                             Name = "Member",
                             NormalizedName = "MEMBER"
                         },
                         new
                         {
                             Id = 3,
-                            ConcurrencyStamp = "be505496-0fc0-4686-b139-a2869cb153aa",
+                            ConcurrencyStamp = "c1826220-34b4-4f37-8cd9-cc3950afe00b",
                             Name = "Client",
                             NormalizedName = "CLIENT"
                         });
@@ -721,6 +730,111 @@ namespace OasisComputerSystems.API.Migrations
                         });
                 });
 
+            modelBuilder.Entity("OasisComputerSystems.API.Models.Ticket", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("ApprovedById")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ApprovedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("AssignedToId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ClientId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ClosedById")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ClosedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("PriorityId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ProblemDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(255)")
+                        .HasMaxLength(255);
+
+                    b.Property<int>("SubmittedById")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("SubmittedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("SystemModuleId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TicketNo")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TicketTypeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApprovedById");
+
+                    b.HasIndex("AssignedToId");
+
+                    b.HasIndex("ClientId");
+
+                    b.HasIndex("ClosedById");
+
+                    b.HasIndex("PriorityId");
+
+                    b.HasIndex("SubmittedById");
+
+                    b.HasIndex("SystemModuleId");
+
+                    b.HasIndex("TicketTypeId");
+
+                    b.ToTable("Tickets");
+                });
+
+            modelBuilder.Entity("OasisComputerSystems.API.Models.TicketNote", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CreatedById")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("OasisComment")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("TicketId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedById");
+
+                    b.HasIndex("TicketId");
+
+                    b.ToTable("TicketNotes");
+                });
+
             modelBuilder.Entity("OasisComputerSystems.API.Models.TicketType", b =>
                 {
                     b.Property<int>("Id")
@@ -796,22 +910,24 @@ namespace OasisComputerSystems.API.Migrations
                     b.HasOne("OasisComputerSystems.API.Models.Country", "Country")
                         .WithMany()
                         .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("OasisComputerSystems.API.Models.StaffProfile", "CreatedBy")
                         .WithMany()
                         .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("OasisComputerSystems.API.Models.StaffProfile", "DeletedBy")
                         .WithMany()
-                        .HasForeignKey("DeletedById");
+                        .HasForeignKey("DeletedById")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("OasisComputerSystems.API.Models.StaffProfile", "UpdatedBy")
                         .WithMany()
-                        .HasForeignKey("UpdatedById");
+                        .HasForeignKey("UpdatedById")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("OasisComputerSystems.API.Models.ClientContact", b =>
@@ -819,7 +935,7 @@ namespace OasisComputerSystems.API.Migrations
                     b.HasOne("OasisComputerSystems.API.Models.Client", "Client")
                         .WithMany("ClientContacts")
                         .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -828,7 +944,7 @@ namespace OasisComputerSystems.API.Migrations
                     b.HasOne("OasisComputerSystems.API.Models.Client", "Client")
                         .WithMany("ClientContactSupports")
                         .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -837,13 +953,13 @@ namespace OasisComputerSystems.API.Migrations
                     b.HasOne("OasisComputerSystems.API.Models.Client", "Client")
                         .WithMany("ClientsModules")
                         .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("OasisComputerSystems.API.Models.SystemModule", "SystemModule")
                         .WithMany("ClientsModules")
                         .HasForeignKey("SystemModuleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -852,25 +968,25 @@ namespace OasisComputerSystems.API.Migrations
                     b.HasOne("OasisComputerSystems.API.Models.Gender", "Gender")
                         .WithMany()
                         .HasForeignKey("GenderId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("OasisComputerSystems.API.Models.MaritalStatus", "MaritalStatus")
                         .WithMany()
                         .HasForeignKey("MaritalStatusId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("OasisComputerSystems.API.Models.Nationality", "Nationality")
                         .WithMany()
                         .HasForeignKey("NationalityId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("OasisComputerSystems.API.Models.Religion", "Religion")
                         .WithMany()
                         .HasForeignKey("ReligionId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -879,13 +995,76 @@ namespace OasisComputerSystems.API.Migrations
                     b.HasOne("OasisComputerSystems.API.Models.Role", "Role")
                         .WithMany("StaffProfileRoles")
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("OasisComputerSystems.API.Models.StaffProfile", "StaffProfile")
                         .WithMany("StaffProfileRoles")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("OasisComputerSystems.API.Models.Ticket", b =>
+                {
+                    b.HasOne("OasisComputerSystems.API.Models.StaffProfile", "ApprovedBy")
+                        .WithMany()
+                        .HasForeignKey("ApprovedById")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("OasisComputerSystems.API.Models.StaffProfile", "AssignedTo")
+                        .WithMany()
+                        .HasForeignKey("AssignedToId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("OasisComputerSystems.API.Models.Client", "Client")
+                        .WithMany()
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("OasisComputerSystems.API.Models.StaffProfile", "ClosedBy")
+                        .WithMany()
+                        .HasForeignKey("ClosedById")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("OasisComputerSystems.API.Models.Priority", "Priority")
+                        .WithMany()
+                        .HasForeignKey("PriorityId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("OasisComputerSystems.API.Models.StaffProfile", "SubmittedBy")
+                        .WithMany()
+                        .HasForeignKey("SubmittedById")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("OasisComputerSystems.API.Models.SystemModule", "SystemModule")
+                        .WithMany()
+                        .HasForeignKey("SystemModuleId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("OasisComputerSystems.API.Models.TicketType", "TicketType")
+                        .WithMany()
+                        .HasForeignKey("TicketTypeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("OasisComputerSystems.API.Models.TicketNote", b =>
+                {
+                    b.HasOne("OasisComputerSystems.API.Models.StaffProfile", "CreatedBy")
+                        .WithMany()
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("OasisComputerSystems.API.Models.Ticket", "Ticket")
+                        .WithMany("TicketNotes")
+                        .HasForeignKey("TicketId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

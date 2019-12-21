@@ -47,11 +47,14 @@ namespace OasisComputerSystems.API.Data
             //Order By
             var columnsMap = OrderByColumnsMap();
 
-            if (clientParams.IsOrderAscending)
-                clients = clients.OrderBy(columnsMap[clientParams.OrderBy]);
-            else
-                clients = clients.OrderByDescending(columnsMap[clientParams.OrderBy]);
-
+            if (clientParams.OrderBy != null)
+            {
+                if (clientParams.IsOrderAscending)
+                    clients = clients.OrderBy(columnsMap[clientParams.OrderBy]);
+                else
+                    clients = clients.OrderByDescending(columnsMap[clientParams.OrderBy]);
+            }
+            
             //Pagination
             return await PagedList<Client>.CreateAsync(clients, clientParams.PageNumber, clientParams.PageSize);
         }
@@ -79,8 +82,12 @@ namespace OasisComputerSystems.API.Data
                 ["address"] = c => c.Address,
                 ["vATNo"] = c => c.VATNo,
                 ["telephoneNumber"] = c => c.TelephoneNumber,
+                ["countryId"] = c => c.Country.Name,
+                ["technicalDetails"] = c => c.TechnicalDetails,
                 ["createdBy"] = c => c.CreatedBy.FullNameEn,
-                ["updatedBy"] = c => c.UpdatedBy.FullNameEn
+                ["createdOn"] = c => c.CreatedOn,
+                ["updatedBy"] = c => c.UpdatedBy.FullNameEn,
+                ["updatedOn"] = c => c.UpdatedOn
             };
         }
     }

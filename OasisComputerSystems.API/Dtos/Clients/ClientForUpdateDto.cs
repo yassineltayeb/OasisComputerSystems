@@ -1,7 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
-using OasisComputerSystems.API.Models;
 
 namespace OasisComputerSystems.API.Dtos.Clients
 {
@@ -18,12 +18,14 @@ namespace OasisComputerSystems.API.Dtos.Clients
         public string TelephoneNumber { get; set; }
         public int CountryId { get; set; }
         public string TechnicalDetails { get; set; }
-        public ICollection<ClientsModulesForRegisterDto> ClientsModules { get; set; }      
+        public DateTime? UpdatedOn { get; set; }
+        public ICollection<ClientsModulesForRegisterDto> ClientsModules { get; set; }
         public ICollection<ClientContactForRegisterDto> ClientContacts { get; set; }
         public ICollection<ClientContactSupportForRegisterDto> ClientContactSupports { get; set; }
 
         public ClientForUpdateDto()
         {
+            UpdatedOn = DateTime.Now;
             ClientsModules = new Collection<ClientsModulesForRegisterDto>();
             ClientContacts = new Collection<ClientContactForRegisterDto>();
             ClientContactSupports = new Collection<ClientContactSupportForRegisterDto>();

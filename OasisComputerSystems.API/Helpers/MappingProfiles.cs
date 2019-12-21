@@ -1,8 +1,8 @@
-using System.Linq;
 using AutoMapper;
 using OasisComputerSystems.API.Dtos;
 using OasisComputerSystems.API.Dtos.Clients;
-using OasisComputerSystems.API.Dtos.StaffProfile;
+using OasisComputerSystems.API.Dtos.StaffProfiles;
+using OasisComputerSystems.API.Dtos.Tickets;
 using OasisComputerSystems.API.Models;
 
 namespace OasisComputerSystems.API.Helpers
@@ -46,6 +46,26 @@ namespace OasisComputerSystems.API.Helpers
 
             CreateMap<ClientsModules, ClientsModulesForDetailsDto>();
 
+            //Tickets
+            CreateMap<Ticket, TicketForRegisterDto>();
+            CreateMap<Ticket, TicketForUpdateDto>();
+            
+            CreateMap<Ticket, TicketForListDto>()
+                .ForMember(dest => dest.Priority, opt => opt.MapFrom(src => src.Priority.Name))
+                .ForMember(dest => dest.TicketType, opt => opt.MapFrom(src => src.TicketType.Name))
+                .ForMember(dest => dest.AssignedTo, opt => opt.MapFrom(src => src.AssignedTo.FullNameEn))
+                .ForMember(dest => dest.SystemModule, opt => opt.MapFrom(src => src.SystemModule.Name))
+                .ForMember(dest => dest.SubmittedBy, opt => opt.MapFrom(src => src.SubmittedBy.FullNameEn))
+                .ForMember(dest => dest.ClosedBy, opt => opt.MapFrom(src => src.ClosedBy.FullNameEn))
+                .ForMember(dest => dest.ApprovedBy, opt => opt.MapFrom(src => src.ApprovedBy.FullNameEn));
+
+
+            CreateMap<TicketNote, TicketNoteForRegisterDto>();
+
+            CreateMap<TicketNote, TicketNoteForListDto>()
+                .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(src => src.CreatedBy.FullNameEn));
+
+
 
             //Key Value Pairs
             CreateMap<Country, KeyValuePairs>();
@@ -55,6 +75,7 @@ namespace OasisComputerSystems.API.Helpers
             CreateMap<Priority, KeyValuePairs>();
             CreateMap<Religion, KeyValuePairs>();
             CreateMap<SystemModule, KeyValuePairs>();
+            CreateMap<TicketType, KeyValuePairs>();
 
             // //Dto to Model
             //Staff Profiles
@@ -74,6 +95,15 @@ namespace OasisComputerSystems.API.Helpers
             CreateMap<ClientsModulesForRegisterDto, ClientsModules>();
             CreateMap<ClientsModulesForDetailsDto, ClientsModules>();
 
+            //Tickets
+            CreateMap<TicketForRegisterDto, Ticket>();
+
+            CreateMap<TicketForUpdateDto, Ticket>()
+                .ForMember(x => x.Id, opt => opt.Ignore());
+                
+            CreateMap<TicketForListDto, Ticket>();
+            CreateMap<TicketNoteForRegisterDto, TicketNote>();
+            CreateMap<TicketNoteForListDto, TicketNote>();
 
             //Key Value Pairs
             CreateMap<KeyValuePairs, Country>();
@@ -83,6 +113,8 @@ namespace OasisComputerSystems.API.Helpers
             CreateMap<KeyValuePairs, Priority>();
             CreateMap<KeyValuePairs, Religion>();
             CreateMap<KeyValuePairs, SystemModule>();
+            CreateMap<KeyValuePairs, TicketType>();
+
         }
 
 

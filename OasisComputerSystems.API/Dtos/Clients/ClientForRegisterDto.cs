@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
@@ -20,12 +21,14 @@ namespace OasisComputerSystems.API.Dtos.Clients
         public int CountryId { get; set; }
         public Country Country { get; set; }
         public string TechnicalDetails { get; set; }
-        public ICollection<ClientsModulesForRegisterDto> ClientsModules { get; set; }      
+        public DateTime CreatedOn { get; set; }
+        public ICollection<ClientsModulesForRegisterDto> ClientsModules { get; set; }
         public ICollection<ClientContactForRegisterDto> ClientContacts { get; set; }
         public ICollection<ClientContactSupportForRegisterDto> ClientContactSupports { get; set; }
 
         public ClientForRegisterDto()
         {
+            CreatedOn = DateTime.Now;
             ClientsModules = new Collection<ClientsModulesForRegisterDto>();
             ClientContacts = new Collection<ClientContactForRegisterDto>();
             ClientContactSupports = new Collection<ClientContactSupportForRegisterDto>();

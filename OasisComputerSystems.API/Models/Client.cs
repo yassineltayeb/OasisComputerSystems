@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace OasisComputerSystems.API.Models
@@ -20,14 +22,24 @@ namespace OasisComputerSystems.API.Models
         public string TechnicalDetails { get; set; }
         public int CreatedById { get; set; }
         public StaffProfile CreatedBy { get; set; }
+        public DateTime CreatedOn { get; set; }
         public int? UpdatedById { get; set; }
         public StaffProfile UpdatedBy { get; set; }
-
+        public DateTime? UpdatedOn { get; set; }
         public bool IsDeleted { get; set; }
         public int? DeletedById { get; set; }
         public StaffProfile DeletedBy { get; set; }
+        public DateTime? DeletedOn { get; set; }
         public ICollection<ClientsModules> ClientsModules { get; set; }      
         public ICollection<ClientContact> ClientContacts { get; set; }
         public ICollection<ClientContactSupport> ClientContactSupports { get; set; }
+
+        public Client()
+        {
+            CreatedOn = DateTime.Now;
+            ClientsModules = new Collection<ClientsModules>();
+            ClientContacts = new Collection<ClientContact>();
+            ClientContactSupports = new Collection<ClientContactSupport>();
+        }
     }
 }

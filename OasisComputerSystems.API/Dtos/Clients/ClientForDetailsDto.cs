@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using OasisComputerSystems.API.Models;
@@ -17,9 +18,15 @@ namespace OasisComputerSystems.API.Dtos.Clients
         public string TechnicalDetails { get; set; }
         public int CreatedById { get; set; }
         public string CreatedBy { get; set; }
+        public DateTime CreatedOn { get; set; }
         public int? UpdatedById { get; set; }
         public string UpdatedBy { get; set; }
-        public ICollection<ClientsModulesForDetailsDto> ClientsModules { get; set; }      
+        public DateTime UpdatedOn { get; set; }
+        public bool IsDeleted { get; set; }
+        public int? DeletedById { get; set; }
+        public DateTime? DeletedOn { get; set; }
+        public string DeletedBy { get; set; }
+        public ICollection<ClientsModulesForDetailsDto> ClientsModules { get; set; }
         public ICollection<ClientContactForDetailsDto> ClientContacts { get; set; }
         public ICollection<ClientContactSupportForDetailsDto> ClientContactSupports { get; set; }
 

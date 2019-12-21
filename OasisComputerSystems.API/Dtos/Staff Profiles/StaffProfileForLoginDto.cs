@@ -1,4 +1,4 @@
-namespace OasisComputerSystems.API.Dtos.StaffProfile
+namespace OasisComputerSystems.API.Dtos.StaffProfiles
 {
     public class StaffProfileForLoginDto
     {

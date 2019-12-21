@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using OasisComputerSystems.API.Models;
 
-namespace OasisComputerSystems.API.Dtos.StaffProfile
+namespace OasisComputerSystems.API.Dtos.StaffProfiles
 {
     public class StaffProfileForRegisterDto
     {

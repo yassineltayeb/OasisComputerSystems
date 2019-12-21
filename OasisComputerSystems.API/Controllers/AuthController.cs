@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using AutoMapper;
-using OasisComputerSystems.API.Dtos.StaffProfile;
+using OasisComputerSystems.API.Dtos.StaffProfiles;
 using OasisComputerSystems.API.Models;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;

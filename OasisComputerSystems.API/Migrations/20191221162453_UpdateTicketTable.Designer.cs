@@ -10,8 +10,8 @@ using OasisComputerSystems.API.Data;
 namespace OasisComputerSystems.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20191214133748_InitialModels")]
-    partial class InitialModels
+    [Migration("20191221162453_UpdateTicketTable")]
+    partial class UpdateTicketTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -123,6 +123,18 @@ namespace OasisComputerSystems.API.Migrations
                     b.Property<int>("CreatedById")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("DeletedById")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("NameAr")
                         .IsRequired()
                         .HasColumnType("nvarchar(255)")
@@ -142,6 +154,9 @@ namespace OasisComputerSystems.API.Migrations
                     b.Property<int?>("UpdatedById")
                         .HasColumnType("int");
 
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("VATNo")
                         .HasColumnType("nvarchar(max)");
 
@@ -151,9 +166,223 @@ namespace OasisComputerSystems.API.Migrations
 
                     b.HasIndex("CreatedById");
 
+                    b.HasIndex("DeletedById");
+
                     b.HasIndex("UpdatedById");
 
                     b.ToTable("Clients");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Address = "Mauritius - Port Louis",
+                            CountryId = 6,
+                            CreatedById = 1,
+                            CreatedOn = new DateTime(2019, 12, 21, 18, 24, 52, 830, DateTimeKind.Local).AddTicks(3868),
+                            IsDeleted = false,
+                            NameAr = "وسيط المدينة",
+                            NameEn = "City Brokers",
+                            TechnicalDetails = "Details 1",
+                            TelephoneNumber = "11",
+                            VATNo = "1"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Address = "Saudi Arabia - Jeddah",
+                            CountryId = 2,
+                            CreatedById = 1,
+                            CreatedOn = new DateTime(2019, 12, 21, 18, 24, 52, 830, DateTimeKind.Local).AddTicks(4307),
+                            IsDeleted = false,
+                            NameAr = "مسارات",
+                            NameEn = "Masarat",
+                            TechnicalDetails = "Details 2",
+                            TelephoneNumber = "22",
+                            VATNo = "2"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Address = "Lebanon - Beirut",
+                            CountryId = 3,
+                            CreatedById = 1,
+                            CreatedOn = new DateTime(2019, 12, 21, 18, 24, 52, 830, DateTimeKind.Local).AddTicks(4316),
+                            IsDeleted = false,
+                            NameAr = "بلاتينيوم",
+                            NameEn = "Platinum",
+                            TechnicalDetails = "Details 3",
+                            TelephoneNumber = "33",
+                            VATNo = "3"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Address = "Lebanon - Beirut",
+                            CountryId = 3,
+                            CreatedById = 1,
+                            CreatedOn = new DateTime(2019, 12, 21, 18, 24, 52, 830, DateTimeKind.Local).AddTicks(4327),
+                            IsDeleted = false,
+                            NameAr = "قروب ميد",
+                            NameEn = "GMRB",
+                            TechnicalDetails = "Details 4",
+                            TelephoneNumber = "44",
+                            VATNo = "4"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Address = "Saudi Arabia - Jeddah",
+                            CountryId = 2,
+                            CreatedById = 1,
+                            CreatedOn = new DateTime(2019, 12, 21, 18, 24, 52, 830, DateTimeKind.Local).AddTicks(4333),
+                            IsDeleted = false,
+                            NameAr = "قروب ميد",
+                            NameEn = "GMIB",
+                            TechnicalDetails = "Details 5",
+                            TelephoneNumber = "55",
+                            VATNo = "5"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Address = "UAE - Dubai",
+                            CountryId = 4,
+                            CreatedById = 1,
+                            CreatedOn = new DateTime(2019, 12, 21, 18, 24, 52, 830, DateTimeKind.Local).AddTicks(4340),
+                            IsDeleted = false,
+                            NameAr = "الحماية",
+                            NameEn = "Alhimaya",
+                            TechnicalDetails = "Details 6",
+                            TelephoneNumber = "66",
+                            VATNo = "6"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Address = "UAE - Dubai",
+                            CountryId = 4,
+                            CreatedById = 1,
+                            CreatedOn = new DateTime(2019, 12, 21, 18, 24, 52, 830, DateTimeKind.Local).AddTicks(4345),
+                            IsDeleted = false,
+                            NameAr = "المنارة",
+                            NameEn = "Al Manarah",
+                            TechnicalDetails = "Details 7",
+                            TelephoneNumber = "77",
+                            VATNo = "7"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Address = "Saudi Arabia - Jeddah",
+                            CountryId = 2,
+                            CreatedById = 1,
+                            CreatedOn = new DateTime(2019, 12, 21, 18, 24, 52, 830, DateTimeKind.Local).AddTicks(4352),
+                            IsDeleted = false,
+                            NameAr = "اب بلس",
+                            NameEn = "APPlus",
+                            TechnicalDetails = "Details 8",
+                            TelephoneNumber = "88",
+                            VATNo = "8"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Address = "Saudi Arabia - Riyadh",
+                            CountryId = 2,
+                            CreatedById = 1,
+                            CreatedOn = new DateTime(2019, 12, 21, 18, 24, 52, 830, DateTimeKind.Local).AddTicks(4357),
+                            IsDeleted = false,
+                            NameAr = "افق",
+                            NameEn = "Ofooq",
+                            TechnicalDetails = "Details 99",
+                            TelephoneNumber = "99",
+                            VATNo = "9"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Address = "Saudi Arabia - Jeddah",
+                            CountryId = 2,
+                            CreatedById = 1,
+                            CreatedOn = new DateTime(2019, 12, 21, 18, 24, 52, 830, DateTimeKind.Local).AddTicks(4363),
+                            IsDeleted = false,
+                            NameAr = "كونكورد",
+                            NameEn = "Concord",
+                            TechnicalDetails = "Details 10",
+                            TelephoneNumber = "1010",
+                            VATNo = "10"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Address = "Saudi Arabia - Riyadh",
+                            CountryId = 2,
+                            CreatedById = 1,
+                            CreatedOn = new DateTime(2019, 12, 21, 18, 24, 52, 830, DateTimeKind.Local).AddTicks(4370),
+                            IsDeleted = false,
+                            NameAr = "بروكر كير",
+                            NameEn = "Broker Care",
+                            TechnicalDetails = "Details 11",
+                            TelephoneNumber = "1111",
+                            VATNo = "11"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Address = "Saudi Arabia - Jeddah",
+                            CountryId = 2,
+                            CreatedById = 1,
+                            CreatedOn = new DateTime(2019, 12, 21, 18, 24, 52, 830, DateTimeKind.Local).AddTicks(4377),
+                            IsDeleted = false,
+                            NameAr = "رؤية الوسيط",
+                            NameEn = "Broker Vision",
+                            TechnicalDetails = "Details 12",
+                            TelephoneNumber = "1212",
+                            VATNo = "12"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Address = "Saudi Arabia - Jeddah",
+                            CountryId = 2,
+                            CreatedById = 1,
+                            CreatedOn = new DateTime(2019, 12, 21, 18, 24, 52, 830, DateTimeKind.Local).AddTicks(4383),
+                            IsDeleted = false,
+                            NameAr = "حازم",
+                            NameEn = "Hazim",
+                            TechnicalDetails = "Details 13",
+                            TelephoneNumber = "1313",
+                            VATNo = "13"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Address = "Sudan - Khartoum",
+                            CountryId = 1,
+                            CreatedById = 1,
+                            CreatedOn = new DateTime(2019, 12, 21, 18, 24, 52, 830, DateTimeKind.Local).AddTicks(4389),
+                            IsDeleted = false,
+                            NameAr = "النيلين للتأمين",
+                            NameEn = "Elnilein Insurance Company",
+                            TechnicalDetails = "Details 14",
+                            TelephoneNumber = "1414",
+                            VATNo = "14"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Address = "Sudan - Khartoum",
+                            CountryId = 1,
+                            CreatedById = 1,
+                            CreatedOn = new DateTime(2019, 12, 21, 18, 24, 52, 830, DateTimeKind.Local).AddTicks(4487),
+                            IsDeleted = false,
+                            NameAr = "سويسس",
+                            NameEn = "Swiss",
+                            TechnicalDetails = "Details 15",
+                            TelephoneNumber = "1515",
+                            VATNo = "15"
+                        });
                 });
 
             modelBuilder.Entity("OasisComputerSystems.API.Models.ClientContact", b =>
@@ -380,6 +609,40 @@ namespace OasisComputerSystems.API.Migrations
                         });
                 });
 
+            modelBuilder.Entity("OasisComputerSystems.API.Models.Priority", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(10)")
+                        .HasMaxLength(10);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Priorities");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Low"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Normal"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "High"
+                        });
+                });
+
             modelBuilder.Entity("OasisComputerSystems.API.Models.Religion", b =>
                 {
                     b.Property<int>("Id")
@@ -441,21 +704,21 @@ namespace OasisComputerSystems.API.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "c4030f6c-c4e8-457f-85fa-52c335fd2ccf",
+                            ConcurrencyStamp = "6a158eaf-6d9b-4511-985e-8a2b08a76f76",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "684cc15f-9eab-4ffb-b39c-33cbe915d342",
+                            ConcurrencyStamp = "a2313849-5dfa-4d60-9aa8-a1389e5a5f42",
                             Name = "Member",
                             NormalizedName = "MEMBER"
                         },
                         new
                         {
                             Id = 3,
-                            ConcurrencyStamp = "834a2851-0b58-497e-9234-9a64a6d7d17d",
+                            ConcurrencyStamp = "aaba3fc9-4340-4d42-82db-c48e44abf72e",
                             Name = "Client",
                             NormalizedName = "CLIENT"
                         });
@@ -679,6 +942,145 @@ namespace OasisComputerSystems.API.Migrations
                         });
                 });
 
+            modelBuilder.Entity("OasisComputerSystems.API.Models.Ticket", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("ApprovedById")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ApprovedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("AssignedToId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ClientId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ClosedById")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ClosedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("PriorityId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ProblemDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(255)")
+                        .HasMaxLength(255);
+
+                    b.Property<int>("SubmittedById")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("SubmittedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("SystemModuleId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TicketNo")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TicketTypeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApprovedById");
+
+                    b.HasIndex("AssignedToId");
+
+                    b.HasIndex("ClientId");
+
+                    b.HasIndex("ClosedById");
+
+                    b.HasIndex("PriorityId");
+
+                    b.HasIndex("SubmittedById");
+
+                    b.HasIndex("SystemModuleId");
+
+                    b.HasIndex("TicketTypeId");
+
+                    b.ToTable("Tickets");
+                });
+
+            modelBuilder.Entity("OasisComputerSystems.API.Models.TicketNote", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CreatedById")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("OasisComment")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("TicketId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedById");
+
+                    b.HasIndex("TicketId");
+
+                    b.ToTable("TicketNotes");
+                });
+
+            modelBuilder.Entity("OasisComputerSystems.API.Models.TicketType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TicketTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Technical Support"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "System Bug"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Change Request"
+                        });
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.HasOne("OasisComputerSystems.API.Models.Role", null)
@@ -720,18 +1122,24 @@ namespace OasisComputerSystems.API.Migrations
                     b.HasOne("OasisComputerSystems.API.Models.Country", "Country")
                         .WithMany()
                         .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("OasisComputerSystems.API.Models.StaffProfile", "CreatedBy")
                         .WithMany()
                         .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("OasisComputerSystems.API.Models.StaffProfile", "DeletedBy")
+                        .WithMany()
+                        .HasForeignKey("DeletedById")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("OasisComputerSystems.API.Models.StaffProfile", "UpdatedBy")
                         .WithMany()
-                        .HasForeignKey("UpdatedById");
+                        .HasForeignKey("UpdatedById")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("OasisComputerSystems.API.Models.ClientContact", b =>
@@ -739,7 +1147,7 @@ namespace OasisComputerSystems.API.Migrations
                     b.HasOne("OasisComputerSystems.API.Models.Client", "Client")
                         .WithMany("ClientContacts")
                         .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -748,7 +1156,7 @@ namespace OasisComputerSystems.API.Migrations
                     b.HasOne("OasisComputerSystems.API.Models.Client", "Client")
                         .WithMany("ClientContactSupports")
                         .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -757,13 +1165,13 @@ namespace OasisComputerSystems.API.Migrations
                     b.HasOne("OasisComputerSystems.API.Models.Client", "Client")
                         .WithMany("ClientsModules")
                         .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("OasisComputerSystems.API.Models.SystemModule", "SystemModule")
                         .WithMany("ClientsModules")
                         .HasForeignKey("SystemModuleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -772,25 +1180,25 @@ namespace OasisComputerSystems.API.Migrations
                     b.HasOne("OasisComputerSystems.API.Models.Gender", "Gender")
                         .WithMany()
                         .HasForeignKey("GenderId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("OasisComputerSystems.API.Models.MaritalStatus", "MaritalStatus")
                         .WithMany()
                         .HasForeignKey("MaritalStatusId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("OasisComputerSystems.API.Models.Nationality", "Nationality")
                         .WithMany()
                         .HasForeignKey("NationalityId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("OasisComputerSystems.API.Models.Religion", "Religion")
                         .WithMany()
                         .HasForeignKey("ReligionId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -799,13 +1207,76 @@ namespace OasisComputerSystems.API.Migrations
                     b.HasOne("OasisComputerSystems.API.Models.Role", "Role")
                         .WithMany("StaffProfileRoles")
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("OasisComputerSystems.API.Models.StaffProfile", "StaffProfile")
                         .WithMany("StaffProfileRoles")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("OasisComputerSystems.API.Models.Ticket", b =>
+                {
+                    b.HasOne("OasisComputerSystems.API.Models.StaffProfile", "ApprovedBy")
+                        .WithMany()
+                        .HasForeignKey("ApprovedById")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("OasisComputerSystems.API.Models.StaffProfile", "AssignedTo")
+                        .WithMany()
+                        .HasForeignKey("AssignedToId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("OasisComputerSystems.API.Models.Client", "Client")
+                        .WithMany()
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("OasisComputerSystems.API.Models.StaffProfile", "ClosedBy")
+                        .WithMany()
+                        .HasForeignKey("ClosedById")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("OasisComputerSystems.API.Models.Priority", "Priority")
+                        .WithMany()
+                        .HasForeignKey("PriorityId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("OasisComputerSystems.API.Models.StaffProfile", "SubmittedBy")
+                        .WithMany()
+                        .HasForeignKey("SubmittedById")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("OasisComputerSystems.API.Models.SystemModule", "SystemModule")
+                        .WithMany()
+                        .HasForeignKey("SystemModuleId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("OasisComputerSystems.API.Models.TicketType", "TicketType")
+                        .WithMany()
+                        .HasForeignKey("TicketTypeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("OasisComputerSystems.API.Models.TicketNote", b =>
+                {
+                    b.HasOne("OasisComputerSystems.API.Models.StaffProfile", "CreatedBy")
+                        .WithMany()
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("OasisComputerSystems.API.Models.Ticket", "Ticket")
+                        .WithMany("TicketNotes")
+                        .HasForeignKey("TicketId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace OasisComputerSystems.API.Migrations
 {
-    public partial class InitialModels : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -75,6 +75,19 @@ namespace OasisComputerSystems.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Priorities",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(maxLength: 10, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Priorities", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Religions",
                 columns: table => new
                 {
@@ -98,6 +111,19 @@ namespace OasisComputerSystems.API.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SystemsModules", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TicketTypes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(maxLength: 50, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TicketTypes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -162,25 +188,25 @@ namespace OasisComputerSystems.API.Migrations
                         column: x => x.GenderId,
                         principalTable: "Genders",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_AspNetUsers_MaritalStatuses_MaritalStatusId",
                         column: x => x.MaritalStatusId,
                         principalTable: "MaritalStatuses",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_AspNetUsers_Nationalities_NationalityId",
                         column: x => x.NationalityId,
                         principalTable: "Nationalities",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_AspNetUsers_Religions_ReligionId",
                         column: x => x.ReligionId,
                         principalTable: "Religions",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -239,13 +265,13 @@ namespace OasisComputerSystems.API.Migrations
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_AspNetUserRoles_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -282,7 +308,12 @@ namespace OasisComputerSystems.API.Migrations
                     CountryId = table.Column<int>(nullable: false),
                     TechnicalDetails = table.Column<string>(nullable: true),
                     CreatedById = table.Column<int>(nullable: false),
-                    UpdatedById = table.Column<int>(nullable: true)
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    UpdatedById = table.Column<int>(nullable: true),
+                    UpdatedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedById = table.Column<int>(nullable: true),
+                    DeletedOn = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -292,13 +323,19 @@ namespace OasisComputerSystems.API.Migrations
                         column: x => x.CountryId,
                         principalTable: "Countries",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Clients_AspNetUsers_CreatedById",
                         column: x => x.CreatedById,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Clients_AspNetUsers_DeletedById",
+                        column: x => x.DeletedById,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Clients_AspNetUsers_UpdatedById",
                         column: x => x.UpdatedById,
@@ -327,7 +364,7 @@ namespace OasisComputerSystems.API.Migrations
                         column: x => x.ClientId,
                         principalTable: "Clients",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -350,7 +387,7 @@ namespace OasisComputerSystems.API.Migrations
                         column: x => x.ClientId,
                         principalTable: "Clients",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -368,13 +405,116 @@ namespace OasisComputerSystems.API.Migrations
                         column: x => x.ClientId,
                         principalTable: "Clients",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_ClientsModules_SystemsModules_SystemModuleId",
                         column: x => x.SystemModuleId,
                         principalTable: "SystemsModules",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Tickets",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ClientId = table.Column<int>(nullable: false),
+                    TicketNo = table.Column<int>(nullable: false),
+                    PriorityId = table.Column<int>(nullable: false),
+                    TicketTypeId = table.Column<int>(nullable: false),
+                    AssignedToId = table.Column<int>(nullable: true),
+                    SystemModuleId = table.Column<int>(nullable: false),
+                    Subject = table.Column<string>(maxLength: 255, nullable: false),
+                    ProblemDescription = table.Column<string>(nullable: false),
+                    SubmittedById = table.Column<int>(nullable: false),
+                    SubmittedOn = table.Column<DateTime>(nullable: false),
+                    ClosedById = table.Column<int>(nullable: true),
+                    ClosedOn = table.Column<DateTime>(nullable: false),
+                    ApprovedById = table.Column<int>(nullable: true),
+                    ApprovedOn = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tickets", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Tickets_AspNetUsers_ApprovedById",
+                        column: x => x.ApprovedById,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Tickets_AspNetUsers_AssignedToId",
+                        column: x => x.AssignedToId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Tickets_Clients_ClientId",
+                        column: x => x.ClientId,
+                        principalTable: "Clients",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Tickets_AspNetUsers_ClosedById",
+                        column: x => x.ClosedById,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Tickets_Priorities_PriorityId",
+                        column: x => x.PriorityId,
+                        principalTable: "Priorities",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Tickets_AspNetUsers_SubmittedById",
+                        column: x => x.SubmittedById,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Tickets_SystemsModules_SystemModuleId",
+                        column: x => x.SystemModuleId,
+                        principalTable: "SystemsModules",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Tickets_TicketTypes_TicketTypeId",
+                        column: x => x.TicketTypeId,
+                        principalTable: "TicketTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TicketNotes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TicketId = table.Column<int>(nullable: false),
+                    Notes = table.Column<string>(nullable: false),
+                    OasisComment = table.Column<bool>(nullable: false),
+                    CreatedById = table.Column<int>(nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TicketNotes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TicketNotes_AspNetUsers_CreatedById",
+                        column: x => x.CreatedById,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_TicketNotes_Tickets_TicketId",
+                        column: x => x.TicketId,
+                        principalTable: "Tickets",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(
@@ -382,9 +522,9 @@ namespace OasisComputerSystems.API.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, "c4030f6c-c4e8-457f-85fa-52c335fd2ccf", "Admin", "ADMIN" },
-                    { 3, "834a2851-0b58-497e-9234-9a64a6d7d17d", "Client", "CLIENT" },
-                    { 2, "684cc15f-9eab-4ffb-b39c-33cbe915d342", "Member", "MEMBER" }
+                    { 1, "5b598fa4-da72-4e1b-9aa4-617f9b63df95", "Admin", "ADMIN" },
+                    { 3, "c1826220-34b4-4f37-8cd9-cc3950afe00b", "Client", "CLIENT" },
+                    { 2, "b182b802-5af3-43b3-b39f-dcb4e7df35e6", "Member", "MEMBER" }
                 });
 
             migrationBuilder.InsertData(
@@ -414,11 +554,11 @@ namespace OasisComputerSystems.API.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
+                    { 1, "Single" },
                     { 2, "Married" },
-                    { 3, "Widowed" },
                     { 4, "Divorced" },
                     { 5, "Separated" },
-                    { 1, "Single" }
+                    { 3, "Widowed" }
                 });
 
             migrationBuilder.InsertData(
@@ -428,6 +568,16 @@ namespace OasisComputerSystems.API.Migrations
                 {
                     { 1, "Sudanese" },
                     { 2, "Saudi" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Priorities",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Low" },
+                    { 2, "Normal" },
+                    { 3, "High" }
                 });
 
             migrationBuilder.InsertData(
@@ -444,19 +594,29 @@ namespace OasisComputerSystems.API.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { 1, "Master Tables" },
-                    { 2, "Clients Management" },
-                    { 3, "Business Development" },
-                    { 4, "Production (Insurance)" },
-                    { 5, "Production (Reinsurance - Facultative)" },
-                    { 6, "Production (Reinsurance - Facultative Claims)" },
+                    { 13, "System Administrator" },
+                    { 12, "Finance Management" },
+                    { 11, "Human Resources" },
+                    { 10, "Claims Management" },
+                    { 9, "Customer Service Management" },
                     { 7, "Production (Reinsurance - Treaties)" },
                     { 8, "Production (Reinsurance - Treaties Claims)" },
-                    { 9, "Customer Service Management" },
-                    { 10, "Claims Management" },
-                    { 11, "Human Resources" },
-                    { 12, "Finance Management" },
-                    { 13, "System Administrator" }
+                    { 5, "Production (Reinsurance - Facultative)" },
+                    { 4, "Production (Insurance)" },
+                    { 3, "Business Development" },
+                    { 2, "Clients Management" },
+                    { 1, "Master Tables" },
+                    { 6, "Production (Reinsurance - Facultative Claims)" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "TicketTypes",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 2, "System Bug" },
+                    { 1, "Technical Support" },
+                    { 3, "Change Request" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -529,6 +689,11 @@ namespace OasisComputerSystems.API.Migrations
                 column: "CreatedById");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Clients_DeletedById",
+                table: "Clients",
+                column: "DeletedById");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Clients_UpdatedById",
                 table: "Clients",
                 column: "UpdatedById");
@@ -547,6 +712,56 @@ namespace OasisComputerSystems.API.Migrations
                 name: "IX_ClientsModules_SystemModuleId",
                 table: "ClientsModules",
                 column: "SystemModuleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TicketNotes_CreatedById",
+                table: "TicketNotes",
+                column: "CreatedById");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TicketNotes_TicketId",
+                table: "TicketNotes",
+                column: "TicketId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tickets_ApprovedById",
+                table: "Tickets",
+                column: "ApprovedById");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tickets_AssignedToId",
+                table: "Tickets",
+                column: "AssignedToId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tickets_ClientId",
+                table: "Tickets",
+                column: "ClientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tickets_ClosedById",
+                table: "Tickets",
+                column: "ClosedById");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tickets_PriorityId",
+                table: "Tickets",
+                column: "PriorityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tickets_SubmittedById",
+                table: "Tickets",
+                column: "SubmittedById");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tickets_SystemModuleId",
+                table: "Tickets",
+                column: "SystemModuleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tickets_TicketTypeId",
+                table: "Tickets",
+                column: "TicketTypeId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -576,13 +791,25 @@ namespace OasisComputerSystems.API.Migrations
                 name: "ClientsModules");
 
             migrationBuilder.DropTable(
+                name: "TicketNotes");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Tickets");
 
             migrationBuilder.DropTable(
                 name: "Clients");
 
             migrationBuilder.DropTable(
+                name: "Priorities");
+
+            migrationBuilder.DropTable(
                 name: "SystemsModules");
+
+            migrationBuilder.DropTable(
+                name: "TicketTypes");
 
             migrationBuilder.DropTable(
                 name: "Countries");
