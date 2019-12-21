@@ -3,9 +3,9 @@ using OasisComputerSystems.API.Models;
 
 namespace OasisComputerSystems.API.Data
 {
-    public class TicketTypeRepository : Repository<TicketType>, ITicketTypeRepository
+    public class TicketNoteRepository : Repository<TicketNote>, ITicketNoteRepository
     {
-        public TicketTypeRepository(DataContext context)
+        public TicketNoteRepository(DataContext context)
             : base(context)
         {
         }

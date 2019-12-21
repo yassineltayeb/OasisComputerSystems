@@ -17,5 +17,10 @@ namespace OasisComputerSystems.API.Models
         public int CreatedById { get; set; }
         public StaffProfile CreatedBy { get; set; }
         public DateTime CreatedOn { get; set; }
+
+        public TicketNote()
+        {
+            CreatedOn = DateTime.Now;
+        }
     }
 }

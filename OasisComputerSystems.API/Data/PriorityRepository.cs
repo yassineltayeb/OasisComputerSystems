@@ -9,6 +9,5 @@ namespace OasisComputerSystems.API.Data
             : base(context)
         {
         }
-            
     }
 }

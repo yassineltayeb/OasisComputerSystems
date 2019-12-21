@@ -46,6 +46,7 @@ namespace OasisComputerSystems.API
             services.AddScoped<IPriorityRepository, PriorityRepository>();
             services.AddScoped<IReligionRepository, ReligionRepository>();
             services.AddScoped<ISystemModuleRepository, SystemModuleRepository>();
+            services.AddScoped<ITicketNoteRepository, TicketNoteRepository>();
             services.AddScoped<ITicketRepository, TicketRepository>();
             services.AddScoped<ITicketTypeRepository, TicketTypeRepository>();
 

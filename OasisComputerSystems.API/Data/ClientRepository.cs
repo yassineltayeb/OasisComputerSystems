@@ -54,7 +54,7 @@ namespace OasisComputerSystems.API.Data
                 else
                     clients = clients.OrderByDescending(columnsMap[clientParams.OrderBy]);
             }
-            
+
             //Pagination
             return await PagedList<Client>.CreateAsync(clients, clientParams.PageNumber, clientParams.PageSize);
         }

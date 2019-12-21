@@ -62,9 +62,6 @@ namespace OasisComputerSystems.API.Controllers
                     await _userManager.AddToRoleAsync(createdUser, "Client");
                 }
 
-                // return CreatedAtRoute("GetUser",
-                //                   new { controller = "Users", id = staffProfile.Id },
-                //                   userToReturn);
                 return Ok(userToReturn);
             }
 

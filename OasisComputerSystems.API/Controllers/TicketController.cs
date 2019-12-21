@@ -17,10 +17,12 @@ namespace OasisComputerSystems.API.Controllers
         private readonly ITicketRepository _repo;
         private readonly IMapper _mapper;
         private readonly IAuthRepository _authRepository;
+        private readonly ITicketNoteRepository _ticketNoteRepository;
 
-        public TicketController(ITicketRepository repo, IMapper mapper, IAuthRepository authRepository)
+        public TicketController(ITicketRepository repo, ITicketNoteRepository ticketNoteRepository, IAuthRepository authRepository, IMapper mapper)
         {
             _repo = repo;
+            _ticketNoteRepository = ticketNoteRepository;
             _mapper = mapper;
             _authRepository = authRepository;
         }
@@ -37,7 +39,7 @@ namespace OasisComputerSystems.API.Controllers
             return Ok(ticketsToReturn);
         }
 
-        [HttpGet("{id}", Name="GetTicket")]
+        [HttpGet("{id}", Name = "GetTicket")]
         public async Task<IActionResult> GetTicket(int id)
         {
             var ticket = await _repo.Get(id);
@@ -51,9 +53,19 @@ namespace OasisComputerSystems.API.Controllers
         public async Task<IActionResult> AddTicket(TicketForRegisterDto ticketForRegisterDto)
         {
             var ticket = _mapper.Map<Ticket>(ticketForRegisterDto);
-            
+
             ticket.TicketNo = await _repo.GetTicketNo(ticketForRegisterDto.ClientId);
             ticket.SubmittedById = _authRepository.GetCurrentUserId();
+
+            var ticketNote = new TicketNote
+            {
+                TicketId = ticket.Id,
+                Notes = "Ticket Opened " + Environment.NewLine + ticket.ProblemDescription,
+                OasisComment = true,
+                CreatedById = ticket.SubmittedById 
+            };
+
+            ticket.TicketNotes.Add(ticketNote);
 
             _repo.Add(ticket);
 
@@ -64,7 +76,7 @@ namespace OasisComputerSystems.API.Controllers
             return Ok(ticketToReturn);
         }
 
-        [HttpPut("{id}", Name="UpdateTicket")]
+        [HttpPut("{id}", Name = "UpdateTicket")]
         public async Task<IActionResult> UpdateTicket(int id, TicketForUpdateDto ticketForUpdateDto)
         {
             var ticket = await _repo.Get(id);
@@ -73,8 +85,6 @@ namespace OasisComputerSystems.API.Controllers
                 return BadRequest("Invalid ticket");
 
             _mapper.Map(ticketForUpdateDto, ticket);
-            
-            // ticket.UpdatedById = _authRepository.GetCurrentUserId();
 
             await _repo.SaveAll();
 
