@@ -84,7 +84,10 @@ namespace OasisComputerSystems.API.Controllers
 
             await _repo.SaveAll();
 
-            Files.UploadFiles(ticket.Id, ticketForRegisterDto.Attachments);
+            if (ticketForRegisterDto.Attachments != null)
+                Files.UploadFiles(ticket.Id, ticketForRegisterDto.Attachments);
+
+            Emails.SendEmail("Subject", "Body", "y.eltayeb@oasisoft.net", ticketForRegisterDto.Attachments, Emails.PriorityHigh);
 
             var ticketToReturn = _mapper.Map<TicketForRegisterDto>(ticket);
 
@@ -107,6 +110,6 @@ namespace OasisComputerSystems.API.Controllers
 
             return Ok(ticketToReturn);
         }
-        
+
     }
 }

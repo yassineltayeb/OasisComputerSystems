@@ -10,6 +10,7 @@ namespace OasisComputerSystems.API.Helpers
         public static async void UploadFiles(int id, ICollection<IFormFile> files)
         {
             var destinationPath = Path.Combine(uploadPath, "Tickets/" + id);
+
             if (!Directory.Exists(destinationPath))
                 Directory.CreateDirectory(destinationPath);
 
@@ -22,7 +23,6 @@ namespace OasisComputerSystems.API.Helpers
                     await file.CopyToAsync(stream);
                 }
             }
-
         }
     }
 }
