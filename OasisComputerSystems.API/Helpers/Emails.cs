@@ -13,12 +13,10 @@ namespace OasisComputerSystems.API.Helpers
         private static readonly string password = "Flatron@1984";
         private static readonly string displayName = "Oasis - Live Support System";
         private static readonly int port = 587;
-        public static readonly MailPriority PriorityLow = MailPriority.Low;
-        public static readonly MailPriority PriorityNormal = MailPriority.Normal;
-        public static readonly MailPriority PriorityHigh = MailPriority.High;
 
-        public static void SendEmail(string subject, string body, IList<string> receivers, 
-                                     ICollection<IFormFile> files = null, 
+
+        public static void SendEmail(string subject, string body, IList<string> receivers,
+                                     ICollection<IFormFile> files = null,
                                      MailPriority priority = MailPriority.Normal)
         {
             var smtpClient = new SmtpClient();
@@ -56,8 +54,8 @@ namespace OasisComputerSystems.API.Helpers
             smtpClient.Send(mailMessage);
         }
 
-        public static void SendEmail(string subject, string body, string receiver, 
-                                    ICollection<IFormFile> files = null, 
+        public static void SendEmail(string subject, string body, string receiver,
+                                    ICollection<IFormFile> files = null,
                                     MailPriority priority = MailPriority.Normal)
         {
             var smtpClient = new SmtpClient();
@@ -90,6 +88,13 @@ namespace OasisComputerSystems.API.Helpers
             }
 
             smtpClient.Send(mailMessage);
+        }
+
+        public class Priority
+        {
+            public static readonly MailPriority Low = MailPriority.Low;
+            public static readonly MailPriority Normal = MailPriority.Normal;
+            public static readonly MailPriority High = MailPriority.High;
         }
     }
 }

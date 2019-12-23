@@ -87,7 +87,7 @@ namespace OasisComputerSystems.API.Controllers
             if (ticketForRegisterDto.Attachments != null)
                 Files.UploadFiles(ticket.Id, ticketForRegisterDto.Attachments);
 
-            Emails.SendEmail("Subject", "Body", "y.eltayeb@oasisoft.net", ticketForRegisterDto.Attachments, Emails.PriorityHigh);
+            Emails.SendEmail("Subject", "Body", "y.eltayeb@oasisoft.net", ticketForRegisterDto.Attachments, Emails.Priority.High);
 
             var ticketToReturn = _mapper.Map<TicketForRegisterDto>(ticket);
 
