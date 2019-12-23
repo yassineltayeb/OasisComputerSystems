@@ -1,8 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using OasisComputerSystems.API.Core;
 using OasisComputerSystems.API.Dtos.Tickets;
 using OasisComputerSystems.API.Helpers;
@@ -15,16 +19,25 @@ namespace OasisComputerSystems.API.Controllers
     public class TicketController : ControllerBase
     {
         private readonly ITicketRepository _repo;
-        private readonly IMapper _mapper;
-        private readonly IAuthRepository _authRepository;
         private readonly ITicketNoteRepository _ticketNoteRepository;
+        private readonly IAuthRepository _authRepository;
+        private readonly IMapper _mapper;
+        private readonly ILogger<TicketController> _logger;
+        private readonly IWebHostEnvironment _host;
 
-        public TicketController(ITicketRepository repo, ITicketNoteRepository ticketNoteRepository, IAuthRepository authRepository, IMapper mapper)
+        public TicketController(ITicketRepository repo,
+                                ITicketNoteRepository ticketNoteRepository,
+                                IAuthRepository authRepository,
+                                IMapper mapper,
+                                ILogger<TicketController> logger,
+                                IWebHostEnvironment host)
         {
             _repo = repo;
             _ticketNoteRepository = ticketNoteRepository;
-            _mapper = mapper;
             _authRepository = authRepository;
+            _mapper = mapper;
+            _logger = logger;
+            _host = host;
         }
 
         [HttpGet("[action]")]
@@ -50,7 +63,7 @@ namespace OasisComputerSystems.API.Controllers
         }
 
         [HttpPost("[action]")]
-        public async Task<IActionResult> AddTicket(TicketForRegisterDto ticketForRegisterDto)
+        public async Task<IActionResult> AddTicket([FromForm] TicketForRegisterDto ticketForRegisterDto)
         {
             var ticket = _mapper.Map<Ticket>(ticketForRegisterDto);
 
@@ -62,7 +75,7 @@ namespace OasisComputerSystems.API.Controllers
                 TicketId = ticket.Id,
                 Notes = "Ticket Opened " + Environment.NewLine + ticket.ProblemDescription,
                 OasisComment = true,
-                CreatedById = ticket.SubmittedById 
+                CreatedById = ticket.SubmittedById
             };
 
             ticket.TicketNotes.Add(ticketNote);
@@ -70,6 +83,8 @@ namespace OasisComputerSystems.API.Controllers
             _repo.Add(ticket);
 
             await _repo.SaveAll();
+
+            Files.UploadFiles(ticket.Id, ticketForRegisterDto.Attachments);
 
             var ticketToReturn = _mapper.Map<TicketForRegisterDto>(ticket);
 
@@ -92,5 +107,6 @@ namespace OasisComputerSystems.API.Controllers
 
             return Ok(ticketToReturn);
         }
+        
     }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
 
 namespace OasisComputerSystems.API.Dtos.Tickets
 {
@@ -28,6 +29,7 @@ namespace OasisComputerSystems.API.Dtos.Tickets
         public DateTime SubmittedOn { get; set; }
 
         public ICollection<TicketNoteForRegisterDto> TicketNotes { get; set; }
+        public ICollection<IFormFile> Attachments { get; set; }
 
         public TicketForRegisterDto()
         {
