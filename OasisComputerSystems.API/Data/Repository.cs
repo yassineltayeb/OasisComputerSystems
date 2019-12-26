@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using OasisComputerSystems.API.Core;
 
 namespace OasisComputerSystems.API.Data
@@ -8,15 +9,17 @@ namespace OasisComputerSystems.API.Data
     public class Repository<T> : IRepository<T> where T : class
     {
         private readonly DataContext _context;
+        private IDbContextTransaction _transaction;
 
         public Repository(DataContext context)
         {
             _context = context;
+            // _transaction = _context.Database.BeginTransaction();
         }
 
         public void Add(T entity)
         {
-             _context.Add(entity);
+            _context.Add(entity);
         }
 
         public void Delete(T entity)
@@ -34,9 +37,24 @@ namespace OasisComputerSystems.API.Data
             return await _context.Set<T>().ToListAsync();
         }
 
+        public async void BeginTransaction()
+        {
+            _transaction = await _context.Database.BeginTransactionAsync();
+        }
+
         public async Task<bool> SaveAll()
         {
             return await _context.SaveChangesAsync() > 0;
+        }
+
+        public async void Commit()
+        {
+            await _transaction.CommitAsync();
+        }
+
+        public async void Rollback()
+        {
+           await _transaction.RollbackAsync();
         }
     }
 }

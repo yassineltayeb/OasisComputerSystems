@@ -9,6 +9,10 @@ namespace OasisComputerSystems.API.Core
         Task<T> Get(int id);
         void Add(T entity);
         void Delete(T entity);
+
+        void BeginTransaction();
         Task<bool> SaveAll();
+        void Commit();
+        void Rollback();
     }
 }
