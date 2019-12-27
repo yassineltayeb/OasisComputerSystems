@@ -14,7 +14,6 @@ namespace OasisComputerSystems.API.Data
         public Repository(DataContext context)
         {
             _context = context;
-            // _transaction = _context.Database.BeginTransaction();
         }
 
         public void Add(T entity)
