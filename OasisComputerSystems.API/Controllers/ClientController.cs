@@ -24,7 +24,7 @@ namespace OasisComputerSystems.API.Controllers
             _authRepository = authRepository;
         }
 
-        [HttpGet("[action]")]
+        [HttpGet]
         public async Task<IActionResult> GetClients([FromQuery] ClientParams clientParams)
         {
             var clients = await _repo.GetAll(clientParams);

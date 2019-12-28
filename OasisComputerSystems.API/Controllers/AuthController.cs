@@ -89,7 +89,7 @@ namespace OasisComputerSystems.API.Controllers
                 return Ok(new
                 {
                     token = await GenerateJwtToken(staffProfile),
-                    staffProfileToReturn
+                    user = staffProfileToReturn
                 });
             }
 
@@ -102,6 +102,7 @@ namespace OasisComputerSystems.API.Controllers
             {
                 new Claim(ClaimTypes.NameIdentifier, staffProfile.Id.ToString()),
                 new Claim(ClaimTypes.Name, staffProfile.UserName)
+
             };
 
             var roles = await _userManager.GetRolesAsync(staffProfile);
