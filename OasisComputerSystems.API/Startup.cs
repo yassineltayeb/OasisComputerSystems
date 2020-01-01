@@ -16,6 +16,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using OasisComputerSystems.API.Core;
 using Newtonsoft.Json;
+using System.Net;
+using Microsoft.AspNetCore.Diagnostics;
+using OasisComputerSystems.API.Helpers;
+using Microsoft.AspNetCore.Http;
 
 namespace OasisComputerSystems.API
 {
@@ -31,7 +35,7 @@ namespace OasisComputerSystems.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(options => 
+            services.AddDbContext<DataContext>(options =>
                 options
                 .UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
                 .EnableSensitiveDataLogging());
@@ -116,7 +120,25 @@ namespace OasisComputerSystems.API
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseExceptionHandler(builder =>
+                {
+                    builder.Run(async context =>
+                    {
+                        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
+                        var error = context.Features.Get<IExceptionHandlerFeature>();
+
+                        if (error != null)
+                        {
+                            context.Response.AddApplicationError(error.Error.Message);
+                            await context.Response.WriteAsync(error.Error.Message);
+                        }
+                    });
+                });
+
+            }
             app.UseHttpsRedirection();
 
             app.UseRouting();

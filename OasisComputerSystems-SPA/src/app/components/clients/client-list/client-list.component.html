@@ -1,3 +1,56 @@
-<p>
-  client-list works!
-</p>
+<div class="container">
+  <div class="row">
+    <h3>Clients List</h3>
+  </div>
+  <div class="row">
+    <table class="table table-sm table-striped">
+        <tr class="table-primary">
+          <th scope="col">ID</th>
+          <th scope="col">Name (En)</th>
+          <th scope="col">Name (Ar)</th>
+          <th scope="col">Address</th>
+          <th scope="col">Vat No.</th>
+          <th scope="col">Telephone No.</th>
+          <th scope="col">Country</th>
+          <th scope="col">TechnicalDetails</th>
+          <th scope="col">Created By</th>
+          <th scope="col">Created On</th>
+          <th scope="col">Updated By</th>
+          <th scope="col">Updated On</th>
+        </tr>
+      <tbody>
+        <tr *ngFor="let client of clients">
+          <td>{{ client.id }}</td>
+          <td>{{ client.nameEn }}</td>
+          <td>{{ client.nameAr }}</td>
+          <td>{{ client.address }}</td>
+          <td>{{ client.vATNo }}</td>
+          <td>{{ client.telephoneNumber }}</td>
+          <td>{{ client.country }}</td>
+          <td>{{ client.technicalDetails }}</td>
+          <td>{{ client.createdBy }}</td>
+          <td>{{ client.createdOn | date }}</td>
+          <td>{{ client.updatedBy }}</td>
+          <td>{{ client.updatedOn | date }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="float-left pagination-detail">
+    <p>Showing {{ (pagination.currentPage * pagination.itemsPerPage)-(pagination.itemsPerPage - 1) }} to {{ pagination.currentPage * pagination.itemsPerPage}} of {{ pagination.totalItems }} rows | rows per page</p>
+  </div>
+  <div class="d-flex justify-content-end">
+    <pagination
+      [boundaryLinks]="true"
+      [totalItems]="pagination.totalItems"
+      [itemsPerPage]="pagination.itemsPerPage"
+      [(ngModel)]="pagination.currentPage"
+      (pageChanged)="pageChanged($event)"
+      previousText="&lsaquo;"
+      nextText="&rsaquo;"
+      firstText="&laquo;"
+      lastText="&raquo;"
+    >
+    </pagination>
+  </div>
+</div>

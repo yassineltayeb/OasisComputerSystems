@@ -8,9 +8,9 @@ import { environment } from 'src/environments/environment';
 
 export class ClientService extends AbstractService<Client> {
 
-  private readonly baseUrl = environment.apiUrl + 'client/';
+  private readonly baseUrl = environment.apiUrl + 'client';
 
 constructor(http: HttpClient) {
-  super(http, environment.apiUrl + 'client/');
+  super(http, environment.apiUrl + 'client');
  }
 }

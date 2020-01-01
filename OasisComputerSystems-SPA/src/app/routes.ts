@@ -4,6 +4,7 @@ import { LoginComponent } from './components/login/login.component';
 import { ClientListComponent } from './components/clients/client-list/client-list.component';
 import { HomeComponent } from './components/home/home.component';
 import { TicketListComponent } from './components/Tickets/ticket-list/ticket-list.component';
+import { ClientListResolver } from './_resolvers/client-list.resolver';
 
 export const appRoutes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -15,7 +16,7 @@ export const appRoutes: Routes = [
             { path: 'home', component: HomeComponent },
             {
                 path: 'clients', component: ClientListComponent,
-                // resolve: {users: MemberListResolver}
+                resolve: {clients: ClientListResolver}
             },
             {
                 path: 'tickets', component: TicketListComponent,

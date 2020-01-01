@@ -5,7 +5,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { appRoutes } from './routes';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BsDropdownModule } from 'ngx-bootstrap';
+import { BsDropdownModule, PaginationModule } from 'ngx-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +18,7 @@ import { AlertifyService } from './_services/alertify.service';
 import { HomeComponent } from './components/home/home.component';
 import { ClientListComponent } from './components/clients/client-list/client-list.component';
 import { TicketListComponent } from './components/Tickets/ticket-list/ticket-list.component';
+import { ClientListResolver } from './_resolvers/client-list.resolver';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -41,6 +42,7 @@ export function tokenGetter() {
       AppRoutingModule,
       NgZorroAntdModule,
       RouterModule.forRoot(appRoutes),
+      PaginationModule.forRoot(),
       BsDropdownModule.forRoot(),
       JwtModule.forRoot({
          config: {
@@ -53,7 +55,8 @@ export function tokenGetter() {
    ],
    providers: [
       AlertifyService,
-      ClientService
+      ClientService,
+      ClientListResolver
    ],
    bootstrap: [
       AppComponent
