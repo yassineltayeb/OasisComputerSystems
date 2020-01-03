@@ -13,7 +13,8 @@ export class ClientListResolver implements Resolve<Client[]> {
 
     clientParams: any = {
         pageNumber: 1,
-        pageSize: 10
+        pageSize: 10,
+        itemsPerPage: 10
       };
 
     constructor(private userService: ClientService, private router: Router, private alertify: AlertifyService) {}

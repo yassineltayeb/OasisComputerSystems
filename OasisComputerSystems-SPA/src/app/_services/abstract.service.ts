@@ -28,6 +28,8 @@ export abstract class AbstractService<T> {
 
     const paginatedResult: PaginatedResult<T[]> = new PaginatedResult<T[]>();
 
+    console.log(this.Url + '?' + this.toQueryString(modelParams));
+
     return this.http.get<T[]>(this.Url + '?' + this.toQueryString(modelParams), { observe: 'response' })
     .pipe(
       map(response => {

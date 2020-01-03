@@ -7,6 +7,7 @@ import { TicketListComponent } from './components/Tickets/ticket-list/ticket-lis
 import { ClientListResolver } from './_resolvers/client-list.resolver';
 
 export const appRoutes: Routes = [
+    { path: '', component: HomeComponent },
     { path: 'login', component: LoginComponent },
     {
         path: '',
@@ -21,7 +22,7 @@ export const appRoutes: Routes = [
             {
                 path: 'tickets', component: TicketListComponent,
                 // resolve: {users: MemberListResolver}
-            },
+            }
             // {
             //     path: 'member/edit', component: MemberEditComponent,
             //     resolve: {user: MemberEditResolver},

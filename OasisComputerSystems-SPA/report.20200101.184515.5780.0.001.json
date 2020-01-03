@@ -4,10 +4,10 @@
     "reportVersion": 1,
     "event": "Allocation failed - JavaScript heap out of memory",
     "trigger": "FatalError",
-    "filename": "report.20200101.100845.3112.0.001.json",
-    "dumpEventTime": "2020-01-01T10:08:45Z",
-    "dumpEventTimeStamp": "1577866125778",
-    "processId": 3112,
+    "filename": "report.20200101.184515.5780.0.001.json",
+    "dumpEventTime": "2020-01-01T18:45:15Z",
+    "dumpEventTimeStamp": "1577897115286",
+    "processId": 5780,
     "cwd": "D:\\Personal\\Work\\Systems\\Oasis Computer Systems\\OasisComputerSystems-SPA",
     "commandLine": [
       "C:\\Program Files\\nodejs\\node.exe",
@@ -50,74 +50,74 @@
       {
         "model": "Intel(R) Core(TM) i7-1065G7 CPU @ 1.30GHz",
         "speed": 1498,
-        "user": 145078,
+        "user": 454812,
         "nice": 0,
-        "sys": 218546,
-        "idle": 837812,
-        "irq": 29421
+        "sys": 511484,
+        "idle": 3071656,
+        "irq": 133781
       },
       {
         "model": "Intel(R) Core(TM) i7-1065G7 CPU @ 1.30GHz",
         "speed": 1498,
-        "user": 189015,
+        "user": 474937,
         "nice": 0,
-        "sys": 124109,
-        "idle": 888156,
-        "irq": 13703
+        "sys": 253359,
+        "idle": 3309500,
+        "irq": 25093
       },
       {
         "model": "Intel(R) Core(TM) i7-1065G7 CPU @ 1.30GHz",
         "speed": 1498,
-        "user": 161812,
+        "user": 316531,
         "nice": 0,
-        "sys": 82171,
-        "idle": 957296,
-        "irq": 10953
+        "sys": 145703,
+        "idle": 3575562,
+        "irq": 17250
       },
       {
         "model": "Intel(R) Core(TM) i7-1065G7 CPU @ 1.30GHz",
         "speed": 1498,
-        "user": 135046,
+        "user": 254515,
         "nice": 0,
-        "sys": 64140,
-        "idle": 1002093,
-        "irq": 7281
+        "sys": 105000,
+        "idle": 3678281,
+        "irq": 8656
       },
       {
         "model": "Intel(R) Core(TM) i7-1065G7 CPU @ 1.30GHz",
         "speed": 1498,
-        "user": 124640,
+        "user": 229437,
         "nice": 0,
-        "sys": 56531,
-        "idle": 1020109,
-        "irq": 6015
+        "sys": 84437,
+        "idle": 3723921,
+        "irq": 7109
       },
       {
         "model": "Intel(R) Core(TM) i7-1065G7 CPU @ 1.30GHz",
         "speed": 1498,
-        "user": 126812,
+        "user": 198281,
         "nice": 0,
-        "sys": 44500,
-        "idle": 1029968,
-        "irq": 3046
+        "sys": 60859,
+        "idle": 3778656,
+        "irq": 4156
       },
       {
         "model": "Intel(R) Core(TM) i7-1065G7 CPU @ 1.30GHz",
         "speed": 1498,
-        "user": 125062,
+        "user": 199875,
         "nice": 0,
-        "sys": 44812,
-        "idle": 1031390,
-        "irq": 5140
+        "sys": 74093,
+        "idle": 3763812,
+        "irq": 11281
       },
       {
         "model": "Intel(R) Core(TM) i7-1065G7 CPU @ 1.30GHz",
         "speed": 1498,
-        "user": 111468,
+        "user": 202062,
         "nice": 0,
-        "sys": 39500,
-        "idle": 1050296,
-        "irq": 6484
+        "sys": 62218,
+        "idle": 3773500,
+        "irq": 5750
       }
     ],
     "networkInterfaces": [
@@ -156,7 +156,7 @@
         "family": "IPv4"
       }
     ],
-    "host": "DESKTOP-RTR7JRN"
+    "host": "Yassin-Laptop"
   },
   "javascriptStack": {
     "message": "No stack.",
@@ -166,71 +166,71 @@
   },
   "nativeStack": [
     {
-      "pc": "0x00007ff6baf91389",
+      "pc": "0x00007ff6a8621389",
       "symbol": "std::basic_ostream<char,std::char_traits<char> >::operator<<+10873"
     },
     {
-      "pc": "0x00007ff6baf957cc",
+      "pc": "0x00007ff6a86257cc",
       "symbol": "std::basic_ostream<char,std::char_traits<char> >::operator<<+28348"
     },
     {
-      "pc": "0x00007ff6baf94778",
+      "pc": "0x00007ff6a8624778",
       "symbol": "std::basic_ostream<char,std::char_traits<char> >::operator<<+24168"
     },
     {
-      "pc": "0x00007ff6bb08332b",
+      "pc": "0x00007ff6a871332b",
       "symbol": "v8::base::CPU::has_sse+37723"
     },
     {
-      "pc": "0x00007ff6bb886f4e",
+      "pc": "0x00007ff6a8f16f4e",
       "symbol": "v8::Isolate::ReportExternalAllocationLimitReached+94"
     },
     {
-      "pc": "0x00007ff6bb86ef91",
+      "pc": "0x00007ff6a8efef91",
       "symbol": "v8::SharedArrayBuffer::Externalize+833"
     },
     {
-      "pc": "0x00007ff6bb73c85c",
+      "pc": "0x00007ff6a8dcc85c",
       "symbol": "v8::internal::Heap::EphemeronKeyWriteBarrierFromCode+1436"
     },
     {
-      "pc": "0x00007ff6bb747c00",
+      "pc": "0x00007ff6a8dd7c00",
       "symbol": "v8::internal::Heap::ProtectUnprotectedMemoryChunks+1312"
     },
     {
-      "pc": "0x00007ff6bb744734",
+      "pc": "0x00007ff6a8dd4734",
       "symbol": "v8::internal::Heap::PageFlagsAreConsistent+3204"
     },
     {
-      "pc": "0x00007ff6bb739fc3",
+      "pc": "0x00007ff6a8dc9fc3",
       "symbol": "v8::internal::Heap::CollectGarbage+1283"
     },
     {
-      "pc": "0x00007ff6bb738794",
+      "pc": "0x00007ff6a8dc8794",
       "symbol": "v8::internal::Heap::AddRetainedMap+2356"
     },
     {
-      "pc": "0x00007ff6bb759a65",
+      "pc": "0x00007ff6a8de9a65",
       "symbol": "v8::internal::Factory::NewFillerObject+53"
     },
     {
-      "pc": "0x00007ff6bb4c6239",
+      "pc": "0x00007ff6a8b56239",
       "symbol": "v8::internal::interpreter::JumpTableTargetOffsets::iterator::operator=+4057"
     },
     {
-      "pc": "0x00007ff6bbcb2c6d",
+      "pc": "0x00007ff6a9342c6d",
       "symbol": "v8::internal::SetupIsolateDelegate::SetupHeap+567949"
     },
     {
-      "pc": "0x0000037a42ccdd43",
+      "pc": "0x000000d804edd0e3",
       "symbol": ""
     }
   ],
   "javascriptHeap": {
-    "totalMemory": 2152927232,
-    "totalCommittedMemory": 2152927232,
-    "usedMemory": 2134916000,
-    "availableMemory": 53391072,
+    "totalMemory": 2151092224,
+    "totalCommittedMemory": 2151092224,
+    "usedMemory": 2134160576,
+    "availableMemory": 55025624,
     "memoryLimit": 2197815296,
     "heapSpaces": {
       "read_only_space": {
@@ -241,24 +241,24 @@
         "available": 229576
       },
       "new_space": {
-        "memorySize": 4194304,
-        "committedMemory": 4194304,
-        "capacity": 2094976,
-        "used": 211424,
-        "available": 1883552
+        "memorySize": 2097152,
+        "committedMemory": 2097152,
+        "capacity": 1047488,
+        "used": 184424,
+        "available": 863064
       },
       "old_space": {
-        "memorySize": 2051649536,
-        "committedMemory": 2051649536,
-        "capacity": 2042852464,
-        "used": 2038557560,
-        "available": 4294904
+        "memorySize": 2051911680,
+        "committedMemory": 2051911680,
+        "capacity": 2043991624,
+        "used": 2037829200,
+        "available": 6162424
       },
       "code_space": {
         "memorySize": 1474560,
         "committedMemory": 1474560,
-        "capacity": 1310048,
-        "used": 1310048,
+        "capacity": 1309984,
+        "used": 1309984,
         "available": 0
       },
       "map_space": {
@@ -285,23 +285,23 @@
       "new_large_object_space": {
         "memorySize": 0,
         "committedMemory": 0,
-        "capacity": 2094976,
+        "capacity": 1047488,
         "used": 0,
-        "available": 2094976
+        "available": 1047488
       }
     }
   },
   "resourceUsage": {
-    "userCpuSeconds": 168.703,
-    "kernelCpuSeconds": 3.375,
-    "cpuConsumptionPercent": 217.82,
-    "maxRss": 2272772096,
+    "userCpuSeconds": 143.078,
+    "kernelCpuSeconds": 3.265,
+    "cpuConsumptionPercent": 212.091,
+    "maxRss": 2270441472,
     "pageFaults": {
-      "IORequired": 1369307,
+      "IORequired": 1348179,
       "IONotRequired": 0
     },
     "fsActivity": {
-      "reads": 885,
+      "reads": 884,
       "writes": 110
     }
   },
@@ -315,20 +315,21 @@
     "CommonProgramFiles": "C:\\Program Files\\Common Files",
     "CommonProgramFiles(x86)": "C:\\Program Files (x86)\\Common Files",
     "CommonProgramW6432": "C:\\Program Files\\Common Files",
-    "COMPUTERNAME": "DESKTOP-RTR7JRN",
+    "COMPUTERNAME": "YASSIN-LAPTOP",
     "ComSpec": "C:\\Windows\\system32\\cmd.exe",
     "DriverData": "C:\\Windows\\System32\\Drivers\\DriverData",
     "FORCE_COLOR": "1",
     "HOMEDRIVE": "C:",
     "HOMEPATH": "\\Users\\Yassin Eltayeb",
-    "JEST_WORKER_ID": "4",
+    "JEST_WORKER_ID": "2",
     "LANG": "en_US.UTF-8",
     "LOCALAPPDATA": "C:\\Users\\Yassin Eltayeb\\AppData\\Local",
-    "LOGONSERVER": "\\\\DESKTOP-RTR7JRN",
+    "LOGONSERVER": "\\\\YASSIN-LAPTOP",
     "NUMBER_OF_PROCESSORS": "8",
     "OneDrive": "C:\\Users\\Yassin Eltayeb\\OneDrive",
+    "OneDriveConsumer": "C:\\Users\\Yassin Eltayeb\\OneDrive",
     "OS": "Windows_NT",
-    "Path": "C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Windows\\System32\\OpenSSH\\;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Program Files\\nodejs\\;C:\\Program Files\\Git\\cmd;C:\\Program Files\\dotnet\\;C:\\Users\\Yassin Eltayeb\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\Yassin Eltayeb\\AppData\\Roaming\\npm;C:\\Users\\Yassin Eltayeb\\AppData\\Local\\Programs\\Microsoft VS Code\\bin;C:\\Users\\Yassin Eltayeb\\.dotnet\\tools",
+    "Path": "C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Windows\\System32\\OpenSSH\\;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Program Files\\nodejs\\;C:\\Program Files\\Git\\cmd;C:\\Program Files\\dotnet\\;C:\\Windows\\system32\\config\\systemprofile\\.dnx\\bin;C:\\Program Files\\Microsoft DNX\\Dnvm\\;C:\\Program Files\\Microsoft SQL Server\\120\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\130\\Tools\\Binn\\;C:\\Program Files (x86)\\Microsoft SQL Server\\140\\DTS\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\140\\DTS\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\Client SDK\\ODBC\\130\\Tools\\Binn\\;C:\\Program Files (x86)\\Microsoft SQL Server\\140\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\140\\Tools\\Binn\\;C:\\Program Files (x86)\\Microsoft SQL Server\\150\\DTS\\Binn\\;C:\\Users\\Yassin Eltayeb\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\Yassin Eltayeb\\AppData\\Roaming\\npm;C:\\Users\\Yassin Eltayeb\\AppData\\Local\\Programs\\Microsoft VS Code\\bin;C:\\Users\\Yassin Eltayeb\\.dotnet\\tools",
     "PATHEXT": ".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.CPL",
     "PROCESSOR_ARCHITECTURE": "AMD64",
     "PROCESSOR_IDENTIFIER": "Intel64 Family 6 Model 126 Stepping 5, GenuineIntel",
@@ -338,7 +339,7 @@
     "ProgramFiles": "C:\\Program Files",
     "ProgramFiles(x86)": "C:\\Program Files (x86)",
     "ProgramW6432": "C:\\Program Files",
-    "PSModulePath": "C:\\Users\\Yassin Eltayeb\\Documents\\WindowsPowerShell\\Modules;C:\\Program Files\\WindowsPowerShell\\Modules;C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\Modules",
+    "PSModulePath": "C:\\Users\\Yassin Eltayeb\\Documents\\WindowsPowerShell\\Modules;C:\\Program Files\\WindowsPowerShell\\Modules;C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\Modules;C:\\Program Files (x86)\\Microsoft SQL Server\\140\\Tools\\PowerShell\\Modules\\",
     "PUBLIC": "C:\\Users\\Public",
     "SESSIONNAME": "Console",
     "SystemDrive": "C:",
@@ -347,10 +348,11 @@
     "TERM_PROGRAM": "vscode",
     "TERM_PROGRAM_VERSION": "1.41.1",
     "TMP": "C:\\Users\\YASSIN~1\\AppData\\Local\\Temp",
-    "USERDOMAIN": "DESKTOP-RTR7JRN",
-    "USERDOMAIN_ROAMINGPROFILE": "DESKTOP-RTR7JRN",
+    "USERDOMAIN": "YASSIN-LAPTOP",
+    "USERDOMAIN_ROAMINGPROFILE": "YASSIN-LAPTOP",
     "USERNAME": "Yassin Eltayeb",
     "USERPROFILE": "C:\\Users\\Yassin Eltayeb",
+    "VS140COMNTOOLS": "C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\Common7\\Tools\\",
     "WEBPACK_DEV_SERVER": "true",
     "windir": "C:\\Windows"
   },
@@ -360,11 +362,11 @@
     "C:\\Windows\\System32\\KERNEL32.DLL",
     "C:\\Windows\\System32\\KERNELBASE.dll",
     "C:\\Windows\\System32\\WS2_32.dll",
+    "C:\\Windows\\SYSTEM32\\dbghelp.dll",
+    "C:\\Windows\\System32\\ucrtbase.dll",
     "C:\\Windows\\System32\\RPCRT4.dll",
     "C:\\Windows\\System32\\ADVAPI32.dll",
-    "C:\\Windows\\SYSTEM32\\dbghelp.dll",
     "C:\\Windows\\System32\\msvcrt.dll",
-    "C:\\Windows\\System32\\ucrtbase.dll",
     "C:\\Windows\\System32\\sechost.dll",
     "C:\\Windows\\System32\\USER32.dll",
     "C:\\Windows\\System32\\win32u.dll",
@@ -375,10 +377,10 @@
     "C:\\Windows\\System32\\CRYPT32.dll",
     "C:\\Windows\\System32\\MSASN1.dll",
     "C:\\Windows\\System32\\bcrypt.dll",
-    "C:\\Windows\\SYSTEM32\\IPHLPAPI.DLL",
     "C:\\Windows\\SYSTEM32\\USERENV.dll",
-    "C:\\Windows\\SYSTEM32\\WINMM.dll",
+    "C:\\Windows\\SYSTEM32\\IPHLPAPI.DLL",
     "C:\\Windows\\System32\\profapi.dll",
+    "C:\\Windows\\SYSTEM32\\WINMM.dll",
     "C:\\Windows\\SYSTEM32\\winmmbase.dll",
     "C:\\Windows\\System32\\cfgmgr32.dll",
     "C:\\Windows\\System32\\bcryptPrimitives.dll",

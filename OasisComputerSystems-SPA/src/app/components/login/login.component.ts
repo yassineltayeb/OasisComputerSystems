@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   model: any = {};
+  loading = false;
 
   constructor(public authService: AuthService, private alertify: AlertifyService, private router: Router) { }
 
@@ -17,13 +18,24 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    this.loadToggle();
+
     this.authService.login(this.model)
       .subscribe(next => {
+        this.loadToggle();
         this.alertify.success('Logged in successfully');
+
       }, error => {
+        this.loadToggle();
         this.alertify.error(error);
+
       }, () => {
         this.router.navigate(['/home']);
+
       });
+  }
+
+  loadToggle() {
+    this.loading = !this.loading;
   }
 }

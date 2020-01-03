@@ -67,7 +67,7 @@ namespace OasisComputerSystems.API.Data
             }
 
             //Pagination
-            return await PagedList<Ticket>.CreateAsync(tickets, ticketParams.PageNumber, ticketParams.PageSize);
+            return await PagedList<Ticket>.CreateAsync(tickets, ticketParams.PageNumber, ticketParams.ItemsPerPage);
         }
 
         public new async Task<Ticket> Get(int id)

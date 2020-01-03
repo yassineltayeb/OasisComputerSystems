@@ -56,7 +56,7 @@ namespace OasisComputerSystems.API.Data
             }
 
             //Pagination
-            return await PagedList<Client>.CreateAsync(clients, clientParams.PageNumber, clientParams.PageSize);
+            return await PagedList<Client>.CreateAsync(clients, clientParams.PageNumber, clientParams.ItemsPerPage);
         }
 
         public new async Task<Client> Get(int id)
@@ -77,12 +77,13 @@ namespace OasisComputerSystems.API.Data
         {
             return new Dictionary<string, Expression<Func<Client, object>>>()
             {
+                ["id"] = c => c.Id,
                 ["nameEn"] = c => c.NameEn,
                 ["nameAr"] = c => c.NameAr,
                 ["address"] = c => c.Address,
                 ["vATNo"] = c => c.VATNo,
                 ["telephoneNumber"] = c => c.TelephoneNumber,
-                ["countryId"] = c => c.Country.Name,
+                ["country"] = c => c.Country.Name,
                 ["technicalDetails"] = c => c.TechnicalDetails,
                 ["createdBy"] = c => c.CreatedBy.FullNameEn,
                 ["createdOn"] = c => c.CreatedOn,

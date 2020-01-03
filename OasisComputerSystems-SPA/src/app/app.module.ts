@@ -10,7 +10,6 @@ import { BsDropdownModule, PaginationModule } from 'ngx-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
-import { NgZorroAntdModule } from './modules/ng-zorro-antd.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NavComponent } from './components/nav/nav.component';
 import { ClientService } from './_services/client.service';
@@ -19,6 +18,8 @@ import { HomeComponent } from './components/home/home.component';
 import { ClientListComponent } from './components/clients/client-list/client-list.component';
 import { TicketListComponent } from './components/Tickets/ticket-list/ticket-list.component';
 import { ClientListResolver } from './_resolvers/client-list.resolver';
+import { NGZorroModule } from './_modules/ng-zorro.module';
+
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -40,7 +41,7 @@ export function tokenGetter() {
       FormsModule,
       ReactiveFormsModule,
       AppRoutingModule,
-      NgZorroAntdModule,
+      NGZorroModule,
       RouterModule.forRoot(appRoutes),
       PaginationModule.forRoot(),
       BsDropdownModule.forRoot(),
