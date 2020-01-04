@@ -1,38 +1,67 @@
 <div class="container">
- <h3>Client List</h3>
- <nz-table 
-    #clientTable 
-    [nzLoading]="loading"
-    nzShowSizeChanger
-    [nzShowPagination]="true" 
-    [nzFrontPagination]="false"
-    [nzPageIndex]="pagination.currentPage" 
-    [nzPageSize]="pagination.itemsPerPage"
-    [nzTotal]="pagination.totalItems" 
-    [nzPageSizeOptions]="PageSizeOptions"
-    (nzPageIndexChange)="pageChanged($event, 'PageIndexChange')"
-    (nzPageSizeChange)="pageChanged($event, 'PageSizeChange')"
-    [nzData]="clients">
-    <thead (nzSortChange)="sort($event)" nzSingleSort>
-      <tr >
-      <th *ngFor="let column of columns" nzShowSort nzSortKey="{{ column.sortKey }}"> {{ column.columnName }}</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let client of clientTable.data">
-        <td>{{client.id}}</td>
-        <td>{{client.nameEn}}</td>
-        <td>{{client.nameAr}}</td>
-        <td>{{client.address}}</td>
-        <td>{{ client.vATNo }}</td>
-        <td>{{ client.telephoneNumber }}</td>
-        <td>{{ client.country }}</td>
-        <td>{{ client.technicalDetails }}</td>
-        <td>{{ client.createdBy }}</td>
-        <td>{{ client.createdOn | date }}</td>
-        <td>{{ client.updatedBy }}</td>
-        <td>{{ client.updatedOn | date }}</td>
-      </tr>
-    </tbody>
-  </nz-table>
+
+  <div nz-row>
+    <form nz-form class="ant-advanced-search-form">
+      <div nz-row>
+        <div nz-col [nzSpan]="6">
+          <nz-form-item nzFlex>
+            <nz-form-label nzFor="name">Name</nz-form-label>
+            <nz-form-control>
+              <input nz-input type="text" name="name" id="name" placeholder="Name" autofocus
+                [(ngModel)]="clientParams.name" />
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div nz-col>
+          <nz-form-item nzFlex>
+            <nz-form-label nzFor="countryId">Country</nz-form-label>
+            <nz-form-control [nzSpan]="6">
+              <nz-select id="countryId" name="countryId" nzPlaceHolder="Country" [(ngModel)]="clientParams.countryId">
+                <nz-option *ngFor="let country of countries" nzValue="{{ country.id }}" nzLabel="{{ country.name }}">
+                </nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
+      <div nz-row>
+        <div nz-col [nzSpan]="24" class="search-area">
+          <button nz-button [nzType]="'primary'" (click)="getClientList()">Search</button>
+          <button nz-button (click)="clear()">Clear</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <br>
+  <div nz-row>
+    <h3>Clients List</h3>
+  </div>
+  <div nz-row>
+    <nz-table #clientTable [nzLoading]="loading" nzShowSizeChanger [nzShowPagination]="true" [nzFrontPagination]="false"
+      [nzPageIndex]="pagination.currentPage" [nzPageSize]="pagination.itemsPerPage" [nzTotal]="pagination.totalItems"
+      [nzPageSizeOptions]="PageSizeOptions" (nzPageIndexChange)="pageChanged($event, 'PageIndexChange')"
+      (nzPageSizeChange)="pageChanged($event, 'PageSizeChange')" [nzData]="clients">
+      <thead (nzSortChange)="sort($event)" nzSingleSort>
+        <tr>
+          <th *ngFor="let column of columns" nzShowSort nzSortKey="{{ column.sortKey }}"> {{ column.columnName }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let client of clientTable.data">
+          <td>{{client.id}}</td>
+          <td>{{client.nameEn}}</td>
+          <td>{{client.nameAr}}</td>
+          <td>{{client.address}}</td>
+          <td>{{ client.vATNo }}</td>
+          <td>{{ client.telephoneNumber }}</td>
+          <td>{{ client.country }}</td>
+          <td>{{ client.technicalDetails }}</td>
+          <td>{{ client.createdBy }}</td>
+          <td>{{ client.createdOn | date }}</td>
+          <td>{{ client.updatedBy }}</td>
+          <td>{{ client.updatedOn | date }}</td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
 </div>

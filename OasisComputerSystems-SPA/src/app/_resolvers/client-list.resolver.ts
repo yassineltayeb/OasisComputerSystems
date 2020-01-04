@@ -1,7 +1,6 @@
 import { catchError } from 'rxjs/operators';
 import { AlertifyService } from '../_services/alertify.service';
 import { Injectable } from '@angular/core';
-import { User } from '../_models/user';
 import { Resolve, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { Client } from '../_models/client';
@@ -21,7 +20,7 @@ export class ClientListResolver implements Resolve<Client[]> {
 
     resolve(route: ActivatedRouteSnapshot): Observable<Client[]> {
         // tslint:disable-next-line:no-string-literal
-        return this.userService.getAll(this.clientParams).pipe(
+        return this.userService.getAllWithPagination(this.clientParams).pipe(
             catchError(error => {
                 this.alertify.error('Problem retrieving data');
                 this.router.navigate(['/clients']);

@@ -20,7 +20,7 @@ namespace OasisComputerSystems.API.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("[action]")]
+        [HttpGet]
         public async Task<IActionResult> GetNationalities()
         {
             var nationalities = await _repo.GetAll();

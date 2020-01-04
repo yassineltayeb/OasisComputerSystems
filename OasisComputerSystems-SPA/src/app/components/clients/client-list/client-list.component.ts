@@ -4,6 +4,8 @@ import { ClientService } from 'src/app/_services/client.service';
 import { Pagination, PaginatedResult } from 'src/app/_models/pagination';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { ActivatedRoute } from '@angular/router';
+import { KeyValuePairs } from 'src/app/_models/keyvaluepairs';
+import { CountryService } from 'src/app/_services/country.service';
 
 @Component({
   selector: 'app-client-list',
@@ -11,6 +13,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./client-list.component.css']
 })
 export class ClientListComponent implements OnInit {
+  countries: KeyValuePairs[] = [];
   clients: Client[] = [];
   pagination: Pagination;
   PageSizeOptions: any[] = [5, 10, 20, 30, 40, 50, 100];
@@ -36,7 +39,11 @@ export class ClientListComponent implements OnInit {
     { columnName: 'Updated On', sortKey: 'updatedOn' }
   ];
 
-  constructor(private clientService: ClientService, private route: ActivatedRoute, private alertify: AlertifyService) { }
+  constructor(
+    private countryService: CountryService,
+    private clientService: ClientService,
+    private route: ActivatedRoute,
+    private alertify: AlertifyService) { }
 
   ngOnInit() {
     this.loadToggle();
@@ -46,6 +53,9 @@ export class ClientListComponent implements OnInit {
       this.pagination = data.clients.pagination;
       this.loadToggle();
     });
+
+    this.getCountriesList();
+
   }
 
   pageChanged(event: any, eventType: string): void {
@@ -57,12 +67,30 @@ export class ClientListComponent implements OnInit {
     this.getClientList();
   }
 
+  getCountriesList() {
+    this.loadToggle();
+
+    this.countryService.getAll()
+      .subscribe((res: KeyValuePairs[]) => {
+        this.countries = res;
+        this.loadToggle();
+
+      }, error => {
+        this.loadToggle();
+        this.alertify.error(error);
+
+      });
+  }
+
   getClientList() {
     this.loadToggle();
 
-    this.clientService.getAll(this.clientParams)
+    console.log(this.clientParams);
+
+    this.clientService.getAllWithPagination(this.clientParams)
       .subscribe((res: PaginatedResult<Client[]>) => {
         this.clients = res.result;
+        console.log(this.clients);
         this.pagination = res.pagination;
         this.loadToggle();
 
@@ -76,6 +104,12 @@ export class ClientListComponent implements OnInit {
   sort(event: { key: any; value: string; }) {
     this.clientParams.orderBy = event.key;
     this.clientParams.IsOrderAscending = event.value === 'ascend' ? true : false;
+    this.getClientList();
+  }
+
+  clear() {
+    this.clientParams.name = null;
+    this.clientParams.countryId = null;
     this.getClientList();
   }
 

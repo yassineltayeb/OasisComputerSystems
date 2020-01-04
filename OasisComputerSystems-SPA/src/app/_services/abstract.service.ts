@@ -24,11 +24,9 @@ export abstract class AbstractService<T> {
     return this.http.delete(this.Url + id).pipe(map(res => res));
   }
 
-  getAll(modelParams?): Observable<PaginatedResult<T[]>>  {
+  getAllWithPagination(modelParams?): Observable<PaginatedResult<T[]>>  {
 
     const paginatedResult: PaginatedResult<T[]> = new PaginatedResult<T[]>();
-
-    console.log(this.Url + '?' + this.toQueryString(modelParams));
 
     return this.http.get<T[]>(this.Url + '?' + this.toQueryString(modelParams), { observe: 'response' })
     .pipe(
@@ -40,6 +38,15 @@ export abstract class AbstractService<T> {
         }
 
         return paginatedResult;
+      })
+    );
+  }
+
+  getAll(): Observable<T[]>  {
+
+    return this.http.get<T[]>(this.Url)
+    .pipe(map(response => {
+        return response;
       })
     );
   }

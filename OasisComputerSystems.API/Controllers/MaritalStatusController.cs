@@ -20,7 +20,7 @@ namespace OasisComputerSystems.API.Controllers
             _repo = repo;
         }
 
-        [HttpGet("[action]")]
+        [HttpGet]
         public async Task<IActionResult> GetMaritalStatuses()
         {
             var maritalStatuses = await _repo.GetAll();

@@ -19,6 +19,7 @@ import { ClientListComponent } from './components/clients/client-list/client-lis
 import { TicketListComponent } from './components/Tickets/ticket-list/ticket-list.component';
 import { ClientListResolver } from './_resolvers/client-list.resolver';
 import { NGZorroModule } from './_modules/ng-zorro.module';
+import { CountryService } from './_services/country.service';
 
 
 export function tokenGetter() {
@@ -56,6 +57,7 @@ export function tokenGetter() {
    ],
    providers: [
       AlertifyService,
+      CountryService,
       ClientService,
       ClientListResolver
    ],

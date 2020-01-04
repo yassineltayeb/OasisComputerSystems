@@ -19,7 +19,7 @@ namespace OasisComputerSystems.API.Dtos.Clients
         public DateTime CreatedOn { get; set; }
         public int UpdatedById { get; set; }
         public string UpdatedBy { get; set; }
-        public DateTime UpdatedOn { get; set; }
+        public DateTime? UpdatedOn { get; set; }
         public bool IsDeleted { get; set; }
         public int DeletedById { get; set; }
         public string DeletedBy { get; set; }
