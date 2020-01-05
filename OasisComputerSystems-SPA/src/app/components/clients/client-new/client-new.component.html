@@ -1,3 +1,88 @@
-<p>
-  client-new works!
-</p>
+<div class="container">
+  <div nz-row>
+    <h3 nz-col>Register New Client</h3>
+  </div>
+  <div nz-row>
+    <form nz-form #clientForm="ngForm" (ngSubmit)="save()">
+
+      <div nz-row nzGutter="24" nzType="flex">
+        <nz-form-item nz-col nzFlex>
+          <nz-form-label nzRequired nzFor="nameEn">Name (En)</nz-form-label>
+          <nz-form-control nzErrorTip="Please enter a valid name">
+            <input nz-input type="text" id="nameEn" name="nameEn" placeholder="Name (En)" required autofocus
+              [(ngModel)]="client.nameEn" />
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item nz-col nzFlex>
+          <nz-form-label nzRequired nzFor="nameAr">Name (Ar)</nz-form-label>
+          <nz-form-control nzErrorTip="Please enter a valid name">
+            <input nz-input type="text" id="nameAr" name="nameAr" placeholder="Name (Ar)" required
+              [(ngModel)]="client.nameAr" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <div nz-row nzGutter="24" nzType="flex">
+        <nz-form-item nz-col nzFlex>
+          <nz-form-label nzFor="vATNo">VAT No.</nz-form-label>
+          <nz-form-control>
+            <input nz-input type="text" id="vATNo" name="vATNo" placeholder="VAT No." [(ngModel)]="client.vATNo" />
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item nz-col nzFlex>
+          <nz-form-label nzFor="telephoneNumber ">Telephone Number</nz-form-label>
+          <nz-form-control>
+            <input nz-input type="text" id="telephoneNumber" name="telephoneNumber" placeholder="Telephone Number"
+              autofocus [(ngModel)]="client.telephoneNumber" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <div nz-row nzType="flex">
+        <nz-form-item nzFlex>
+          <nz-form-label nzRequired nzFor="Country">Country</nz-form-label>
+          <nz-form-control nzErrorTip="Please select country">
+            <nz-select id="countryId" name="countryId" nzPlaceHolder="Country" nzFor="countryId" required
+              [(ngModel)]="client.countryId">
+              <nz-option *ngFor="let country of countries" nzValue="{{ country.id }}" nzLabel="{{ country.name }}">
+              </nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <div nz-row nzGutter="24" nzType="flex">
+        <nz-form-item nz-col nzFlex>
+          <nz-form-label nzFor="address">Address</nz-form-label>
+          <nz-form-control>
+            <textarea nz-input type="text" id="address" name="address" placeholder="address" nzAutosize
+              [(ngModel)]="client.address"></textarea>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item nz-col nzFlex>
+          <nz-form-label nzFor="technicalDetails">Technical Details</nz-form-label>
+          <nz-form-control>
+            <textarea nz-input type="text" id="technicalDetails" name="technicalDetails" placeholder="Technical Details"
+              nzAutosize [(ngModel)]="client.technicalDetails"></textarea>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <div nz-row nzType="flex" nzJustify="start">
+        <nz-form-item>
+          <nz-form-control>
+            <button [disabled]="!clientForm.valid" nz-button nzType="primary"
+              type="submit" [nzLoading]="loading">Save</button>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control>
+            <button  nz-button
+              type="button" (click)="clear()">Clear</button>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+    </form>
+  </div>
+</div>

@@ -18,6 +18,7 @@ import { HomeComponent } from './components/home/home.component';
 import { ClientListComponent } from './components/clients/client-list/client-list.component';
 import { TicketListComponent } from './components/Tickets/ticket-list/ticket-list.component';
 import { ClientListResolver } from './_resolvers/client-list.resolver';
+import { ClientNewComponent } from './components/clients/client-new/client-new.component';
 import { NGZorroModule } from './_modules/ng-zorro.module';
 import { CountryService } from './_services/country.service';
 
@@ -33,6 +34,7 @@ export function tokenGetter() {
       NavComponent,
       HomeComponent,
       ClientListComponent,
+      ClientNewComponent,
       TicketListComponent
    ],
    imports: [

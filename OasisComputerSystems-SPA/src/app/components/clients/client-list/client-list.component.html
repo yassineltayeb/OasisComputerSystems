@@ -1,5 +1,4 @@
 <div class="container">
-
   <div nz-row>
     <form nz-form class="ant-advanced-search-form">
       <div nz-row>
@@ -33,8 +32,9 @@
     </form>
   </div>
   <br>
-  <div nz-row>
-    <h3>Clients List</h3>
+  <div nz-row nzType="flex" nzJustify="space-between">
+    <h3 nz-col nzSpan="12">Clients List</h3>
+    <button nz-button nzType="primary" nz-col nzSpan="12" [routerLink]="['/clients/new']">New Client</button>
   </div>
   <div nz-row>
     <nz-table #clientTable [nzLoading]="loading" nzShowSizeChanger [nzShowPagination]="true" [nzFrontPagination]="false"

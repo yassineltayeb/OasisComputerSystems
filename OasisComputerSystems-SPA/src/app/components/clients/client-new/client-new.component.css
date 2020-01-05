@@ -1,0 +1,11 @@
+div.container {
+  margin-top: 25px;
+}
+
+nz-select {
+  width: 200px;
+}
+
+button {
+  margin-right: 15px;
+}

@@ -5,6 +5,7 @@ import { ClientListComponent } from './components/clients/client-list/client-lis
 import { HomeComponent } from './components/home/home.component';
 import { TicketListComponent } from './components/Tickets/ticket-list/ticket-list.component';
 import { ClientListResolver } from './_resolvers/client-list.resolver';
+import { ClientNewComponent } from './components/clients/client-new/client-new.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -17,7 +18,10 @@ export const appRoutes: Routes = [
             { path: 'home', component: HomeComponent },
             {
                 path: 'clients', component: ClientListComponent,
-                resolve: {clients: ClientListResolver}
+                resolve: { clients: ClientListResolver }
+            },
+            {
+                path: 'clients/new', component: ClientNewComponent,
             },
             {
                 path: 'tickets', component: TicketListComponent,
