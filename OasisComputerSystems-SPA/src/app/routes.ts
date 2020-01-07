@@ -8,7 +8,7 @@ import { ClientListResolver } from './_resolvers/client-list.resolver';
 import { ClientNewComponent } from './components/clients/client-new/client-new.component';
 
 export const appRoutes: Routes = [
-    { path: '', component: HomeComponent },
+    { path: '', component: LoginComponent },
     { path: 'login', component: LoginComponent },
     {
         path: '',

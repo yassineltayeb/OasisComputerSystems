@@ -1,35 +1,44 @@
 import { Injectable } from '@angular/core';
-declare let alertify: any;
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AlertifyService {
 
-constructor() { }
+  constructor(private notification: NzNotificationService) {
+    this.notification.config({
+      nzPlacement: 'bottomRight'
+    });
+  }
 
-confirm(message: string, okCallback: () => any) {
-  // tslint:disable-next-line:only-arrow-functions
-  alertify.confirm(message, function(e) {
-    if (e) {
-      okCallback();
-    } else {}
-  });
-}
+  // confirm(message: string, okCallback: () => any) {
+  //   // tslint:disable-next-line:only-arrow-functions
+  //   alertify.confirm(message, function(e) {
+  //     if (e) {
+  //       okCallback();
+  //     } else {}
+  //   });
+  // }
 
-success(message: string) {
-  alertify.success(message);
-}
+  success(message: string) {
+    this.notification.success(message, '');
+  }
 
-error(message: string) {
-  alertify.error(message);
-}
+  info(message: string) {
+    this.notification.info(message, '');
+  }
 
-warning(message: string) {
-  alertify.warning(message);
-}
+  warning(message: string) {
+    this.notification.warning(message, '');
+  }
 
-message(message: string) {
-  alertify.message(message);
-}
+  error(message: string) {
+    this.notification.error(message, '');
+  }
+
+  blank(message: string) {
+    this.notification.blank(message, '');
+  }
+
 }

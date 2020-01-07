@@ -10,6 +10,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { NzSelectModule } from 'ng-zorro-antd/select';
@@ -34,6 +35,7 @@ import { NZ_I18N, en_US } from 'ng-zorro-antd/i18n';
     NzInputModule,
     NzLayoutModule,
     NzMenuModule,
+    NzNotificationModule,
     NzTableModule,
     NzPaginationModule,
     NzSelectModule

@@ -39,7 +39,7 @@ export class AuthService {
     localStorage.removeItem('user');
     this.decodedToken = null;
     this.currentUser = null;
-    this.alertify.message('Logged Out');
+    this.alertify.blank('Logged Out');
     this.router.navigate(['/login']);
   }
 

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CountryService } from 'src/app/_services/country.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { KeyValuePairs } from 'src/app/_models/keyvaluepairs';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { ClientService } from 'src/app/_services/client.service';
 
 @Component({
   selector: 'app-client-new',
@@ -13,7 +15,7 @@ export class ClientNewComponent implements OnInit {
   loading = false;
   client: any = {};
 
-  constructor(private countryService: CountryService, private alertify: AlertifyService) { }
+  constructor(private clientService: ClientService, private countryService: CountryService, private alertify: AlertifyService) { }
 
   ngOnInit() {
     this.getCountriesList();
@@ -34,6 +36,7 @@ export class ClientNewComponent implements OnInit {
 
   save() {
     console.log(this.client);
+    this.alertify.success('Client Saved Successfully');
   }
 
   clear() {
