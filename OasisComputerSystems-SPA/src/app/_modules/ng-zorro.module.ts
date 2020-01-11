@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
+import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzFormModule } from 'ng-zorro-antd/form';
@@ -15,6 +16,12 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NZ_I18N, en_US } from 'ng-zorro-antd/i18n';
+import { NzConfig, NZ_CONFIG } from 'ng-zorro-antd';
+
+const ngZorroConfig: NzConfig = {
+  message: { nzTop: 120 },
+  notification: { nzPlacement: 'bottomRight' }
+};
 
 @NgModule({
   declarations: [],
@@ -22,12 +29,14 @@ import { NZ_I18N, en_US } from 'ng-zorro-antd/i18n';
     CommonModule
   ],
   providers   : [
-    { provide: NZ_I18N, useValue: en_US }
+    { provide: NZ_I18N, useValue: en_US },
+    { provide: NZ_CONFIG, useValue: ngZorroConfig }
   ],
   exports: [
     CommonModule,
     NzButtonModule,
     NzBreadCrumbModule,
+    NzCardModule,
     NzDividerModule,
     NzGridModule,
     NzFormModule,

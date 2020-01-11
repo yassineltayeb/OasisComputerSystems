@@ -2,10 +2,10 @@ div.container {
   margin-top: 25px;
 }
 
-nz-select {
-  width: 200px;
+.client-form {
+  max-width: 100%;
 }
 
 button {
-  margin-right: 15px;
+  margin-left: 15px;
 }

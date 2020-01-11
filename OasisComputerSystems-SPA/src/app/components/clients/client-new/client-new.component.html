@@ -1,87 +1,261 @@
 <div class="container">
-  <div nz-row>
-    <h3 nz-col>Register New Client</h3>
-  </div>
-  <div nz-row>
-    <form nz-form #clientForm="ngForm" (ngSubmit)="save()">
+  <nz-card nzTitle="Register New Client">
+    <form nz-form [nzLayout]="'inline'" class="client-form" #clientForm="ngForm" (ngSubmit)="save()">
 
-      <div nz-row nzGutter="24" nzType="flex">
-        <nz-form-item nz-col nzFlex>
-          <nz-form-label nzRequired nzFor="nameEn">Name (En)</nz-form-label>
-          <nz-form-control nzErrorTip="Please enter a valid name">
-            <input nz-input type="text" id="nameEn" name="nameEn" placeholder="Name (En)" required autofocus
-              [(ngModel)]="client.nameEn" />
-          </nz-form-control>
-        </nz-form-item>
-        <nz-form-item nz-col nzFlex>
-          <nz-form-label nzRequired nzFor="nameAr">Name (Ar)</nz-form-label>
-          <nz-form-control nzErrorTip="Please enter a valid name">
-            <input nz-input type="text" id="nameAr" name="nameAr" placeholder="Name (Ar)" required
-              [(ngModel)]="client.nameAr" />
-          </nz-form-control>
-        </nz-form-item>
+      <div nz-row nzGutter="24">
+
+        <div nz-col [nzSpan]="24">
+          <nz-card nzType="inner" nzTitle="Client Details">
+
+            <nz-form-item nzFlex>
+              <nz-form-label [nzSm]="2" nzNoColon nzRequired nzFor="nameEn">Name (En)</nz-form-label>
+              <nz-form-control [nzSm]="8" nzErrorTip="Please enter a valid name">
+                <input nz-input type="text" id="nameEn" name="nameEn" placeholder="Name (En)" required autofocus
+                  [(ngModel)]="client.nameEn" />
+              </nz-form-control>
+
+              <nz-form-label [nzSm]="4" nzSm nzNoColon nzRequired nzFor="nameAr">Name (Ar)</nz-form-label>
+              <nz-form-control [nzSm]="8" nzErrorTip="Please enter a valid name">
+                <input nz-input type="text" id="nameAr" name="nameAr" placeholder="Name (Ar)" required
+                  [(ngModel)]="client.nameAr" />
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item nzFlex>
+              <nz-form-label [nzSm]="2" nzNoColon nzFor="vATNo">VAT No.</nz-form-label>
+              <nz-form-control [nzSm]="8">
+                <input nz-input type="text" id="vATNo" name="vATNo" placeholder="VAT No." [(ngModel)]="client.vATNo" />
+              </nz-form-control>
+              <nz-form-label [nzSm]="4" nzNoColon nzFor="telephoneNumber ">Telephone Number</nz-form-label>
+              <nz-form-control [nzSm]="8">
+                <input nz-input type="text" id="telephoneNumber" name="telephoneNumber" placeholder="Telephone Number"
+                  autofocus [(ngModel)]="client.telephoneNumber" />
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item nzFlex>
+              <nz-form-label [nzSm]="2" nzNoColon nzRequired nzFor="Country">Country</nz-form-label>
+              <nz-form-control [nzSm]="8" nzErrorTip="Please select country">
+                <nz-select id="countryId" name="countryId" nzPlaceHolder="Country" nzFor="countryId" required
+                  [(ngModel)]="client.countryId">
+                  <nz-option *ngFor="let country of countries" [nzValue]="country.id" [nzLabel]="country.name">
+                  </nz-option>
+                </nz-select>
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item nzFlex>
+              <nz-form-label [nzSm]="2" nzNoColon nzFor="address">Address</nz-form-label>
+              <nz-form-control [nzSm]="8">
+                <textarea nz-input type="text" id="address" name="address" placeholder="address" nzAutosize
+                  [(ngModel)]="client.address"></textarea>
+              </nz-form-control>
+
+              <nz-form-label [nzSm]="4" nzNoColon nzFor="technicalDetails">Technical Details</nz-form-label>
+              <nz-form-control [nzSm]="8">
+                <textarea nz-input type="text" id="technicalDetails" name="technicalDetails"
+                  placeholder="Technical Details" nzAutosize [(ngModel)]="client.technicalDetails"></textarea>
+              </nz-form-control>
+            </nz-form-item>
+          </nz-card>
+
+        </div>
+
       </div>
 
-      <div nz-row nzGutter="24" nzType="flex">
-        <nz-form-item nz-col nzFlex>
-          <nz-form-label nzFor="vATNo">VAT No.</nz-form-label>
-          <nz-form-control>
-            <input nz-input type="text" id="vATNo" name="vATNo" placeholder="VAT No." [(ngModel)]="client.vATNo" />
-          </nz-form-control>
-        </nz-form-item>
-        <nz-form-item nz-col nzFlex>
-          <nz-form-label nzFor="telephoneNumber ">Telephone Number</nz-form-label>
-          <nz-form-control>
-            <input nz-input type="text" id="telephoneNumber" name="telephoneNumber" placeholder="Telephone Number"
-              autofocus [(ngModel)]="client.telephoneNumber" />
-          </nz-form-control>
-        </nz-form-item>
+      <br />
+
+      <div nz-row nzGutter="24">
+        <div nz-col [nzSpan]="24">
+          <nz-card nzType="inner" nzTitle="Modules List">
+
+            <nz-form-item nzFlex>
+              <nz-form-label [nzSm]="2" nzNoColon nzFor="module">Module</nz-form-label>
+              <nz-form-control [nzSm]="8">
+                <nz-select id="systemModule" name="systemModule" nzPlaceHolder="Select Module" nzFor="systemModule"
+                  [(ngModel)]="selectedModule">
+                  <nz-option *ngFor="let systemModule of systemsModules" [nzValue]="systemModule"
+                    [nzLabel]="systemModule.name">
+                  </nz-option>
+                </nz-select>
+              </nz-form-control>
+
+              <nz-form-control [nzSm]="8">
+                <button [disabled]="!selectedModule" nz-button type="button" nzType="primary"
+                  (click)="addModule()">Add</button>
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-table nzSize="small" #modulesListTable nzBordered [nzData]="clientModules">
+              <thead>
+                <tr>
+                  <th nzWidth="70%">Module</th>
+                  <th nzWidth="30%">Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let clientModule of clientModules">
+                  <td>{{ clientModule.name }}</td>
+                  <td>
+                    <button nz-button type="button" (click)="deleteModule(clientModule)">Delete</button>
+                  </td>
+                </tr>
+              </tbody>
+            </nz-table>
+
+          </nz-card>
+        </div>
       </div>
 
-      <div nz-row nzType="flex">
-        <nz-form-item nzFlex>
-          <nz-form-label nzRequired nzFor="Country">Country</nz-form-label>
-          <nz-form-control nzErrorTip="Please select country">
-            <nz-select id="countryId" name="countryId" nzPlaceHolder="Country" nzFor="countryId" required
-              [(ngModel)]="client.countryId">
-              <nz-option *ngFor="let country of countries" nzValue="{{ country.id }}" nzLabel="{{ country.name }}">
-              </nz-option>
-            </nz-select>
-          </nz-form-control>
-        </nz-form-item>
+      <br />
+
+      <div nz-row nzGutter="24">
+        <div nz-col [nzSpan]="24">
+          <nz-card nzType="inner" nzTitle="Contacts List">
+
+            <nz-form-item nzFlex>
+              <nz-form-label [nzSm]="2" nzNoColon nzFor="name">Name</nz-form-label>
+              <nz-form-control [nzSm]="8" nzErrorTip="Please enter a valid name">
+                <input nz-input type="text" id="name" name="name" placeholder="Name" autofocus
+                  [(ngModel)]="clientContacts.name" />
+              </nz-form-control>
+
+              <nz-form-label [nzSm]="4" nzSm nzNoColon nzFor="phone">Phone</nz-form-label>
+              <nz-form-control [nzSm]="8" nzErrorTip="Please enter phone">
+                <input nz-input type="text" id="phone" name="phone" placeholder="Phone"
+                  [(ngModel)]="clientContacts.phone" />
+              </nz-form-control>
+
+            </nz-form-item>
+
+            <nz-form-item nzFlex>
+              <nz-form-label [nzSm]="2" nzNoColon nzFor="position">Position</nz-form-label>
+              <nz-form-control [nzSm]="8" nzErrorTip="Please enter position">
+                <input nz-input type="text" id="position" name="position" placeholder="Position" autofocus
+                  [(ngModel)]="clientContacts.position" />
+              </nz-form-control>
+
+              <nz-form-label [nzSm]="4" nzSm nzNoColon nzFor="email">Email</nz-form-label>
+              <nz-form-control [nzSm]="8" nzErrorTip="Please enter a valid email">
+                <input nz-input type="text" id="email" name="email" placeholder="Email"
+                  [(ngModel)]="clientContacts.email" />
+              </nz-form-control>
+
+            </nz-form-item>
+
+            <nz-form-item nzFlex nzType="flex" nzJustify="end">
+              <nz-form-control [nzSm]="4">
+                <button nz-button [disabled]="!validateClientContact()" type="button" nzType="primary"
+                  (click)="addClientContact()">Add</button>
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-table nzSize="small" #modulesListTable nzBordered [nzData]="client.clientsModules">
+              <thead>
+                <tr>
+                  <th nzWidth="22.5%">Name</th>
+                  <th nzWidth="22.5%">Position</th>
+                  <th nzWidth="22.5%"> Phone</th>
+                  <th nzWidth="22.5%">Email</th>
+                  <th nzWidth="10%">Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let clientContact of client.clientContacts">
+                  <td>{{ clientContact.name }}</td>
+                  <td>{{ clientContact.position }}</td>
+                  <td>{{ clientContact.phone }}</td>
+                  <td>{{ clientContact.email }}</td>
+                  <td>
+                    <button nz-button type="button" (click)="deleteClientContact(clientContact)">Delete</button>
+                  </td>
+                </tr>
+              </tbody>
+            </nz-table>
+
+          </nz-card>
+        </div>
       </div>
 
-      <div nz-row nzGutter="24" nzType="flex">
-        <nz-form-item nz-col nzFlex>
-          <nz-form-label nzFor="address">Address</nz-form-label>
-          <nz-form-control>
-            <textarea nz-input type="text" id="address" name="address" placeholder="address" nzAutosize
-              [(ngModel)]="client.address"></textarea>
-          </nz-form-control>
-        </nz-form-item>
-        <nz-form-item nz-col nzFlex>
-          <nz-form-label nzFor="technicalDetails">Technical Details</nz-form-label>
-          <nz-form-control>
-            <textarea nz-input type="text" id="technicalDetails" name="technicalDetails" placeholder="Technical Details"
-              nzAutosize [(ngModel)]="client.technicalDetails"></textarea>
-          </nz-form-control>
-        </nz-form-item>
+      <br />
+
+      <div nz-row nzGutter="24">
+        <div nz-col [nzSpan]="24">
+          <nz-card nzType="inner" nzTitle="Main Support Contacts">
+
+            <nz-form-item nzFlex>
+              <nz-form-label [nzSm]="2" nzNoColon nzFor="clientContactSupportName">Name</nz-form-label>
+              <nz-form-control [nzSm]="8" nzErrorTip="Please enter a valid name">
+                <input nz-input type="text" id="clientContactSupportName" name="clientContactSupportName" placeholder="Name" autofocus
+                  [(ngModel)]="clientContactSupport.name" />
+              </nz-form-control>
+
+              <nz-form-label [nzSm]="4" nzSm nzNoColon nzFor="clientContactSupportPhone">Phone</nz-form-label>
+              <nz-form-control [nzSm]="8" nzErrorTip="Please enter phone">
+                <input nz-input type="text" id="clientContactSupportPhone" name="clientContactSupportPhone" placeholder="Phone"
+                  [(ngModel)]="clientContactSupport.phone" />
+              </nz-form-control>
+
+            </nz-form-item>
+
+            <nz-form-item nzFlex>
+              <nz-form-label [nzSm]="2" nzNoColon nzFor="clientContactSupportPosition">Position</nz-form-label>
+              <nz-form-control [nzSm]="8" nzErrorTip="Please enter position">
+                <input nz-input type="text" id="clientContactSupportPosition" name="clientContactSupportPosition" placeholder="Position" autofocus
+                  [(ngModel)]="clientContactSupport.position" />
+              </nz-form-control>
+
+              <nz-form-label [nzSm]="4" nzSm nzNoColon nzFor="clientContactSupportEmail">Email</nz-form-label>
+              <nz-form-control [nzSm]="8" nzErrorTip="Please enter a valid email">
+                <input nz-input type="text" id="clientContactSupportEmail" name="clientContactSupportEmail" placeholder="Email"
+                  [(ngModel)]="clientContactSupport.email" />
+              </nz-form-control>
+
+            </nz-form-item>
+
+            <nz-form-item nzFlex nzType="flex" nzJustify="end">
+              <nz-form-control [nzSm]="4">
+                <button nz-button [disabled]="!validateClientContactSupport()" type="button" nzType="primary"
+                  (click)="addClientContactSupport()">Add</button>
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-table nzSize="small" #modulesListTable nzBordered [nzData]="client.clientContactSupports">
+              <thead>
+                <tr>
+                  <th nzWidth="22.5%">Name</th>
+                  <th nzWidth="22.5%">Position</th>
+                  <th nzWidth="22.5%"> Phone</th>
+                  <th nzWidth="22.5%">Email</th>
+                  <th nzWidth="10%">Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let clientContactSupport of client.clientContactSupports">
+                  <td>{{ clientContactSupport.name }}</td>
+                  <td>{{ clientContactSupport.position }}</td>
+                  <td>{{ clientContactSupport.phone }}</td>
+                  <td>{{ clientContactSupport.email }}</td>
+                  <td>
+                    <button nz-button type="button" (click)="deleteClientContactSupport(clientContactSupport)">Delete</button>
+                  </td>
+                </tr>
+              </tbody>
+            </nz-table>
+
+          </nz-card>
+        </div>
       </div>
 
-      <div nz-row nzType="flex" nzJustify="start">
-        <nz-form-item>
-          <nz-form-control>
-            <button [disabled]="!clientForm.valid" nz-button nzType="primary" type="submit"
-              [nzLoading]="loading">Save</button>
-          </nz-form-control>
-        </nz-form-item>
-        <nz-form-item>
-          <nz-form-control>
-            <button nz-button type="button" (click)="clear()">Clear</button>
-          </nz-form-control>
-        </nz-form-item>
-      </div>
+      <nz-form-item nz-row nzFlex nzType="flex" nzJustify="end">
+        <nz-form-control>
+          <button [disabled]="!clientForm.valid" nz-button nzType="primary" type="submit"
+            [nzLoading]="loading">Save</button>
+          <button nz-button type="button" (click)="clear()">Clear</button>
+        </nz-form-control>
+      </nz-form-item>
 
     </form>
-  </div>
+  </nz-card>
 </div>
+{{ clientContacts | json }}

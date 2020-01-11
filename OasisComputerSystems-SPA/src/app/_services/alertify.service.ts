@@ -6,11 +6,7 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 })
 export class AlertifyService {
 
-  constructor(private notification: NzNotificationService) {
-    this.notification.config({
-      nzPlacement: 'bottomRight'
-    });
-  }
+  constructor(private notification: NzNotificationService) {}
 
   // confirm(message: string, okCallback: () => any) {
   //   // tslint:disable-next-line:only-arrow-functions
@@ -21,24 +17,24 @@ export class AlertifyService {
   //   });
   // }
 
-  success(message: string) {
-    this.notification.success(message, '');
+  success(title: string, message: string = '') {
+    this.notification.success(title, message);
   }
 
-  info(message: string) {
-    this.notification.info(message, '');
+  info(title: string, message: string = '') {
+    this.notification.info(title, message);
   }
 
-  warning(message: string) {
-    this.notification.warning(message, '');
+  warning(title: string, message: string = '') {
+    this.notification.warning(title, message);
   }
 
-  error(message: string) {
-    this.notification.error(message, '');
+  error(title: string, message: string = '') {
+    this.notification.error(title, message);
   }
 
-  blank(message: string) {
-    this.notification.blank(message, '');
+  blank(title: string, message: string = '') {
+    this.notification.blank(title, message);
   }
 
 }

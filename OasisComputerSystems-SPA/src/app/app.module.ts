@@ -21,6 +21,7 @@ import { ClientListResolver } from './_resolvers/client-list.resolver';
 import { ClientNewComponent } from './components/clients/client-new/client-new.component';
 import { NGZorroModule } from './_modules/ng-zorro.module';
 import { CountryService } from './_services/country.service';
+import { SystemModuleService } from './_services/system-module.service';
 
 
 export function tokenGetter() {
@@ -61,7 +62,8 @@ export function tokenGetter() {
       AlertifyService,
       CountryService,
       ClientService,
-      ClientListResolver
+      ClientListResolver,
+      SystemModuleService
    ],
    bootstrap: [
       AppComponent

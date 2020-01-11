@@ -14,4 +14,10 @@ export interface User {
   deletedById?: number;
   deletedBy?: string;
   deletedOn?: Date;
+  clientsModules?: ClientsModules[];
 }
+
+interface ClientsModules {
+  systemModuleId: number;
+}
+

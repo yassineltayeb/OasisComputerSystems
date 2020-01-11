@@ -46,7 +46,7 @@ namespace OasisComputerSystems.API.Controllers
             return Ok(clientsToReturn);
         }
 
-        [HttpPost("[action]")]
+        [HttpPost]
         public async Task<IActionResult> AddClient(ClientForRegisterDto clientForRegisterDto)
         {
             var client = _mapper.Map<Client>(clientForRegisterDto);

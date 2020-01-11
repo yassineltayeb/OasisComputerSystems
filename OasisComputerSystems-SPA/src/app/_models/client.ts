@@ -8,9 +8,9 @@ export interface Client {
   countryId: number;
   country: string;
   technicalDetails: string;
-  createdById: number;
-  createdBy: string;
-  createdOn: Date;
+  createdById?: number;
+  createdBy?: string;
+  createdOn?: Date;
   updatedById?: number;
   updatedBy?: string;
   updatedOn?: Date;
@@ -18,4 +18,26 @@ export interface Client {
   deletedById?: number;
   deletedBy?: string;
   deletedOn?: Date;
+  clientsModules?: ClientsModules[];
+  clientContacts?: ClientContact[];
+  clientContactSupports?: ClientContactSupport[];
 }
+
+export interface ClientsModules {
+  systemModuleId: number;
+}
+
+export interface ClientContact {
+  name: string;
+  position: string;
+  phone: string;
+  email: string;
+}
+
+export interface ClientContactSupport {
+  name: string;
+  position: string;
+  phone: string;
+  email: string;
+}
+
