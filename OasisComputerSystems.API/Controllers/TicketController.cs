@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using OasisComputerSystems.API.Core;
@@ -40,7 +38,7 @@ namespace OasisComputerSystems.API.Controllers
             _host = host;
         }
 
-        [HttpGet("[action]")]
+        [HttpGet]
         public async Task<IActionResult> GetTickets([FromQuery] TicketParams ticketParams)
         {
             var tickets = await _repo.GetAll(ticketParams);
@@ -52,7 +50,7 @@ namespace OasisComputerSystems.API.Controllers
             return Ok(ticketsToReturn);
         }
 
-        [HttpGet("{id}", Name = "GetTicket")]
+        // [HttpGet("{id}", Name = "GetTicket")]
         public async Task<IActionResult> GetTicket(int id)
         {
             var ticket = await _repo.Get(id);
@@ -62,7 +60,7 @@ namespace OasisComputerSystems.API.Controllers
             return Ok(ticketsToReturn);
         }
 
-        [HttpPost("[action]")]
+        [HttpPost]
         public async Task<IActionResult> AddTicket([FromForm] TicketForRegisterDto ticketForRegisterDto)
         {
             var ticket = _mapper.Map<Ticket>(ticketForRegisterDto);
@@ -98,7 +96,7 @@ namespace OasisComputerSystems.API.Controllers
             return Ok(ticketToReturn);
         }
 
-        [HttpPut("{id}", Name = "UpdateTicket")]
+        [HttpPut("{id}")]
         public async Task<IActionResult> UpdateTicket(int id, TicketForUpdateDto ticketForUpdateDto)
         {
             var ticket = await _repo.Get(id);

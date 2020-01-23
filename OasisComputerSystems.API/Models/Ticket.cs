@@ -14,6 +14,8 @@ namespace OasisComputerSystems.API.Models
         [Required]
         public int TicketNo { get; set; }
         [Required]
+        public string Status { get; set; }
+        [Required]
         public int PriorityId { get; set; }
         public Priority Priority { get; set; }
         [Required]
@@ -29,6 +31,8 @@ namespace OasisComputerSystems.API.Models
         public string Subject { get; set; }
         [Required]
         public string ProblemDescription { get; set; }
+        public int Reminders { get; set; }
+        public bool HighPriority { get; set; }
         public int SubmittedById { get; set; }
         public StaffProfile SubmittedBy { get; set; }
         public DateTime SubmittedOn { get; set; }

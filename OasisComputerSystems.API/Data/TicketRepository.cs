@@ -23,37 +23,38 @@ namespace OasisComputerSystems.API.Data
         {
             //Get Clients List
             var tickets = _context.Tickets
-                .Include(c => c.Priority)
-                .Include(c => c.TicketType)
-                .Include(c => c.AssignedTo)
-                .Include(c => c.SystemModule)
-                .Include(c => c.SubmittedBy)
-                .Include(c => c.ClosedBy)
-                .Include(c => c.ApprovedBy)
-                .OrderBy(c => c.TicketNo)
+                .Include(t => t.Client)
+                .Include(t => t.Priority)
+                .Include(t => t.TicketType)
+                .Include(t => t.AssignedTo)
+                .Include(t => t.SystemModule)
+                .Include(t => t.SubmittedBy)
+                .Include(t => t.ClosedBy)
+                .Include(t => t.ApprovedBy)
+                .OrderBy(t => t.TicketNo)
                 .AsQueryable();
 
             //Filter By
             if (ticketParams.ClientId.HasValue)
-                tickets = tickets.Where(c => c.ClientId == ticketParams.ClientId);
+                tickets = tickets.Where(t => t.ClientId == ticketParams.ClientId);
 
             if (ticketParams.PriorityId.HasValue)
-                tickets = tickets.Where(c => c.PriorityId == ticketParams.PriorityId);
+                tickets = tickets.Where(t => t.PriorityId == ticketParams.PriorityId);
 
             if (ticketParams.TicketTypeId.HasValue)
-                tickets = tickets.Where(c => c.TicketTypeId == ticketParams.TicketTypeId);
+                tickets = tickets.Where(t => t.TicketTypeId == ticketParams.TicketTypeId);
 
             if (ticketParams.AssignedToId.HasValue)
-                tickets = tickets.Where(c => c.AssignedToId == ticketParams.AssignedToId);
+                tickets = tickets.Where(t => t.AssignedToId == ticketParams.AssignedToId);
 
             if (ticketParams.SystemModuleId.HasValue)
-                tickets = tickets.Where(c => c.SystemModuleId == ticketParams.SystemModuleId);
+                tickets = tickets.Where(t => t.SystemModuleId == ticketParams.SystemModuleId);
 
             if (ticketParams.Subject != null)
-                tickets = tickets.Where(c => c.Subject.Contains(ticketParams.Subject));
+                tickets = tickets.Where(t => t.Subject.Contains(ticketParams.Subject));
 
             if (ticketParams.ProblemDescription != null)
-                tickets = tickets.Where(c => c.ProblemDescription.Contains(ticketParams.ProblemDescription));
+                tickets = tickets.Where(t => t.ProblemDescription.Contains(ticketParams.ProblemDescription));
 
             //Order By
             var columnsMap = OrderByColumnsMap();
@@ -73,14 +74,15 @@ namespace OasisComputerSystems.API.Data
         public new async Task<Ticket> Get(int id)
         {
             return await _context.Tickets
-                .Include(c => c.Priority)
-                .Include(c => c.TicketType)
-                .Include(c => c.AssignedTo)
-                .Include(c => c.SystemModule)
-                .Include(c => c.SubmittedBy)
-                .Include(c => c.ClosedBy)
-                .Include(c => c.ApprovedBy)
-                .SingleOrDefaultAsync(c => c.Id == id);
+                .Include(t => t.Client)
+                .Include(t => t.Priority)
+                .Include(t => t.TicketType)
+                .Include(t => t.AssignedTo)
+                .Include(t => t.SystemModule)
+                .Include(t => t.SubmittedBy)
+                .Include(t => t.ClosedBy)
+                .Include(t => t.ApprovedBy)
+                .SingleOrDefaultAsync(t => t.Id == id);
         }
 
         public async Task<int> GetTicketNo(int clientId)
@@ -103,17 +105,18 @@ namespace OasisComputerSystems.API.Data
         {
             return new Dictionary<string, Expression<Func<Ticket, object>>>()
             {
-                ["priority"] = c => c.Priority.Name,
-                ["ticketType"] = c => c.TicketType.Name,
-                ["assignedTo"] = c => c.AssignedTo.FullNameEn,
-                ["systemModule"] = c => c.SystemModule.Name,
-                ["subject"] = c => c.Subject,
-                ["problemDescription"] = c => c.ProblemDescription,
-                ["submittedBy"] = c => c.SubmittedBy.FullNameEn,
-                ["submittedOn"] = c => c.SubmittedOn,
-                ["closedBy"] = c => c.ClosedBy.FullNameEn,
-                ["approvedBy"] = c => c.ApprovedBy.FullNameEn,
-                ["approvedOn"] = c => c.ApprovedOn
+                ["ticketNo"] = t => t.TicketNo,
+                ["priority"] = t => t.Priority.Name,
+                ["ticketType"] = t => t.TicketType.Name,
+                ["assignedTo"] = t => t.AssignedTo.FullNameEn,
+                ["systemModule"] = t => t.SystemModule.Name,
+                ["subject"] = t => t.Subject,
+                ["problemDescription"] = t => t.ProblemDescription,
+                ["submittedBy"] = t => t.SubmittedBy.FullNameEn,
+                ["submittedOn"] = t => t.SubmittedOn,
+                ["closedBy"] = t => t.ClosedBy.FullNameEn,
+                ["approvedBy"] = t => t.ApprovedBy.FullNameEn,
+                ["approvedOn"] = t => t.ApprovedOn
             };
         }
     }

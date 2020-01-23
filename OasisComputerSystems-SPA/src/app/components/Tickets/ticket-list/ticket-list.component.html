@@ -1,3 +1,70 @@
-<p>
-  ticket-list works!
-</p>
+
+<div class="container-fluid">
+  <div nz-row>
+    <form nz-form class="ant-advanced-search-form">
+      <div nz-row>
+        <!-- <div nz-col [nzSpan]="6">
+          <nz-form-item nzFlex>
+            <nz-form-label nzFor="name">Name</nz-form-label>
+            <nz-form-control>
+              <input nz-input type="text" name="name" id="name" placeholder="Name" autofocus
+                [(ngModel)]="ticketParams.name" />
+            </nz-form-control>
+          </nz-form-item>
+        </div> -->
+        <!-- <div nz-col>
+          <nz-form-item nzFlex>
+            <nz-form-label nzFor="countryId">Country</nz-form-label>
+            <nz-form-control [nzSpan]="6">
+              <nz-select id="countryId" name="countryId" nzPlaceHolder="Country" [(ngModel)]="ticketParams.countryId">
+                <nz-option *ngFor="let country of countries" nzValue="{{ country.id }}" nzLabel="{{ country.name }}">
+                </nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div> -->
+      </div>
+      <div nz-row>
+        <div nz-col [nzSpan]="24" class="search-area">
+          <button nz-button [nzType]="'primary'" (click)="getTicketList()">Search</button>
+          <button nz-button (click)="clear()">Clear</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <br>
+  <div nz-row nzType="flex" nzJustify="space-between">
+    <h3 nz-col nzSpan="12">Tickets List</h3>
+    <button nz-button nzType="primary" nz-col nzSpan="12" [routerLink]="['/tickets/new']">New Ticket</button>
+  </div>
+  <div nz-row>
+    <nz-table nzSize="small" #ticketTable [nzLoading]="loading" nzShowSizeChanger [nzShowPagination]="true" [nzFrontPagination]="false"
+      [nzPageIndex]="pagination.currentPage" [nzPageSize]="pagination.itemsPerPage" [nzTotal]="pagination.totalItems"
+      [nzPageSizeOptions]="PageSizeOptions" (nzPageIndexChange)="pageChanged($event, 'PageIndexChange')"
+      (nzPageSizeChange)="pageChanged($event, 'PageSizeChange')" [nzData]="tickets">
+      <thead (nzSortChange)="sort($event)" nzSingleSort>
+        <tr>
+          <th *ngFor="let column of columns" nzShowSort nzSortKey="{{ column.sortKey }}"> {{ column.columnName }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ticket of ticketTable.data">
+          <td>{{ ticket.assignedTo }}</td>
+          <td>{{ ticket.ticketNo}}</td>
+          <td>{{ ticket.status}}</td>
+          <td>{{ ticket.priority}}</td>
+          <td>{{ ticket.ticketType}}</td>
+          <td>{{ ticket.client.nameEn }}</td>
+          <td>{{ ticket.systemModule }}</td>
+          <td>{{ ticket.subject }}</td>
+          <td>{{ ticket.problemDescription }}</td>
+          <td>{{ ticket.reminders }}</td>
+          <td>{{ ticket.submittedBy }}</td>
+          <td>{{ ticket.submittedOn | date }}</td>
+          <td>{{ ticket.closedBy }}</td>
+          <td>{{ ticket.closedOn | date }}</td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+</div>

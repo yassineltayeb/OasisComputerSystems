@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
   <div nz-row>
     <form nz-form class="ant-advanced-search-form">
       <div nz-row>
@@ -37,7 +37,7 @@
     <button nz-button nzType="primary" nz-col nzSpan="12" [routerLink]="['/clients/new']">New Client</button>
   </div>
   <div nz-row>
-    <nz-table #clientTable [nzLoading]="loading" nzShowSizeChanger [nzShowPagination]="true" [nzFrontPagination]="false"
+    <nz-table nzSize="small" #clientTable [nzLoading]="loading" nzShowSizeChanger [nzShowPagination]="true" [nzFrontPagination]="false"
       [nzPageIndex]="pagination.currentPage" [nzPageSize]="pagination.itemsPerPage" [nzTotal]="pagination.totalItems"
       [nzPageSizeOptions]="PageSizeOptions" (nzPageIndexChange)="pageChanged($event, 'PageIndexChange')"
       (nzPageSizeChange)="pageChanged($event, 'PageSizeChange')" [nzData]="clients">

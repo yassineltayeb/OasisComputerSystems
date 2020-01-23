@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OasisComputerSystems.API.Data;
 
 namespace OasisComputerSystems.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20200123183219_AddStatuAndRemindersAndHighPriorityToTicket")]
+    partial class AddStatuAndRemindersAndHighPriorityToTicket
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -177,7 +179,7 @@ namespace OasisComputerSystems.API.Migrations
                             Address = "Mauritius - Port Louis",
                             CountryId = 6,
                             CreatedById = 1,
-                            CreatedOn = new DateTime(2020, 1, 23, 20, 36, 9, 962, DateTimeKind.Local).AddTicks(4128),
+                            CreatedOn = new DateTime(2020, 1, 23, 20, 32, 18, 963, DateTimeKind.Local).AddTicks(5628),
                             IsDeleted = false,
                             NameAr = "وسيط المدينة",
                             NameEn = "City Brokers",
@@ -191,7 +193,7 @@ namespace OasisComputerSystems.API.Migrations
                             Address = "Saudi Arabia - Jeddah",
                             CountryId = 2,
                             CreatedById = 1,
-                            CreatedOn = new DateTime(2020, 1, 23, 20, 36, 9, 962, DateTimeKind.Local).AddTicks(4263),
+                            CreatedOn = new DateTime(2020, 1, 23, 20, 32, 18, 963, DateTimeKind.Local).AddTicks(5763),
                             IsDeleted = false,
                             NameAr = "مسارات",
                             NameEn = "Masarat",
@@ -205,7 +207,7 @@ namespace OasisComputerSystems.API.Migrations
                             Address = "Lebanon - Beirut",
                             CountryId = 3,
                             CreatedById = 1,
-                            CreatedOn = new DateTime(2020, 1, 23, 20, 36, 9, 962, DateTimeKind.Local).AddTicks(4269),
+                            CreatedOn = new DateTime(2020, 1, 23, 20, 32, 18, 963, DateTimeKind.Local).AddTicks(5770),
                             IsDeleted = false,
                             NameAr = "بلاتينيوم",
                             NameEn = "Platinum",
@@ -219,7 +221,7 @@ namespace OasisComputerSystems.API.Migrations
                             Address = "Lebanon - Beirut",
                             CountryId = 3,
                             CreatedById = 1,
-                            CreatedOn = new DateTime(2020, 1, 23, 20, 36, 9, 962, DateTimeKind.Local).AddTicks(4273),
+                            CreatedOn = new DateTime(2020, 1, 23, 20, 32, 18, 963, DateTimeKind.Local).AddTicks(5804),
                             IsDeleted = false,
                             NameAr = "قروب ميد",
                             NameEn = "GMRB",
@@ -233,7 +235,7 @@ namespace OasisComputerSystems.API.Migrations
                             Address = "Saudi Arabia - Jeddah",
                             CountryId = 2,
                             CreatedById = 1,
-                            CreatedOn = new DateTime(2020, 1, 23, 20, 36, 9, 962, DateTimeKind.Local).AddTicks(4277),
+                            CreatedOn = new DateTime(2020, 1, 23, 20, 32, 18, 963, DateTimeKind.Local).AddTicks(5807),
                             IsDeleted = false,
                             NameAr = "قروب ميد",
                             NameEn = "GMIB",
@@ -247,7 +249,7 @@ namespace OasisComputerSystems.API.Migrations
                             Address = "UAE - Dubai",
                             CountryId = 4,
                             CreatedById = 1,
-                            CreatedOn = new DateTime(2020, 1, 23, 20, 36, 9, 962, DateTimeKind.Local).AddTicks(4281),
+                            CreatedOn = new DateTime(2020, 1, 23, 20, 32, 18, 963, DateTimeKind.Local).AddTicks(5812),
                             IsDeleted = false,
                             NameAr = "الحماية",
                             NameEn = "Alhimaya",
@@ -261,7 +263,7 @@ namespace OasisComputerSystems.API.Migrations
                             Address = "UAE - Dubai",
                             CountryId = 4,
                             CreatedById = 1,
-                            CreatedOn = new DateTime(2020, 1, 23, 20, 36, 9, 962, DateTimeKind.Local).AddTicks(4286),
+                            CreatedOn = new DateTime(2020, 1, 23, 20, 32, 18, 963, DateTimeKind.Local).AddTicks(5816),
                             IsDeleted = false,
                             NameAr = "المنارة",
                             NameEn = "Al Manarah",
@@ -275,7 +277,7 @@ namespace OasisComputerSystems.API.Migrations
                             Address = "Saudi Arabia - Jeddah",
                             CountryId = 2,
                             CreatedById = 1,
-                            CreatedOn = new DateTime(2020, 1, 23, 20, 36, 9, 962, DateTimeKind.Local).AddTicks(4289),
+                            CreatedOn = new DateTime(2020, 1, 23, 20, 32, 18, 963, DateTimeKind.Local).AddTicks(5820),
                             IsDeleted = false,
                             NameAr = "اب بلس",
                             NameEn = "APPlus",
@@ -289,7 +291,7 @@ namespace OasisComputerSystems.API.Migrations
                             Address = "Saudi Arabia - Riyadh",
                             CountryId = 2,
                             CreatedById = 1,
-                            CreatedOn = new DateTime(2020, 1, 23, 20, 36, 9, 962, DateTimeKind.Local).AddTicks(4293),
+                            CreatedOn = new DateTime(2020, 1, 23, 20, 32, 18, 963, DateTimeKind.Local).AddTicks(5824),
                             IsDeleted = false,
                             NameAr = "افق",
                             NameEn = "Ofooq",
@@ -303,7 +305,7 @@ namespace OasisComputerSystems.API.Migrations
                             Address = "Saudi Arabia - Jeddah",
                             CountryId = 2,
                             CreatedById = 1,
-                            CreatedOn = new DateTime(2020, 1, 23, 20, 36, 9, 962, DateTimeKind.Local).AddTicks(4297),
+                            CreatedOn = new DateTime(2020, 1, 23, 20, 32, 18, 963, DateTimeKind.Local).AddTicks(5828),
                             IsDeleted = false,
                             NameAr = "كونكورد",
                             NameEn = "Concord",
@@ -317,7 +319,7 @@ namespace OasisComputerSystems.API.Migrations
                             Address = "Saudi Arabia - Riyadh",
                             CountryId = 2,
                             CreatedById = 1,
-                            CreatedOn = new DateTime(2020, 1, 23, 20, 36, 9, 962, DateTimeKind.Local).AddTicks(4300),
+                            CreatedOn = new DateTime(2020, 1, 23, 20, 32, 18, 963, DateTimeKind.Local).AddTicks(5831),
                             IsDeleted = false,
                             NameAr = "بروكر كير",
                             NameEn = "Broker Care",
@@ -331,7 +333,7 @@ namespace OasisComputerSystems.API.Migrations
                             Address = "Saudi Arabia - Jeddah",
                             CountryId = 2,
                             CreatedById = 1,
-                            CreatedOn = new DateTime(2020, 1, 23, 20, 36, 9, 962, DateTimeKind.Local).AddTicks(4304),
+                            CreatedOn = new DateTime(2020, 1, 23, 20, 32, 18, 963, DateTimeKind.Local).AddTicks(5835),
                             IsDeleted = false,
                             NameAr = "رؤية الوسيط",
                             NameEn = "Broker Vision",
@@ -345,7 +347,7 @@ namespace OasisComputerSystems.API.Migrations
                             Address = "Saudi Arabia - Jeddah",
                             CountryId = 2,
                             CreatedById = 1,
-                            CreatedOn = new DateTime(2020, 1, 23, 20, 36, 9, 962, DateTimeKind.Local).AddTicks(4307),
+                            CreatedOn = new DateTime(2020, 1, 23, 20, 32, 18, 963, DateTimeKind.Local).AddTicks(5839),
                             IsDeleted = false,
                             NameAr = "حازم",
                             NameEn = "Hazim",
@@ -359,7 +361,7 @@ namespace OasisComputerSystems.API.Migrations
                             Address = "Sudan - Khartoum",
                             CountryId = 1,
                             CreatedById = 1,
-                            CreatedOn = new DateTime(2020, 1, 23, 20, 36, 9, 962, DateTimeKind.Local).AddTicks(4311),
+                            CreatedOn = new DateTime(2020, 1, 23, 20, 32, 18, 963, DateTimeKind.Local).AddTicks(5843),
                             IsDeleted = false,
                             NameAr = "النيلين للتأمين",
                             NameEn = "Elnilein Insurance Company",
@@ -373,7 +375,7 @@ namespace OasisComputerSystems.API.Migrations
                             Address = "Sudan - Khartoum",
                             CountryId = 1,
                             CreatedById = 1,
-                            CreatedOn = new DateTime(2020, 1, 23, 20, 36, 9, 962, DateTimeKind.Local).AddTicks(4314),
+                            CreatedOn = new DateTime(2020, 1, 23, 20, 32, 18, 963, DateTimeKind.Local).AddTicks(5847),
                             IsDeleted = false,
                             NameAr = "سويسس",
                             NameEn = "Swiss",
@@ -702,21 +704,21 @@ namespace OasisComputerSystems.API.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "4a1941cc-8fcc-459e-a4f3-2b3850b26119",
+                            ConcurrencyStamp = "474466a1-69c3-4475-b075-423c021fcb68",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "88c5ad32-f292-44d2-b0ca-61c2d5f85ee2",
+                            ConcurrencyStamp = "c3ecf0b4-0bb4-4b63-8a1c-5fe3df2c8f48",
                             Name = "Member",
                             NormalizedName = "MEMBER"
                         },
                         new
                         {
                             Id = 3,
-                            ConcurrencyStamp = "d0cf974b-f350-4573-a5cb-b9be1c134d56",
+                            ConcurrencyStamp = "368d6970-3283-4e1c-93a6-c622b3f290e5",
                             Name = "Client",
                             NormalizedName = "CLIENT"
                         });
@@ -979,7 +981,6 @@ namespace OasisComputerSystems.API.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Status")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Subject")

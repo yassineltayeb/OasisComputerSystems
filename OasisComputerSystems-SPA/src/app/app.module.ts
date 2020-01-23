@@ -22,6 +22,8 @@ import { ClientNewComponent } from './components/clients/client-new/client-new.c
 import { NGZorroModule } from './_modules/ng-zorro.module';
 import { CountryService } from './_services/country.service';
 import { SystemModuleService } from './_services/system-module.service';
+import { TicketService } from './_services/ticket.service';
+import { TicketNewComponent } from './components/Tickets/ticket-new/ticket-new.component';
 
 
 export function tokenGetter() {
@@ -36,7 +38,8 @@ export function tokenGetter() {
       HomeComponent,
       ClientListComponent,
       ClientNewComponent,
-      TicketListComponent
+      TicketListComponent,
+      TicketNewComponent
    ],
    imports: [
       BrowserModule,
@@ -63,7 +66,8 @@ export function tokenGetter() {
       CountryService,
       ClientService,
       ClientListResolver,
-      SystemModuleService
+      SystemModuleService,
+      TicketService
    ],
    bootstrap: [
       AppComponent

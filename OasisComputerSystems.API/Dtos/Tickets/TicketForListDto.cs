@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations;
 using OasisComputerSystems.API.Dtos.Clients;
-using OasisComputerSystems.API.Models;
 
 namespace OasisComputerSystems.API.Dtos.Tickets
 {
@@ -13,6 +11,7 @@ namespace OasisComputerSystems.API.Dtos.Tickets
         public int ClientId { get; set; }
         public ClientForListDto Client { get; set; }
         public int TicketNo { get; set; }
+        public string Status { get; set; }
         public int PriorityId { get; set; }
         public string Priority { get; set; }
         public int TicketTypeId { get; set; }
@@ -23,6 +22,8 @@ namespace OasisComputerSystems.API.Dtos.Tickets
         public string SystemModule { get; set; }
         public string Subject { get; set; }
         public string ProblemDescription { get; set; }
+        public int Reminders { get; set; }
+        public bool HighPriority { get; set; }
         public int SubmittedById { get; set; }
         public string SubmittedBy { get; set; }
         public DateTime SubmittedOn { get; set; }
