@@ -1,9 +1,9 @@
 export interface User {
   id: number;
   username: string;
-  Status: string;
-  FullNameEn: string;
-  FullNameAr: string;
+  status: string;
+  fullNameEn: string;
+  fullNameAr: string;
   createdById: number;
   createdBy: string;
   createdOn: Date;

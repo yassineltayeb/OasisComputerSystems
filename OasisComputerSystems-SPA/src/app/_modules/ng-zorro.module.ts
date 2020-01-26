@@ -13,6 +13,7 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NZ_I18N, en_US } from 'ng-zorro-antd/i18n';
@@ -46,6 +47,7 @@ const ngZorroConfig: NzConfig = {
     NzMenuModule,
     NzNotificationModule,
     NzTableModule,
+    NzUploadModule,
     NzPaginationModule,
     NzSelectModule
   ]

@@ -9,12 +9,9 @@ namespace OasisComputerSystems.API.Dtos.Tickets
     public class TicketForRegisterDto
     {
         public int Id { get; set; }
-        [Required]
-        public int ClientId { get; set; }
-        [Required]
         public string Status { get; set; }
         [Required]
-        public int TicketNo { get; set; }
+        public int ClientId { get; set; }
         [Required]
         public int PriorityId { get; set; }
         [Required]
@@ -33,10 +30,11 @@ namespace OasisComputerSystems.API.Dtos.Tickets
         public DateTime SubmittedOn { get; set; }
 
         public ICollection<TicketNoteForRegisterDto> TicketNotes { get; set; }
-        public ICollection<IFormFile> Attachments { get; set; }
+        public List<IFormFile> Attachments { get; set; }
 
         public TicketForRegisterDto()
         {
+            Status = "Waiting";
             Reminders = 0;
             HighPriority = false;
             SubmittedOn = DateTime.Now;

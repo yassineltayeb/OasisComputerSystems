@@ -1,5 +1,3 @@
-using OasisComputerSystems.API.Models;
-
 namespace OasisComputerSystems.API.Dtos.Clients
 {
     public class ClientsModulesForDetailsDto

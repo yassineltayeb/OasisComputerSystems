@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using OasisComputerSystems.API.Core;
+using OasisComputerSystems.API.Dtos;
 using OasisComputerSystems.API.Dtos.Clients;
 using OasisComputerSystems.API.Helpers;
 using OasisComputerSystems.API.Models;
@@ -36,7 +37,18 @@ namespace OasisComputerSystems.API.Controllers
             return Ok(clientsToReturn);
         }
 
-        [HttpGet("{id}", Name="GetClient")]
+        [HttpGet]
+        [Route("GetAllClients")]
+        public async Task<IActionResult> GetAllClients()
+        {
+            var clients = await _repo.GetAll();
+
+            var clientsToReturn = _mapper.Map<IEnumerable<KeyValuePairs>>(clients);
+
+            return Ok(clientsToReturn);
+        }
+
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetClient(int id)
         {
             var client = await _repo.Get(id);
@@ -61,7 +73,7 @@ namespace OasisComputerSystems.API.Controllers
             return Ok(clientToReturn);
         }
 
-        [HttpPut("{id}", Name="UpdateClient")]
+        [HttpPut("{id}", Name = "UpdateClient")]
         public async Task<IActionResult> UpdateClient(int id, ClientForUpdateDto clientForUpdateDto)
         {
             var client = await _repo.Get(id);
@@ -70,7 +82,7 @@ namespace OasisComputerSystems.API.Controllers
                 return BadRequest("Invalid client");
 
             _mapper.Map(clientForUpdateDto, client);
-            
+
             client.UpdatedById = _authRepository.GetCurrentUserId();
 
             await _repo.SaveAll();
@@ -80,7 +92,7 @@ namespace OasisComputerSystems.API.Controllers
             return Ok(clientToReturn);
         }
 
-        [HttpDelete("{id}", Name="DeleteClient")]
+        [HttpDelete("{id}", Name = "DeleteClient")]
         public async Task<IActionResult> DeleteClient(int id)
         {
             var client = await _repo.Get(id);
@@ -88,7 +100,7 @@ namespace OasisComputerSystems.API.Controllers
             if (client == null)
                 return BadRequest("Invalid client");
 
-            
+
             client.IsDeleted = true;
             client.DeletedById = _authRepository.GetCurrentUserId();
 
@@ -96,5 +108,6 @@ namespace OasisComputerSystems.API.Controllers
 
             return Ok("Deleted Successfully");
         }
+
     }
 }

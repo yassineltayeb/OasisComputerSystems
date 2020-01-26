@@ -17,7 +17,6 @@ using Microsoft.AspNetCore.Authorization;
 namespace OasisComputerSystems.API.Controllers
 {
     [Route("api/[controller]")]
-    [AllowAnonymous]
     [ApiController]
     public class AuthController : ControllerBase
     {
@@ -36,7 +35,17 @@ namespace OasisComputerSystems.API.Controllers
             _config = config;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetUsers()
+        {
+            var users = await _userManager.Users.ToListAsync();
+            var usersToReturn = _mapper.Map<IEnumerable<StaffProfileForListDto>>(users);
+
+            return Ok(usersToReturn);
+        }
+
         [HttpPost("[action]")]
+        [AllowAnonymous]
         public async Task<IActionResult> Register(StaffProfileForRegisterDto staffProfileForRegisterDto)
         {
             var staffProfile = _mapper.Map<StaffProfile>(staffProfileForRegisterDto);
@@ -69,6 +78,7 @@ namespace OasisComputerSystems.API.Controllers
         }
 
         [HttpPost("[action]")]
+        [AllowAnonymous]
         public async Task<IActionResult> Login(StaffProfileForLoginDto staffProfileForLoginDto)
         {
             var staffProfile = await _userManager.FindByNameAsync(staffProfileForLoginDto.UserName);

@@ -16,6 +16,10 @@ export abstract class AbstractService<T> {
     return this.http.post<T>(this.Url, item).pipe(map(res => res as T));
   }
 
+  public addWithFormData(ticketFormData: FormData): Observable<T> {
+    return this.http.post<T>(this.Url, ticketFormData).pipe(map(res => res as T));
+  }
+
   public update(id: number, item: T): Observable<T> {
     return this.http.put<T>(this.Url + id, item).pipe(map(res => res as T));
   }

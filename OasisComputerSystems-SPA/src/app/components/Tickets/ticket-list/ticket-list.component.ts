@@ -28,7 +28,7 @@ export class TicketListComponent implements OnInit {
     { columnName: 'Priority', sortKey: 'priority' },
     { columnName: 'Type', sortKey: 'ticketType' },
     { columnName: 'Client Name', sortKey: 'clientName' },
-    { columnName: 'Module', sortKey: 'module' },
+    { columnName: 'Module', sortKey: 'systemModule' },
     { columnName: 'Subject', sortKey: 'subject' },
     { columnName: 'Problem Description', sortKey: 'problemDescription' },
     { columnName: 'Reminder(s)', sortKey: 'reminders' },
@@ -44,7 +44,13 @@ export class TicketListComponent implements OnInit {
               private alertify: AlertifyService) { }
 
   ngOnInit() {
-    this.getTicketList();
+    this.loadToggle();
+
+    this.route.data.subscribe(data => {
+      this.tickets = data.tickets.result;
+      this.pagination = data.tickets.pagination;
+      this.loadToggle();
+    });
   }
 
   pageChanged(event: any, eventType: string): void {

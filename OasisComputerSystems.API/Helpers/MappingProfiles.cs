@@ -40,6 +40,11 @@ namespace OasisComputerSystems.API.Helpers
             CreateMap<ClientContactSupport, ClientContactSupportForRegisterDto>();
             CreateMap<ClientContactSupport, ClientContactSupportForDetailsDto>();
 
+            CreateMap<ClientsModules, ClientsModulesForListDto>()
+                .ForMember(dest => dest.ClientId, opt => opt.MapFrom(src => src.Client.Id))
+                .ForMember(dest => dest.SystemModuleId, opt => opt.MapFrom(src => src.SystemModule.Id))
+                .ForMember(dest => dest.SystemModule, opt => opt.MapFrom(src => src.SystemModule.Name));
+
             CreateMap<ClientsModules, ClientsModulesForRegisterDto>()
                 .ForMember(dest => dest.ClientId, opt => opt.MapFrom(src => src.Client.Id))
                 .ForMember(dest => dest.SystemModuleId, opt => opt.MapFrom(src => src.SystemModule.Id));
@@ -49,7 +54,7 @@ namespace OasisComputerSystems.API.Helpers
             //Tickets
             CreateMap<Ticket, TicketForRegisterDto>();
             CreateMap<Ticket, TicketForUpdateDto>();
-            
+
             CreateMap<Ticket, TicketForListDto>()
                 .ForMember(dest => dest.Priority, opt => opt.MapFrom(src => src.Priority.Name))
                 .ForMember(dest => dest.TicketType, opt => opt.MapFrom(src => src.TicketType.Name))
@@ -76,6 +81,9 @@ namespace OasisComputerSystems.API.Helpers
             CreateMap<Religion, KeyValuePairs>();
             CreateMap<SystemModule, KeyValuePairs>();
             CreateMap<TicketType, KeyValuePairs>();
+            CreateMap<Client, KeyValuePairs>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.NameEn));
 
             // //Dto to Model
             //Staff Profiles
@@ -92,6 +100,7 @@ namespace OasisComputerSystems.API.Helpers
             CreateMap<ClientContactForDetailsDto, ClientContact>();
             CreateMap<ClientContactSupportForRegisterDto, ClientContactSupport>();
             CreateMap<ClientContactSupportForDetailsDto, ClientContactSupport>();
+            CreateMap<ClientsModulesForListDto, ClientsModules>();
             CreateMap<ClientsModulesForRegisterDto, ClientsModules>();
             CreateMap<ClientsModulesForDetailsDto, ClientsModules>();
 
@@ -100,7 +109,7 @@ namespace OasisComputerSystems.API.Helpers
 
             CreateMap<TicketForUpdateDto, Ticket>()
                 .ForMember(x => x.Id, opt => opt.Ignore());
-                
+
             CreateMap<TicketForListDto, Ticket>();
             CreateMap<TicketNoteForRegisterDto, TicketNote>();
             CreateMap<TicketNoteForListDto, TicketNote>();

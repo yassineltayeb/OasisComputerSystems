@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using OasisComputerSystems.API.Core;
+using OasisComputerSystems.API.Dtos;
 using OasisComputerSystems.API.Helpers;
 using OasisComputerSystems.API.Models;
 
@@ -57,6 +58,14 @@ namespace OasisComputerSystems.API.Data
 
             //Pagination
             return await PagedList<Client>.CreateAsync(clients, clientParams.PageNumber, clientParams.ItemsPerPage);
+        }
+
+        public new async Task<IEnumerable<KeyValuePairs>> GetAll()
+        {
+            //Get Clients List
+            var clients = await _context.Clients.Select(c => new KeyValuePairs{ Id = c.Id, Name = c.NameEn }).ToListAsync();
+
+            return clients;
         }
 
         public new async Task<Client> Get(int id)

@@ -34,6 +34,14 @@ export class AuthService {
     }));
   }
 
+  getAll() {
+    return this.http.get(this.basUrl)
+    .pipe(map(response => {
+        return response;
+      })
+    );
+  }
+
   logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');

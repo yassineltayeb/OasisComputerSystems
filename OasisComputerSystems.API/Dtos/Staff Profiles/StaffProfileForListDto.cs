@@ -7,6 +7,7 @@ namespace OasisComputerSystems.API.Dtos.StaffProfiles
 {
     public class StaffProfileForListDto
     {
+        public int Id { get; set; }
         public string Status { get; set; }
         public string FullNameEn { get; set; }
         public string FullNameAr { get; set; }

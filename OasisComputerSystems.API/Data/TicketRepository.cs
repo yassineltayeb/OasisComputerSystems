@@ -105,16 +105,20 @@ namespace OasisComputerSystems.API.Data
         {
             return new Dictionary<string, Expression<Func<Ticket, object>>>()
             {
+                ["clientName"] = t => t.Client.NameEn,
                 ["ticketNo"] = t => t.TicketNo,
+                ["status"] = t => t.Status,
                 ["priority"] = t => t.Priority.Name,
                 ["ticketType"] = t => t.TicketType.Name,
                 ["assignedTo"] = t => t.AssignedTo.FullNameEn,
                 ["systemModule"] = t => t.SystemModule.Name,
                 ["subject"] = t => t.Subject,
                 ["problemDescription"] = t => t.ProblemDescription,
+                ["reminders"] = t => t.Reminders,
                 ["submittedBy"] = t => t.SubmittedBy.FullNameEn,
                 ["submittedOn"] = t => t.SubmittedOn,
                 ["closedBy"] = t => t.ClosedBy.FullNameEn,
+                ["closedOn"] = t => t.ClosedOn,
                 ["approvedBy"] = t => t.ApprovedBy.FullNameEn,
                 ["approvedOn"] = t => t.ApprovedOn
             };

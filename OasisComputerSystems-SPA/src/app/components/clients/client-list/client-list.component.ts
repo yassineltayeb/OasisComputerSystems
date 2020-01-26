@@ -64,7 +64,7 @@ export class ClientListComponent implements OnInit {
     } else {
       this.clientParams.itemsPerPage = event;
     }
-    this.getClientList();
+    this.getClientsList();
   }
 
   getCountriesList() {
@@ -82,7 +82,7 @@ export class ClientListComponent implements OnInit {
       });
   }
 
-  getClientList() {
+  getClientsList() {
     this.loadToggle();
 
     console.log(this.clientParams);
@@ -104,13 +104,13 @@ export class ClientListComponent implements OnInit {
   sort(event: { key: any; value: string; }) {
     this.clientParams.orderBy = event.key;
     this.clientParams.IsOrderAscending = event.value === 'ascend' ? true : false;
-    this.getClientList();
+    this.getClientsList();
   }
 
   clear() {
     this.clientParams.name = null;
     this.clientParams.countryId = null;
-    this.getClientList();
+    this.getClientsList();
   }
 
   loadToggle() {
