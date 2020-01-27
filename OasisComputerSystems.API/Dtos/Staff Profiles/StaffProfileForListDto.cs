@@ -1,7 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using OasisComputerSystems.API.Models;
 
 namespace OasisComputerSystems.API.Dtos.StaffProfiles
 {
@@ -14,7 +11,7 @@ namespace OasisComputerSystems.API.Dtos.StaffProfiles
         public int MaritalStatusId { get; set; }
         public string MaritalStatus { get; set; }
         public int NationalityId { get; set; }
-        public string Nationality  { get; set; }
+        public string Nationality { get; set; }
         public int ReligionId { get; set; }
         public string Religion { get; set; }
         public int GenderId { get; set; }

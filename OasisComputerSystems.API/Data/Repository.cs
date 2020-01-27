@@ -53,7 +53,7 @@ namespace OasisComputerSystems.API.Data
 
         public async void Rollback()
         {
-           await _transaction.RollbackAsync();
+            await _transaction.RollbackAsync();
         }
     }
 }

@@ -1,5 +1,4 @@
 using System;
-using OasisComputerSystems.API.Models;
 
 namespace OasisComputerSystems.API.Dtos.Clients
 {

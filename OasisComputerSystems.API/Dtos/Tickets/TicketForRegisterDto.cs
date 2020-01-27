@@ -25,7 +25,7 @@ namespace OasisComputerSystems.API.Dtos.Tickets
         [Required]
         public string ProblemDescription { get; set; }
         public int Reminders { get; set; }
-        public bool HighPriority { get; set; } 
+        public bool HighPriority { get; set; }
         public int SubmittedById { get; set; }
         public DateTime SubmittedOn { get; set; }
 

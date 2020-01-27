@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
-using OasisComputerSystems.API.Models;
 
 namespace OasisComputerSystems.API.Dtos.Tickets
 {

@@ -65,7 +65,7 @@ namespace OasisComputerSystems.API.Controllers
         {
             var ticket = _mapper.Map<Ticket>(ticketForRegisterDto);
 
-            ticket.TicketNo = await _repo.GetTicketNo(ticketForRegisterDto.ClientId);
+            ticket.TicketNo = await _repo.GenerateTicketNo(ticketForRegisterDto.ClientId);
             ticket.SubmittedById = _authRepository.GetCurrentUserId();
 
             var ticketNote = new TicketNote

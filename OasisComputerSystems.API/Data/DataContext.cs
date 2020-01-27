@@ -11,7 +11,6 @@ namespace OasisComputerSystems.API.Data
         IdentityUserClaim<int>, StaffProfileRole, IdentityUserLogin<int>,
         IdentityRoleClaim<int>, IdentityUserToken<int>>
     {
-
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
         public DbSet<Client> Clients { get; set; }

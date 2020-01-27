@@ -28,7 +28,7 @@ namespace OasisComputerSystems.API.Dtos.StaffProfiles
         public MaritalStatus MaritalStatus { get; set; }
         [Required]
         public int NationalityId { get; set; }
-        public Nationality Nationality  { get; set; }
+        public Nationality Nationality { get; set; }
         [Required]
         public int ReligionId { get; set; }
         public Religion Religion { get; set; }

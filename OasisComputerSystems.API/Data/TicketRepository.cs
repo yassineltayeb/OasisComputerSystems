@@ -13,15 +13,18 @@ namespace OasisComputerSystems.API.Data
     public class TicketRepository : Repository<Ticket>, ITicketRepository
     {
         private readonly DataContext _context;
+
+        // Constructor
         public TicketRepository(DataContext context)
             : base(context)
         {
             _context = context;
         }
 
+        // Get All Tickets With Pagination
         public async Task<PagedList<Ticket>> GetAll(TicketParams ticketParams)
         {
-            //Get Clients List
+            // Get Tickets List
             var tickets = _context.Tickets
                 .Include(t => t.Client)
                 .Include(t => t.Priority)
@@ -34,10 +37,10 @@ namespace OasisComputerSystems.API.Data
                 .OrderBy(t => t.TicketNo)
                 .AsQueryable();
 
-            //Filter By
+            // Filter By
             if (ticketParams.Status != null)
                 tickets = tickets.Where(t => t.Status == ticketParams.Status);
-            
+
             if (ticketParams.ClientName != null)
                 tickets = tickets.Where(t => t.Client.NameEn.Contains(ticketParams.ClientName));
 
@@ -56,7 +59,7 @@ namespace OasisComputerSystems.API.Data
             if (ticketParams.Subject != null)
                 tickets = tickets.Where(t => t.Subject.Contains(ticketParams.Subject));
 
-            //Order By
+            // Order By
             var columnsMap = OrderByColumnsMap();
 
             if (ticketParams.OrderBy != null)
@@ -67,10 +70,11 @@ namespace OasisComputerSystems.API.Data
                     tickets = tickets.OrderByDescending(columnsMap[ticketParams.OrderBy]);
             }
 
-            //Pagination
+            // Pagination
             return await PagedList<Ticket>.CreateAsync(tickets, ticketParams.PageNumber, ticketParams.ItemsPerPage);
         }
 
+        // Get Ticket By ID
         public new async Task<Ticket> Get(int id)
         {
             return await _context.Tickets
@@ -85,7 +89,8 @@ namespace OasisComputerSystems.API.Data
                 .SingleOrDefaultAsync(t => t.Id == id);
         }
 
-        public async Task<int> GetTicketNo(int clientId)
+        // Generate Ticket No.
+        public async Task<int> GenerateTicketNo(int clientId)
         {
             var maxTicketNo = await _context.Tickets
                                 .Where(t => t.ClientId == clientId)
@@ -101,6 +106,7 @@ namespace OasisComputerSystems.API.Data
             return maxTicketNo;
         }
 
+        // Order Parameters
         private Dictionary<string, Expression<Func<Ticket, object>>> OrderByColumnsMap()
         {
             return new Dictionary<string, Expression<Func<Ticket, object>>>()
