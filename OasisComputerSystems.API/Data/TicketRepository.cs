@@ -35,8 +35,11 @@ namespace OasisComputerSystems.API.Data
                 .AsQueryable();
 
             //Filter By
-            if (ticketParams.ClientId.HasValue)
-                tickets = tickets.Where(t => t.ClientId == ticketParams.ClientId);
+            if (ticketParams.Status != null)
+                tickets = tickets.Where(t => t.Status == ticketParams.Status);
+            
+            if (ticketParams.ClientName != null)
+                tickets = tickets.Where(t => t.Client.NameEn.Contains(ticketParams.ClientName));
 
             if (ticketParams.PriorityId.HasValue)
                 tickets = tickets.Where(t => t.PriorityId == ticketParams.PriorityId);
@@ -52,9 +55,6 @@ namespace OasisComputerSystems.API.Data
 
             if (ticketParams.Subject != null)
                 tickets = tickets.Where(t => t.Subject.Contains(ticketParams.Subject));
-
-            if (ticketParams.ProblemDescription != null)
-                tickets = tickets.Where(t => t.ProblemDescription.Contains(ticketParams.ProblemDescription));
 
             //Order By
             var columnsMap = OrderByColumnsMap();

@@ -19,6 +19,8 @@ export class ClientListComponent implements OnInit {
   PageSizeOptions: any[] = [5, 10, 20, 30, 40, 50, 100];
   loading = false;
   clientParams: any = {
+    name: '',
+    countryId: null,
     orderBy: 'nameEn',
     IsOrderAscending: true,
     pageNumber: 1,

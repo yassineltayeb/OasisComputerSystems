@@ -5,6 +5,7 @@ import { KeyValuePairs } from 'src/app/_models/keyvaluepairs';
 import { ClientService } from 'src/app/_services/client.service';
 import { SystemModuleService } from 'src/app/_services/system-module.service';
 import { Client, ClientContact, ClientContactSupport } from 'src/app/_models/client';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-client-new',
@@ -34,7 +35,8 @@ export class ClientNewComponent implements OnInit {
   constructor(private clientService: ClientService,
               private countryService: CountryService,
               private systemModuleService: SystemModuleService,
-              private alertify: AlertifyService) { }
+              private alertify: AlertifyService,
+              private router: Router) { }
 
   ngOnInit() {
     this.getCountriesList();
@@ -68,13 +70,14 @@ export class ClientNewComponent implements OnInit {
 
   // Save Client
   save() {
+    this.loadToggle();
     this.clientService.add(this.client).subscribe(res => {
       this.alertify.success('Client Saved Successfully');
-      this.clear();
+      this.router.navigate(['/clients']);
 
     }, error => {
-      console.log(error);
       this.alertify.error(error);
+      this.loadToggle();
 
     });
   }
