@@ -8,15 +8,6 @@ export class AlertifyService {
 
   constructor(private notification: NzNotificationService) {}
 
-  // confirm(message: string, okCallback: () => any) {
-  //   // tslint:disable-next-line:only-arrow-functions
-  //   alertify.confirm(message, function(e) {
-  //     if (e) {
-  //       okCallback();
-  //     } else {}
-  //   });
-  // }
-
   success(title: string, message: string = '') {
     this.notification.success(title, message);
   }

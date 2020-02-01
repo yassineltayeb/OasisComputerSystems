@@ -75,7 +75,7 @@
           <td>
             <button nz-button [nzSize]="'small'" type="button" nzType="primary"
               [routerLink]="['/clients', client.id]">Edit</button>
-            <button nz-button [nzSize]="'small'" type="button" nzType="danger">Delete</button>
+            <button nz-button [nzSize]="'small'" type="button" nzType="danger" (click)="showDeleteConfirm(client.id)">Delete</button>
           </td>
         </tr>
       </tbody>

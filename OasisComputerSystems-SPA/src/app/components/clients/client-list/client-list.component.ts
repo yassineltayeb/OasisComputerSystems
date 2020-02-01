@@ -6,6 +6,7 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
 import { ActivatedRoute } from '@angular/router';
 import { KeyValuePairs } from 'src/app/_models/keyvaluepairs';
 import { CountryService } from 'src/app/_services/country.service';
+import { MessageService } from 'src/app/_services/message.service';
 
 @Component({
   selector: 'app-client-list',
@@ -46,7 +47,8 @@ export class ClientListComponent implements OnInit {
     private countryService: CountryService,
     private clientService: ClientService,
     private route: ActivatedRoute,
-    private alertify: AlertifyService) { }
+    private alertify: AlertifyService,
+    private messageService: MessageService) { }
 
   ngOnInit() {
     this.loadToggle();
@@ -88,12 +90,9 @@ export class ClientListComponent implements OnInit {
   getClientsList() {
     this.loadToggle();
 
-    console.log(this.clientParams);
-
     this.clientService.getAllWithPagination(this.clientParams)
       .subscribe((res: PaginatedResult<Client[]>) => {
         this.clients = res.result;
-        console.log(this.clients);
         this.pagination = res.pagination;
         this.loadToggle();
 
@@ -102,6 +101,20 @@ export class ClientListComponent implements OnInit {
         this.alertify.error(error);
 
       });
+  }
+
+  showDeleteConfirm(id: number) {
+    this.messageService.confirmDelete('Are you sure you want to delete this client?', '', () => this.deleteClient(id));
+  }
+
+  deleteClient(id: number) {
+    this.clientService.delete(id).subscribe(res => {
+      this.alertify.success('Client Deleted Successfully');
+      this.getClientsList();
+    }, error => {
+      console.log(error);
+      this.alertify.error(error);
+    });
   }
 
   sort(event: { key: any; value: string; }) {

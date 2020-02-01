@@ -25,7 +25,7 @@ export abstract class AbstractService<T> {
   }
 
   public delete(id: number) {
-    return this.http.delete(this.Url + id).pipe(map(res => res));
+    return this.http.delete(this.Url + id);
   }
 
   getAllWithPagination(modelParams?): Observable<PaginatedResult<T[]>>  {

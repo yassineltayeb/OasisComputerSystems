@@ -25,6 +25,7 @@ import { SystemModuleService } from './_services/system-module.service';
 import { TicketService } from './_services/ticket.service';
 import { TicketNewComponent } from './components/Tickets/ticket-new/ticket-new.component';
 import { TicketListResolver } from './_resolvers/ticket-list.resolver';
+import { MessageService } from './_services/message.service';
 
 
 export function tokenGetter() {
@@ -67,6 +68,7 @@ export function tokenGetter() {
       CountryService,
       ClientService,
       ClientListResolver,
+      MessageService,
       SystemModuleService,
       TicketService,
       TicketListResolver

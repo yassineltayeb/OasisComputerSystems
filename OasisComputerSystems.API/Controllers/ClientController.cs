@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -84,6 +85,7 @@ namespace OasisComputerSystems.API.Controllers
             _mapper.Map(clientForUpdateDto, client);
 
             client.UpdatedById = _authRepository.GetCurrentUserId();
+            client.UpdatedOn = DateTime.Now;
 
             await _repo.SaveAll();
 
@@ -100,13 +102,13 @@ namespace OasisComputerSystems.API.Controllers
             if (client == null)
                 return BadRequest("Invalid client");
 
-
             client.IsDeleted = true;
             client.DeletedById = _authRepository.GetCurrentUserId();
+            client.DeletedOn = DateTime.Now;
 
             await _repo.SaveAll();
 
-            return Ok("Deleted Successfully");
+            return Ok();
         }
 
     }
