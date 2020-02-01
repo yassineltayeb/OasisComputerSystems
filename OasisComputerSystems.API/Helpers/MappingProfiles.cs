@@ -40,16 +40,16 @@ namespace OasisComputerSystems.API.Helpers
             CreateMap<ClientContactSupport, ClientContactSupportForRegisterDto>();
             CreateMap<ClientContactSupport, ClientContactSupportForDetailsDto>();
 
-            CreateMap<ClientsModules, ClientsModulesForListDto>()
+            CreateMap<ClientModules, ClientsModulesForListDto>()
                 .ForMember(dest => dest.ClientId, opt => opt.MapFrom(src => src.Client.Id))
                 .ForMember(dest => dest.SystemModuleId, opt => opt.MapFrom(src => src.SystemModule.Id))
                 .ForMember(dest => dest.SystemModule, opt => opt.MapFrom(src => src.SystemModule.Name));
 
-            CreateMap<ClientsModules, ClientsModulesForRegisterDto>()
+            CreateMap<ClientModules, ClientsModulesForRegisterDto>()
                 .ForMember(dest => dest.ClientId, opt => opt.MapFrom(src => src.Client.Id))
                 .ForMember(dest => dest.SystemModuleId, opt => opt.MapFrom(src => src.SystemModule.Id));
 
-            CreateMap<ClientsModules, ClientsModulesForDetailsDto>();
+            CreateMap<ClientModules, ClientsModulesForDetailsDto>();
 
             //Tickets
             CreateMap<Ticket, TicketForRegisterDto>();
@@ -96,19 +96,23 @@ namespace OasisComputerSystems.API.Helpers
             CreateMap<ClientForUpdateDto, Client>();
             CreateMap<ClientForListDto, Client>();
             CreateMap<ClientForDetailsDto, Client>();
-            CreateMap<ClientContactForRegisterDto, ClientContact>();
-            CreateMap<ClientContactForDetailsDto, ClientContact>();
-            CreateMap<ClientContactSupportForRegisterDto, ClientContactSupport>();
-            CreateMap<ClientContactSupportForDetailsDto, ClientContactSupport>();
-            CreateMap<ClientsModulesForListDto, ClientsModules>();
-            CreateMap<ClientsModulesForRegisterDto, ClientsModules>();
-            CreateMap<ClientsModulesForDetailsDto, ClientsModules>();
+            CreateMap<ClientContactForRegisterDto, ClientContact>()
+                .ForMember(c => c.Id, opt => opt.Ignore());
+            CreateMap<ClientContactForDetailsDto, ClientContact>()
+                .ForMember(c => c.Id, opt => opt.Ignore());
+            CreateMap<ClientContactSupportForRegisterDto, ClientContactSupport>()
+                .ForMember(c => c.Id, opt => opt.Ignore());
+            CreateMap<ClientContactSupportForDetailsDto, ClientContactSupport>()
+                .ForMember(c => c.Id, opt => opt.Ignore());
+            CreateMap<ClientsModulesForListDto, ClientModules>();
+            CreateMap<ClientsModulesForRegisterDto, ClientModules>();
+            CreateMap<ClientsModulesForDetailsDto, ClientModules>();
 
             //Tickets
             CreateMap<TicketForRegisterDto, Ticket>();
 
             CreateMap<TicketForUpdateDto, Ticket>()
-                .ForMember(x => x.Id, opt => opt.Ignore());
+                .ForMember(t => t.Id, opt => opt.Ignore());
 
             CreateMap<TicketForListDto, Ticket>();
             CreateMap<TicketNoteForRegisterDto, TicketNote>();

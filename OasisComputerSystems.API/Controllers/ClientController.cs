@@ -73,7 +73,7 @@ namespace OasisComputerSystems.API.Controllers
             return Ok(clientToReturn);
         }
 
-        [HttpPut("{id}", Name = "UpdateClient")]
+        [HttpPut("{id}")]
         public async Task<IActionResult> UpdateClient(int id, ClientForUpdateDto clientForUpdateDto)
         {
             var client = await _repo.Get(id);
@@ -92,7 +92,7 @@ namespace OasisComputerSystems.API.Controllers
             return Ok(clientToReturn);
         }
 
-        [HttpDelete("{id}", Name = "DeleteClient")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteClient(int id)
         {
             var client = await _repo.Get(id);

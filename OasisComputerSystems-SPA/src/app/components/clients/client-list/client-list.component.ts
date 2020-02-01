@@ -38,7 +38,8 @@ export class ClientListComponent implements OnInit {
     { columnName: 'Created By', sortKey: 'createdBy' },
     { columnName: 'Created On', sortKey: 'createdOn' },
     { columnName: 'Updated By', sortKey: 'updatedBy' },
-    { columnName: 'Updated On', sortKey: 'updatedOn' }
+    { columnName: 'Updated On', sortKey: 'updatedOn' },
+    { columnName: 'Actions', sortKey: '' }
   ];
 
   constructor(

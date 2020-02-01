@@ -25,13 +25,13 @@ namespace OasisComputerSystems.API.Dtos.Clients
         public int? DeletedById { get; set; }
         public DateTime? DeletedOn { get; set; }
         public string DeletedBy { get; set; }
-        public ICollection<ClientsModulesForDetailsDto> ClientsModules { get; set; }
+        public ICollection<ClientsModulesForListDto> ClientModules { get; set; }
         public ICollection<ClientContactForDetailsDto> ClientContacts { get; set; }
         public ICollection<ClientContactSupportForDetailsDto> ClientContactSupports { get; set; }
 
         public ClientForDetailsDto()
         {
-            ClientsModules = new Collection<ClientsModulesForDetailsDto>();
+            ClientModules = new Collection<ClientsModulesForListDto>();
             ClientContacts = new Collection<ClientContactForDetailsDto>();
             ClientContactSupports = new Collection<ClientContactSupportForDetailsDto>();
         }

@@ -1,6 +1,13 @@
 <div class="container">
+  
+  <div nz-row nzGutter="24" nzType="flex" nzJustify="space-between">
+    <button nz-button type="button" nzType="primary" [routerLink]="['/clients']">Back To List</button>
+  </div>
+
+  <br/>
+
   <nz-card nzTitle="Register New Client">
-    <form nz-form [nzLayout]="'inline'" class="client-form" #clientForm="ngForm" (ngSubmit)="save()">
+    <form nz-form [nzLayout]="'inline'" class="client-form" #clientForm="ngForm" (ngSubmit)="submit()">
 
       <div nz-row nzGutter="24">
 
@@ -86,7 +93,7 @@
               </nz-form-control>
             </nz-form-item>
 
-            <nz-table nzSize="small" #modulesListTable nzBordered [nzData]="clientModules">
+            <nz-table nzSize="small" #modulesListTable nzBordered [nzData]="client.clientModules">
               <thead>
                 <tr>
                   <th nzWidth="70%">Module</th>
@@ -94,8 +101,8 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let clientModule of clientModules">
-                  <td>{{ clientModule.name }}</td>
+                <tr *ngFor="let clientModule of client.clientModules">
+                  <td>{{ clientModule.systemModule }}</td>
                   <td>
                     <button nz-button type="button" (click)="deleteModule(clientModule)">Delete</button>
                   </td>
@@ -150,7 +157,7 @@
               </nz-form-control>
             </nz-form-item>
 
-            <nz-table nzSize="small" #modulesListTable nzBordered [nzData]="client.clientsModules">
+            <nz-table nzSize="small" #modulesListTable nzBordered [nzData]="client.clientContacts">
               <thead>
                 <tr>
                   <th nzWidth="22.5%">Name</th>
@@ -186,14 +193,14 @@
             <nz-form-item nzFlex>
               <nz-form-label [nzSm]="2" nzNoColon nzFor="clientContactSupportName">Name</nz-form-label>
               <nz-form-control [nzSm]="8" nzErrorTip="Please enter a valid name">
-                <input nz-input type="text" id="clientContactSupportName" name="clientContactSupportName" placeholder="Name" autofocus
-                  [(ngModel)]="clientContactSupport.name" />
+                <input nz-input type="text" id="clientContactSupportName" name="clientContactSupportName"
+                  placeholder="Name" autofocus [(ngModel)]="clientContactSupport.name" />
               </nz-form-control>
 
               <nz-form-label [nzSm]="4" nzSm nzNoColon nzFor="clientContactSupportPhone">Phone</nz-form-label>
               <nz-form-control [nzSm]="8" nzErrorTip="Please enter phone">
-                <input nz-input type="text" id="clientContactSupportPhone" name="clientContactSupportPhone" placeholder="Phone"
-                  [(ngModel)]="clientContactSupport.phone" />
+                <input nz-input type="text" id="clientContactSupportPhone" name="clientContactSupportPhone"
+                  placeholder="Phone" [(ngModel)]="clientContactSupport.phone" />
               </nz-form-control>
 
             </nz-form-item>
@@ -201,14 +208,14 @@
             <nz-form-item nzFlex>
               <nz-form-label [nzSm]="2" nzNoColon nzFor="clientContactSupportPosition">Position</nz-form-label>
               <nz-form-control [nzSm]="8" nzErrorTip="Please enter position">
-                <input nz-input type="text" id="clientContactSupportPosition" name="clientContactSupportPosition" placeholder="Position" autofocus
-                  [(ngModel)]="clientContactSupport.position" />
+                <input nz-input type="text" id="clientContactSupportPosition" name="clientContactSupportPosition"
+                  placeholder="Position" autofocus [(ngModel)]="clientContactSupport.position" />
               </nz-form-control>
 
               <nz-form-label [nzSm]="4" nzSm nzNoColon nzFor="clientContactSupportEmail">Email</nz-form-label>
               <nz-form-control [nzSm]="8" nzErrorTip="Please enter a valid email">
-                <input nz-input type="text" id="clientContactSupportEmail" name="clientContactSupportEmail" placeholder="Email"
-                  [(ngModel)]="clientContactSupport.email" />
+                <input nz-input type="text" id="clientContactSupportEmail" name="clientContactSupportEmail"
+                  placeholder="Email" [(ngModel)]="clientContactSupport.email" />
               </nz-form-control>
 
             </nz-form-item>
@@ -237,7 +244,8 @@
                   <td>{{ clientContactSupport.phone }}</td>
                   <td>{{ clientContactSupport.email }}</td>
                   <td>
-                    <button nz-button type="button" (click)="deleteClientContactSupport(clientContactSupport)">Delete</button>
+                    <button nz-button type="button"
+                      (click)="deleteClientContactSupport(clientContactSupport)">Delete</button>
                   </td>
                 </tr>
               </tbody>
@@ -250,12 +258,12 @@
       <nz-form-item nz-row nzFlex nzType="flex" nzJustify="end">
         <nz-form-control>
           <button [disabled]="!clientForm.valid" nz-button nzType="primary" type="submit"
-            [nzLoading]="loading">Save</button>
-          <button nz-button type="button" (click)="clear()">Clear</button>
+        [nzLoading]="loading">{{ saveButtonLabel }}</button>
+          <button nz-button *ngIf="client.id == 0" type="button" (click)="clear()">Clear</button>
+          <button nz-button nzType="danger" type="button" [routerLink]="['/clients']">Cancel</button>
         </nz-form-control>
       </nz-form-item>
 
     </form>
   </nz-card>
 </div>
-{{ clientContacts | json }}

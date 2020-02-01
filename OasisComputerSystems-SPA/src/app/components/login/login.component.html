@@ -9,7 +9,7 @@
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
-    <nz-form-control nzErrorTip="Please input password">
+    <nz-form-control nzErrorTip="Please input your password">
     <nz-input-group nzPrefixIcon="lock">
       <input nz-input type="password" name="password" id="password" placeholder="Password" required [(ngModel)]="model.password" />
     </nz-input-group>
@@ -20,5 +20,6 @@
       <button [disabled]="!loginForm.valid" nz-button nzType="primary" class="btn btn-lg btn-primary btn-block" type="submit" [nzLoading]="loading">Login</button>
     </nz-form-control>
   </nz-form-item>
+  <nz-alert *ngIf="invalidLogin" class="text-center" nzType="error" nzMessage="Invalid username/password"></nz-alert>
   <p class="mt-5 mb-3 text-muted text-center">Oasis Computer Systems © 2019</p>
 </form>

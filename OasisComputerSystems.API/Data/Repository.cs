@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Storage;
 using OasisComputerSystems.API.Core;
 
@@ -14,6 +15,8 @@ namespace OasisComputerSystems.API.Data
         public Repository(DataContext context)
         {
             _context = context;
+            _context.ChangeTracker.CascadeDeleteTiming = CascadeTiming.OnSaveChanges;
+            _context.ChangeTracker.DeleteOrphansTiming = CascadeTiming.OnSaveChanges;
         }
 
         public void Add(T entity)

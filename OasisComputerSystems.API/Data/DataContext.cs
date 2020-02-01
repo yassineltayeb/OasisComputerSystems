@@ -14,6 +14,7 @@ namespace OasisComputerSystems.API.Data
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
         public DbSet<Client> Clients { get; set; }
+        public DbSet<ClientModules> ClientsModules { get; set; }
         public DbSet<ClientContact> ClientsContacts { get; set; }
         public DbSet<ClientContactSupport> ClientsContactsSupport { get; set; }
         public DbSet<Country> Countries { get; set; }
@@ -32,7 +33,7 @@ namespace OasisComputerSystems.API.Data
 
             foreach (var relationship in builder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
             {
-                relationship.DeleteBehavior = DeleteBehavior.Restrict;
+                // relationship.DeleteBehavior = DeleteBehavior.Restrict;
             }
 
             base.OnModelCreating(builder);
@@ -53,17 +54,17 @@ namespace OasisComputerSystems.API.Data
                     .IsRequired();
             });
 
-            builder.Entity<ClientsModules>(clientsModules =>
+            builder.Entity<ClientModules>(clientsModules =>
             {
                 clientsModules.HasKey(cm => new { cm.ClientId, cm.SystemModuleId });
 
                 clientsModules.HasOne(cm => cm.Client)
-                    .WithMany(cm => cm.ClientsModules)
+                    .WithMany(cm => cm.ClientModules)
                     .HasForeignKey(cm => cm.ClientId)
                     .IsRequired();
 
                 clientsModules.HasOne(cm => cm.SystemModule)
-                    .WithMany(cm => cm.ClientsModules)
+                    .WithMany(cm => cm.ClientModules)
                     .HasForeignKey(cm => cm.SystemModuleId)
                     .IsRequired();
             });

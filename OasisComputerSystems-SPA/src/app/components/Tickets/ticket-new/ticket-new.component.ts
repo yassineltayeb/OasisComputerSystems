@@ -27,9 +27,7 @@ export class TicketNewComponent implements OnInit {
   ticket: Ticket = null;
   attachments: UploadFile[] = [];
 
-
   @ViewChild('ticketForm', {static: false}) ticketForm: ElementRef;
-
 
   constructor(
     private ticketService: TicketService,

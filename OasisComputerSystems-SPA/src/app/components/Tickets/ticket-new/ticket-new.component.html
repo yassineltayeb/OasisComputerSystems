@@ -1,4 +1,11 @@
 <div class="container">
+
+  <div nz-row nzGutter="24" nzType="flex" nzJustify="space-between">
+    <button nz-button type="button" nzType="primary" [routerLink]="['/tickets']">Back To List</button>
+  </div>
+
+  <br/>
+
   <nz-card nzTitle="Register New Ticket">
     <form nz-form [nzLayout]="'inline'" class="ticket-form" #ticketForm="ngForm" (ngSubmit)="save()">
 

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzCardModule } from 'ng-zorro-antd/card';
@@ -35,6 +36,7 @@ const ngZorroConfig: NzConfig = {
   ],
   exports: [
     CommonModule,
+    NzAlertModule,
     NzButtonModule,
     NzBreadCrumbModule,
     NzCardModule,

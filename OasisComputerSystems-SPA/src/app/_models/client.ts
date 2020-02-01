@@ -18,13 +18,15 @@ export interface Client {
   deletedById?: number;
   deletedBy?: string;
   deletedOn?: Date;
-  clientsModules?: ClientsModules[];
+  clientModules?: ClientModule[];
   clientContacts?: ClientContact[];
   clientContactSupports?: ClientContactSupport[];
 }
 
-export interface ClientsModules {
+export interface ClientModule {
+  clientId: number;
   systemModuleId: number;
+  systemModule: string;
 }
 
 export interface ClientContact {

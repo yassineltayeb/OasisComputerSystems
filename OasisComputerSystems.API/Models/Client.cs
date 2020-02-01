@@ -30,14 +30,14 @@ namespace OasisComputerSystems.API.Models
         public int? DeletedById { get; set; }
         public StaffProfile DeletedBy { get; set; }
         public DateTime? DeletedOn { get; set; }
-        public ICollection<ClientsModules> ClientsModules { get; set; }      
+        public ICollection<ClientModules> ClientModules { get; set; }      
         public ICollection<ClientContact> ClientContacts { get; set; }
         public ICollection<ClientContactSupport> ClientContactSupports { get; set; }
 
         public Client()
         {
             CreatedOn = DateTime.Now;
-            ClientsModules = new Collection<ClientsModules>();
+            ClientModules = new Collection<ClientModules>();
             ClientContacts = new Collection<ClientContact>();
             ClientContactSupports = new Collection<ClientContactSupport>();
         }

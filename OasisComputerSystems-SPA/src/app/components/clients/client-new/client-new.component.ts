@@ -4,8 +4,8 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
 import { KeyValuePairs } from 'src/app/_models/keyvaluepairs';
 import { ClientService } from 'src/app/_services/client.service';
 import { SystemModuleService } from 'src/app/_services/system-module.service';
-import { Client, ClientContact, ClientContactSupport } from 'src/app/_models/client';
-import { Router } from '@angular/router';
+import { Client, ClientContact, ClientContactSupport, ClientModule } from 'src/app/_models/client';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-client-new',
@@ -16,8 +16,12 @@ export class ClientNewComponent implements OnInit {
   countries: KeyValuePairs[] = [];
   systemsModules: KeyValuePairs[] = [];
   loading = false;
-  client: Client = null;
-  clientModules: any[] = [];
+  client: Client;
+  ClientModule: ClientModule = {
+    clientId: null,
+    systemModuleId: null,
+    systemModule: null
+  };
   clientContacts: ClientContact = {
     name: null,
     position: null,
@@ -31,17 +35,33 @@ export class ClientNewComponent implements OnInit {
     email: null
   };
   selectedModule = null;
+  saveButtonLabel = 'Save';
 
   constructor(private clientService: ClientService,
               private countryService: CountryService,
               private systemModuleService: SystemModuleService,
               private alertify: AlertifyService,
-              private router: Router) { }
+              private route: ActivatedRoute,
+              private router: Router) {
+    this.clear();
+    this.route.params.subscribe(p => {
+      if (p.id) {
+        this.client.id = p.id;
+      }
+    });
+  }
 
   ngOnInit() {
     this.getCountriesList();
     this.getSystemsModulesList();
-    this.clear();
+    this.getClientDetails(this.client.id);
+
+    // Set Save Button Label
+    if (this.client.id === 0) {
+      this.saveButtonLabel = 'Save';
+    } else {
+      this.saveButtonLabel = 'Update';
+    }
   }
 
   // Get Countries List
@@ -68,11 +88,43 @@ export class ClientNewComponent implements OnInit {
       });
   }
 
-  // Save Client
-  save() {
+  // Get Client Details
+  getClientDetails(id: number) {
+    if (id !== 0) {
+      this.clientService.get(this.client.id).subscribe((res: Client) => {
+        this.client = res;
+      });
+    }
+  }
+
+  // Submit
+  submit() {
+    if (this.client.id === 0) {
+      this.saveClient();
+    } else {
+      this.updateClient();
+    }
+  }
+
+  saveClient() {
     this.loadToggle();
+
     this.clientService.add(this.client).subscribe(res => {
       this.alertify.success('Client Saved Successfully');
+      this.router.navigate(['/clients']);
+
+    }, error => {
+      this.alertify.error(error);
+      this.loadToggle();
+
+    });
+  }
+
+  updateClient() {
+    this.loadToggle();
+
+    this.clientService.update(this.client.id, this.client).subscribe(res => {
+      this.alertify.success('Client Updated Successfully');
       this.router.navigate(['/clients']);
 
     }, error => {
@@ -94,7 +146,7 @@ export class ClientNewComponent implements OnInit {
       countryId: null,
       country: '',
       technicalDetails: '',
-      clientsModules: [],
+      clientModules: [],
       clientContacts: [],
       clientContactSupports: []
     };
@@ -110,9 +162,15 @@ export class ClientNewComponent implements OnInit {
 
   // Add Module
   addModule() {
-    if (!this.clientModules.includes(this.selectedModule)) {
-      this.clientModules.push(this.selectedModule);
-      this.client.clientsModules.push({ systemModuleId: this.selectedModule.id });
+
+    if (!this.client.clientModules.includes(this.ClientModule)) {
+      this.client.clientModules.push(
+        {
+          clientId: 0,
+          systemModuleId: this.selectedModule.id,
+          systemModule: this.selectedModule.name
+        }
+      );
     }
 
     this.selectedModule = null;
@@ -120,8 +178,7 @@ export class ClientNewComponent implements OnInit {
 
   // Delete Module
   deleteModule(clientModule) {
-    this.clientModules.splice(this.clientModules.indexOf(clientModule), 1);
-    this.client.clientsModules.splice(this.client.clientsModules.indexOf(clientModule.id), 1);
+    this.client.clientModules.splice(this.client.clientModules.indexOf(clientModule), 1);
     this.selectedModule = null;
   }
 
@@ -192,9 +249,9 @@ export class ClientNewComponent implements OnInit {
   // Validate Client Contact
   validateClientContact() {
     if ((this.clientContacts.name == null || this.clientContacts.name === '') ||
-        (this.clientContacts.position == null || this.clientContacts.position === '') ||
-        (this.clientContacts.phone == null || this.clientContacts.phone === '') ||
-        (this.clientContacts.email == null || this.clientContacts.email === '')) {
+      (this.clientContacts.position == null || this.clientContacts.position === '') ||
+      (this.clientContacts.phone == null || this.clientContacts.phone === '') ||
+      (this.clientContacts.email == null || this.clientContacts.email === '')) {
       return false;
     }
 
@@ -204,9 +261,9 @@ export class ClientNewComponent implements OnInit {
   // Validate Client Contact Support
   validateClientContactSupport() {
     if ((this.clientContactSupport.name == null || this.clientContactSupport.name === '') ||
-        (this.clientContactSupport.position == null || this.clientContactSupport.position === '') ||
-        (this.clientContactSupport.phone == null || this.clientContactSupport.phone === '') ||
-        (this.clientContactSupport.email == null || this.clientContactSupport.email === '')) {
+      (this.clientContactSupport.position == null || this.clientContactSupport.position === '') ||
+      (this.clientContactSupport.phone == null || this.clientContactSupport.phone === '') ||
+      (this.clientContactSupport.email == null || this.clientContactSupport.email === '')) {
       return false;
     }
 

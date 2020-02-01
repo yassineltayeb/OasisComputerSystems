@@ -19,14 +19,14 @@ namespace OasisComputerSystems.API.Dtos.Clients
         public int CountryId { get; set; }
         public string TechnicalDetails { get; set; }
         public DateTime? UpdatedOn { get; set; }
-        public ICollection<ClientsModulesForRegisterDto> ClientsModules { get; set; }
+        public ICollection<ClientsModulesForRegisterDto> ClientModules { get; set; }
         public ICollection<ClientContactForRegisterDto> ClientContacts { get; set; }
         public ICollection<ClientContactSupportForRegisterDto> ClientContactSupports { get; set; }
 
         public ClientForUpdateDto()
         {
             UpdatedOn = DateTime.Now;
-            ClientsModules = new Collection<ClientsModulesForRegisterDto>();
+            ClientModules = new Collection<ClientsModulesForRegisterDto>();
             ClientContacts = new Collection<ClientContactForRegisterDto>();
             ClientContactSupports = new Collection<ClientContactSupportForRegisterDto>();
         }

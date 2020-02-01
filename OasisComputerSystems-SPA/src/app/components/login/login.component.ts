@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   model: any = {};
   loading = false;
+  invalidLogin: boolean;
 
   constructor(public authService: AuthService, private alertify: AlertifyService, private router: Router) { }
 
@@ -20,6 +21,8 @@ export class LoginComponent implements OnInit {
   login() {
     this.loadToggle();
 
+    this.invalidLogin = false;
+
     this.authService.login(this.model)
       .subscribe(next => {
         this.loadToggle();
@@ -27,7 +30,7 @@ export class LoginComponent implements OnInit {
 
       }, error => {
         this.loadToggle();
-        this.alertify.error(error);
+        this.invalidLogin = true;
 
       }, () => {
         this.router.navigate(['/home']);

@@ -22,16 +22,14 @@ export const appRoutes: Routes = [
                 path: 'clients', component: ClientListComponent,
                 resolve: { clients: ClientListResolver }
             },
-            {
-                path: 'clients/new', component: ClientNewComponent,
-            },
+            { path: 'clients/new', component: ClientNewComponent },
+            { path: 'clients/:id', component: ClientNewComponent },
             {
                 path: 'tickets', component: TicketListComponent,
                 resolve: { tickets: TicketListResolver }
             },
-            {
-                path: 'tickets/new', component: TicketNewComponent,
-            },
+            { path: 'tickets/new', component: TicketNewComponent },
+            { path: 'tickets/:id', component: TicketNewComponent },
             // {
             //     path: 'member/edit', component: MemberEditComponent,
             //     resolve: {user: MemberEditResolver},

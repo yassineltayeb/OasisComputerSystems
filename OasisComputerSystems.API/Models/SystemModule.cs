@@ -10,6 +10,6 @@ namespace OasisComputerSystems.API.Models
         [StringLength(250)]
         public string Name { get; set; }
 
-        public ICollection<ClientsModules> ClientsModules { get; set; }
+        public ICollection<ClientModules> ClientModules { get; set; }
     }
 }

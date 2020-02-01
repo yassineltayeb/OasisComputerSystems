@@ -1,10 +1,11 @@
 <div class="container-fluid">
   <br />
+  
   <div nz-row nzType="flex" nzJustify="space-between">
     <h3 nz-col nzSpan="12">Clients List</h3>
     <button nz-button nzType="primary" nz-col nzSpan="12" [routerLink]="['/clients/new']">New Client</button>
   </div>
-  
+
   <form nz-form [nzLayout]="'inline'" class="ticket-form" #ticketForm="ngForm" (ngSubmit)="getClientsList()">
 
     <div nz-row nzGutter="24">
@@ -59,10 +60,10 @@
       </thead>
       <tbody>
         <tr *ngFor="let client of clientTable.data">
-          <td>{{client.id}}</td>
-          <td>{{client.nameEn}}</td>
-          <td>{{client.nameAr}}</td>
-          <td>{{client.address}}</td>
+          <td>{{ client.id}}</td>
+          <td>{{ client.nameEn}}</td>
+          <td>{{ client.nameAr}}</td>
+          <td>{{ client.address}}</td>
           <td>{{ client.vATNo }}</td>
           <td>{{ client.telephoneNumber }}</td>
           <td>{{ client.country }}</td>
@@ -71,6 +72,11 @@
           <td>{{ client.createdOn | date }}</td>
           <td>{{ client.updatedBy }}</td>
           <td>{{ client.updatedOn | date }}</td>
+          <td>
+            <button nz-button [nzSize]="'small'" type="button" nzType="primary"
+              [routerLink]="['/clients', client.id]">Edit</button>
+            <button nz-button [nzSize]="'small'" type="button" nzType="danger">Delete</button>
+          </td>
         </tr>
       </tbody>
     </nz-table>
