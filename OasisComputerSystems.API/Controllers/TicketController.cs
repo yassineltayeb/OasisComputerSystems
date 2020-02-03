@@ -50,6 +50,15 @@ namespace OasisComputerSystems.API.Controllers
             return Ok(ticketsToReturn);
         }
 
+        [HttpGet]
+        [Route("GetClientsActiveTickets")]
+        public async Task<IActionResult> GetClientsActiveTickets()
+        {
+            var clientsActiveTickets = await _repo.GetClientsActiveTickets();
+
+            return Ok(clientsActiveTickets);
+        }
+
         // [HttpGet("{id}", Name = "GetTicket")]
         public async Task<IActionResult> GetTicket(int id)
         {
@@ -112,6 +121,5 @@ namespace OasisComputerSystems.API.Controllers
 
             return Ok(ticketToReturn);
         }
-
     }
 }

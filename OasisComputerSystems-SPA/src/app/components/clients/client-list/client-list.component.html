@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <br />
-  
+
   <div nz-row nzType="flex" nzJustify="space-between">
     <h3 nz-col nzSpan="12">Clients List</h3>
     <button nz-button nzType="primary" nz-col nzSpan="12" [routerLink]="['/clients/new']">New Client</button>
@@ -75,7 +75,8 @@
           <td>
             <button nz-button [nzSize]="'small'" type="button" nzType="primary"
               [routerLink]="['/clients', client.id]">Edit</button>
-            <button nz-button [nzSize]="'small'" type="button" nzType="danger" (click)="showDeleteConfirm(client.id)">Delete</button>
+            <button nz-button [nzSize]="'small'" type="button" nzType="danger"
+              (click)="showDeleteConfirm(client.id)">Delete</button>
           </td>
         </tr>
       </tbody>

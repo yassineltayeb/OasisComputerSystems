@@ -6,7 +6,7 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 })
 export class AlertifyService {
 
-  constructor(private notification: NzNotificationService) {}
+  constructor(private notification: NzNotificationService) { }
 
   success(title: string, message: string = '') {
     this.notification.success(title, message);

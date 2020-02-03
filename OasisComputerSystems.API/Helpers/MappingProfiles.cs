@@ -27,11 +27,13 @@ namespace OasisComputerSystems.API.Helpers
 
             CreateMap<Client, ClientForListDto>()
                 .ForMember(dest => dest.Country, opt => opt.MapFrom(src => src.Country.Name))
+                .ForMember(dest => dest.AccountManager, opt => opt.MapFrom(src => src.AccountManager.FullNameEn))
                 .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(src => src.CreatedBy.FullNameEn))
                 .ForMember(dest => dest.UpdatedBy, opt => opt.MapFrom(src => src.UpdatedBy.FullNameEn));
 
             CreateMap<Client, ClientForDetailsDto>()
                 .ForMember(dest => dest.Country, opt => opt.MapFrom(src => src.Country.Name))
+                .ForMember(dest => dest.AccountManager, opt => opt.MapFrom(src => src.AccountManager.FullNameEn))
                 .ForMember(dest => dest.CreatedBy, opt => opt.MapFrom(src => src.CreatedBy.FullNameEn))
                 .ForMember(dest => dest.UpdatedBy, opt => opt.MapFrom(src => src.UpdatedBy.FullNameEn));
 

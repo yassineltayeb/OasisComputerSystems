@@ -18,6 +18,7 @@ namespace OasisComputerSystems.API.Dtos.Clients
         public string TelephoneNumber { get; set; }
         public int CountryId { get; set; }
         public string TechnicalDetails { get; set; }
+        public int? AccountManagerId { get; set; }
         public DateTime? UpdatedOn { get; set; }
         public ICollection<ClientsModulesForRegisterDto> ClientModules { get; set; }
         public ICollection<ClientContactForRegisterDto> ClientContacts { get; set; }

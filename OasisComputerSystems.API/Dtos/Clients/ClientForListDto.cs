@@ -13,6 +13,8 @@ namespace OasisComputerSystems.API.Dtos.Clients
         public int CountryId { get; set; }
         public string Country { get; set; }
         public string TechnicalDetails { get; set; }
+        public int? AccountManagerId { get; set; }
+        public string AccountManager { get; set; }
         public int CreatedById { get; set; }
         public string CreatedBy { get; set; }
         public DateTime CreatedOn { get; set; }

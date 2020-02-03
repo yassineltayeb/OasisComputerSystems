@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using OasisComputerSystems.API.Core;
+using OasisComputerSystems.API.Dtos.Tickets;
 using OasisComputerSystems.API.Helpers;
 using OasisComputerSystems.API.Models;
 
@@ -72,6 +73,27 @@ namespace OasisComputerSystems.API.Data
 
             // Pagination
             return await PagedList<Ticket>.CreateAsync(tickets, ticketParams.PageNumber, ticketParams.ItemsPerPage);
+        }
+
+        // Get Clients Active Tickets
+        public async Task<IEnumerable<ClientsActiveTickets>> GetClientsActiveTickets()
+        {
+            return await _context.Tickets
+                        .GroupBy(t => new ClientsActiveTickets
+                        {
+                            ClientId = t.Client.Id,
+                            ClientName = t.Client.NameEn,
+                            AccountManager = t.Client.AccountManager.FullNameEn
+                        })
+                        .Select(group => new ClientsActiveTickets
+                        {
+                            ClientId = group.Key.ClientId,
+                            ClientName = group.Key.ClientName,
+                            NoOfTickets = group.Count(),
+                            AccountManager = group.Key.AccountManager
+                        })
+                        .OrderByDescending(group => group.NoOfTickets)
+                        .ToListAsync();
         }
 
         // Get Ticket By ID

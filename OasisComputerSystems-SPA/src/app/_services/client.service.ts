@@ -15,12 +15,12 @@ export class ClientService extends AbstractService<Client> {
     super(http, environment.apiUrl + 'client/');
   }
 
-  getAllClients(): Observable<KeyValuePairs[]>  {
+  getAllClients(): Observable<KeyValuePairs[]> {
 
-    return this.http.get<KeyValuePairs[]>(environment.apiUrl + 'client/GetAllClients')
-    .pipe(map(response => {
-      return response;
+    return this.http.get<KeyValuePairs[]>(environment.apiUrl + 'client/getAllClients')
+      .pipe(map(response => {
+        return response;
       })
-    );
+      );
   }
 }

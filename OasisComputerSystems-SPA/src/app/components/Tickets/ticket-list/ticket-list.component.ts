@@ -10,6 +10,8 @@ import { AuthService } from 'src/app/_services/auth.service';
 import { User } from 'src/app/_models/user';
 import { TicketTypeService } from 'src/app/_services/ticket-type.service';
 import { SystemModuleService } from 'src/app/_services/system-module.service';
+import { MessageService } from 'src/app/_services/message.service';
+import { ClientsActiveTickets } from 'src/app/_models/clientsactivetickets';
 
 @Component({
   selector: 'app-ticket-list',
@@ -17,6 +19,7 @@ import { SystemModuleService } from 'src/app/_services/system-module.service';
   styleUrls: ['./ticket-list.component.css']
 })
 export class TicketListComponent implements OnInit {
+  clientsActiveTickets: ClientsActiveTickets[] = [];
   tickets: Ticket[] = [];
   users: User[] = [];
   priorities: KeyValuePairs[] = [];
@@ -31,7 +34,13 @@ export class TicketListComponent implements OnInit {
     itemsPerPage: 10
   };
   loading = false;
-  columns: any[] = [
+  activeTicketColumns: any[] = [
+    { columnName: 'Client ID', sortKey: '' },
+    { columnName: 'Client Name', sortKey: '' },
+    { columnName: 'No. of Tickets', sortKey: '' },
+    { columnName: 'Account Manager', sortKey: '' }
+  ];
+  ticketColumns: any[] = [
     { columnName: 'Assigned To', sortKey: 'assignedTo' },
     { columnName: 'No.', sortKey: 'ticketNo' },
     { columnName: 'Status', sortKey: 'status' },
@@ -44,8 +53,7 @@ export class TicketListComponent implements OnInit {
     { columnName: 'Reminder(s)', sortKey: 'reminders' },
     { columnName: 'Submitted By', sortKey: 'submittedBy' },
     { columnName: 'Submitted On', sortKey: 'submittedOn' },
-    { columnName: 'Closed By', sortKey: 'closedBy' },
-    { columnName: 'Closed On', sortKey: 'closedOn' }
+    { columnName: 'Actions', sortKey: '' }
   ];
   statuses: string[] = [
     'Waiting',
@@ -64,6 +72,7 @@ export class TicketListComponent implements OnInit {
               private ticketTypeService: TicketTypeService,
               private systemModuleService: SystemModuleService,
               private alertify: AlertifyService,
+              private messageService: MessageService,
               private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -72,6 +81,7 @@ export class TicketListComponent implements OnInit {
     this.getUsersList();
     this.getTicketTypesList();
     this.getSystemModulesList();
+    this.getClientsActiveTickets();
 
     this.route.data.subscribe(data => {
       this.tickets = data.tickets.result;
@@ -159,11 +169,25 @@ export class TicketListComponent implements OnInit {
       });
   }
 
-
-  getTicketList() {
+  // Get Clients Active Tickets
+  getClientsActiveTickets() {
     this.loadToggle();
 
-    console.log(this.ticketParams);
+    this.ticketService.getClientsActiveTickets()
+      .subscribe((res: ClientsActiveTickets[]) => {
+        this.clientsActiveTickets = res;
+        this.loadToggle();
+
+      }, error => {
+        this.loadToggle();
+        this.alertify.error(error);
+
+      });
+  }
+
+  // Get Ticket List
+  getTicketList() {
+    this.loadToggle();
 
     this.ticketService.getAllWithPagination(this.ticketParams)
       .subscribe((res: PaginatedResult<Ticket[]>) => {
@@ -179,6 +203,23 @@ export class TicketListComponent implements OnInit {
       });
   }
 
+  // Show Delete Confirm
+  showDeleteConfirm(id: number) {
+    this.messageService.confirmDelete('Are you sure you want to delete this client?', '', () => this.deleteTicket(id));
+  }
+
+  // Delete Ticket
+  deleteTicket(id: number) {
+    this.ticketService.delete(id).subscribe(res => {
+      this.alertify.success('Ticket Deleted Successfully');
+      this.getTicketList();
+    }, error => {
+      console.log(error);
+      this.alertify.error(error);
+    });
+  }
+
+  // Cleat Filter
   clear() {
     this.ticketParams.assignedToId = null;
     this.ticketParams.clientName = '';
@@ -189,6 +230,7 @@ export class TicketListComponent implements OnInit {
     this.getTicketList();
   }
 
+  // Load Toggle
   loadToggle() {
     this.loading = !this.loading;
   }

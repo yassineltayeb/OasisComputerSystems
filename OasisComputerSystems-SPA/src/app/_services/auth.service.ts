@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
-  basUrl = environment.apiUrl +  'auth/';
+  basUrl = environment.apiUrl + 'auth/';
   jwtHelper = new JwtHelperService();
   decodedToken: any;
   currentUser: User;
@@ -36,10 +36,10 @@ export class AuthService {
 
   getAll() {
     return this.http.get(this.basUrl)
-    .pipe(map(response => {
+      .pipe(map(response => {
         return response;
       })
-    );
+      );
   }
 
   logout() {

@@ -89,34 +89,59 @@
   <br>
 
   <div nz-row>
-    <nz-table nzSize="small" #ticketTable [nzLoading]="loading" nzShowSizeChanger [nzShowPagination]="true"
-      [nzFrontPagination]="false" [nzPageIndex]="pagination.currentPage" [nzPageSize]="pagination.itemsPerPage"
-      [nzTotal]="pagination.totalItems" [nzPageSizeOptions]="PageSizeOptions"
-      (nzPageIndexChange)="pageChanged($event, 'PageIndexChange')"
-      (nzPageSizeChange)="pageChanged($event, 'PageSizeChange')" [nzData]="tickets">
-      <thead (nzSortChange)="sort($event)" nzSingleSort>
-        <tr>
-          <th *ngFor="let column of columns" nzShowSort nzSortKey="{{ column.sortKey }}"> {{ column.columnName }}</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let ticket of ticketTable.data">
-          <td>{{ ticket.assignedTo }}</td>
-          <td>{{ ticket.ticketNo}}</td>
-          <td>{{ ticket.status}}</td>
-          <td>{{ ticket.priority}}</td>
-          <td>{{ ticket.ticketType}}</td>
-          <td>{{ ticket.client.nameEn }}</td>
-          <td>{{ ticket.systemModule }}</td>
-          <td>{{ ticket.subject }}</td>
-          <td>{{ ticket.problemDescription }}</td>
-          <td>{{ ticket.reminders }}</td>
-          <td>{{ ticket.submittedBy }}</td>
-          <td>{{ ticket.submittedOn | date }}</td>
-          <td>{{ ticket.closedBy }}</td>
-          <td>{{ ticket.closedOn | date }}</td>
-        </tr>
-      </tbody>
-    </nz-table>
+    <div nz-col nzSpan="6">
+      <nz-card style="width:95%;" nzTitle="Active Tickets (0)">
+        <nz-table nzSize="small" [nzShowPagination]="false" #activeTicketTable [nzData]="clientsActiveTickets">
+        <thead>
+          <tr>
+            <th *ngFor="let column of activeTicketColumns"> {{ column.columnName }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let activeTickets of activeTicketTable.data">
+            <td>{{ activeTickets.clientId }}</td>
+            <td>{{ activeTickets.clientName }}</td>
+            <td>{{ activeTickets.noOfTickets | number }}</td>
+            <td>{{ activeTickets.accountManager }}</td>
+          </tr>
+        </tbody>
+      </nz-table>
+      </nz-card>
+    </div>
+
+    <div nz-col nzSpan="18">
+      <nz-table nzSize="small" #ticketTable [nzLoading]="loading" nzShowSizeChanger [nzShowPagination]="true"
+        [nzFrontPagination]="false" [nzPageIndex]="pagination.currentPage" [nzPageSize]="pagination.itemsPerPage"
+        [nzTotal]="pagination.totalItems" [nzPageSizeOptions]="PageSizeOptions"
+        (nzPageIndexChange)="pageChanged($event, 'PageIndexChange')"
+        (nzPageSizeChange)="pageChanged($event, 'PageSizeChange')" [nzData]="tickets">
+        <thead (nzSortChange)="sort($event)" nzSingleSort>
+          <tr>
+            <th *ngFor="let column of ticketColumns" nzShowSort nzSortKey="{{ column.sortKey }}"> {{ column.columnName }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let ticket of ticketTable.data">
+            <td>{{ ticket.assignedTo }}</td>
+            <td>{{ ticket.ticketNo }}</td>
+            <td>{{ ticket.status }}</td>
+            <td>{{ ticket.priority }}</td>
+            <td>{{ ticket.ticketType }}</td>
+            <td>{{ ticket.client.nameEn }}</td>
+            <td>{{ ticket.systemModule }}</td>
+            <td>{{ ticket.subject }}</td>
+            <td>{{ ticket.problemDescription }}</td>
+            <td>{{ ticket.reminders }}</td>
+            <td>{{ ticket.submittedBy }}</td>
+            <td>{{ ticket.submittedOn | date }}</td>
+            <td>
+              <button nz-button [nzSize]="'small'" type="button" nzType="primary"
+                [routerLink]="['/clients', ticket.id]">Edit</button>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+
   </div>
 </div>

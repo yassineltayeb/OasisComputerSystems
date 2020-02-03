@@ -10,7 +10,7 @@ import { PaginatedResult } from '../_models/pagination';
 
 export abstract class AbstractService<T> {
 
-  constructor(protected http: HttpClient, protected Url: string) {}
+  constructor(protected http: HttpClient, protected Url: string) { }
 
   public add(item: T): Observable<T> {
     return this.http.post<T>(this.Url, item).pipe(map(res => res as T));
@@ -28,31 +28,31 @@ export abstract class AbstractService<T> {
     return this.http.delete(this.Url + id);
   }
 
-  getAllWithPagination(modelParams?): Observable<PaginatedResult<T[]>>  {
+  getAllWithPagination(modelParams?): Observable<PaginatedResult<T[]>> {
 
     const paginatedResult: PaginatedResult<T[]> = new PaginatedResult<T[]>();
 
     return this.http.get<T[]>(this.Url + '?' + this.toQueryString(modelParams), { observe: 'response' })
-    .pipe(
-      map(response => {
-        paginatedResult.result = response.body;
+      .pipe(
+        map(response => {
+          paginatedResult.result = response.body;
 
-        if (response.headers.get('Pagination') != null) {
-          paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
-        }
+          if (response.headers.get('Pagination') != null) {
+            paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
+          }
 
-        return paginatedResult;
-      })
-    );
+          return paginatedResult;
+        })
+      );
   }
 
-  getAll(): Observable<T[]>  {
+  getAll(): Observable<T[]> {
 
     return this.http.get<T[]>(this.Url)
-    .pipe(map(response => {
+      .pipe(map(response => {
         return response;
       })
-    );
+      );
   }
 
   private toQueryString(obj) {

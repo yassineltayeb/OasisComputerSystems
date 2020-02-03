@@ -21,6 +21,8 @@ namespace OasisComputerSystems.API.Dtos.Clients
         public int CountryId { get; set; }
         public Country Country { get; set; }
         public string TechnicalDetails { get; set; }
+        public int? AccountManagerId { get; set; }
+        public StaffProfile AccountManager { get; set; }
         public DateTime CreatedOn { get; set; }
         public ICollection<ClientsModulesForRegisterDto> ClientModules { get; set; }
         public ICollection<ClientContactForRegisterDto> ClientContacts { get; set; }

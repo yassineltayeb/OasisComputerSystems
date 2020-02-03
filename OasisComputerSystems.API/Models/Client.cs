@@ -20,6 +20,8 @@ namespace OasisComputerSystems.API.Models
         public int CountryId { get; set; }
         public Country Country { get; set; }
         public string TechnicalDetails { get; set; }
+        public int? AccountManagerId { get; set; }
+        public StaffProfile AccountManager { get; set; }
         public int CreatedById { get; set; }
         public StaffProfile CreatedBy { get; set; }
         public DateTime CreatedOn { get; set; }
