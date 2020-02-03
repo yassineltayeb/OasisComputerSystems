@@ -1,0 +1,16 @@
+div.container {
+    margin-top: 25px;
+  }
+  
+  .ticket-form {
+    max-width: 100%;
+  }
+  
+  button {
+    margin-left: 15px;
+  }
+
+  .ticketFollowUp {
+    margin-left: 15px;
+  }
+  

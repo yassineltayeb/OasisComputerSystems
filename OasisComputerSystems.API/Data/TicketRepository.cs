@@ -42,6 +42,9 @@ namespace OasisComputerSystems.API.Data
             if (ticketParams.Status != null)
                 tickets = tickets.Where(t => t.Status == ticketParams.Status);
 
+            if (ticketParams.ClientId.HasValue)
+                tickets = tickets.Where(t => t.ClientId == ticketParams.ClientId);
+
             if (ticketParams.ClientName != null)
                 tickets = tickets.Where(t => t.Client.NameEn.Contains(ticketParams.ClientName));
 
@@ -78,7 +81,17 @@ namespace OasisComputerSystems.API.Data
         // Get Clients Active Tickets
         public async Task<IEnumerable<ClientsActiveTickets>> GetClientsActiveTickets()
         {
+            var activeStatuses = new List<string> {
+                TicketHelpers.Status.Waiting,
+                TicketHelpers.Status.Reopened,
+                TicketHelpers.Status.WorkInProgress,
+                TicketHelpers.Status.PendingDelivery,
+                TicketHelpers.Status.PendingDelivery,
+                TicketHelpers.Status.PendingOnCustomer,
+            };
+
             return await _context.Tickets
+                        .Where(t => activeStatuses.Contains(t.Status))
                         .GroupBy(t => new ClientsActiveTickets
                         {
                             ClientId = t.Client.Id,
@@ -108,6 +121,7 @@ namespace OasisComputerSystems.API.Data
                 .Include(t => t.SubmittedBy)
                 .Include(t => t.ClosedBy)
                 .Include(t => t.ApprovedBy)
+                .Include(t => t.TicketNotes)
                 .SingleOrDefaultAsync(t => t.Id == id);
         }
 

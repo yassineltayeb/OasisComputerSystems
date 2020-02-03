@@ -3,8 +3,9 @@ import { Client } from './client';
 export interface Ticket {
   id: number;
   clientId: number;
-  Client?: Client;
-  TicketNo?: number;
+  client?: Client;
+  ticketNo?: number;
+  status?: string;
   priorityId: number;
   priority?: string;
   ticketTypeId: number;
@@ -28,13 +29,13 @@ export interface Ticket {
 }
 
 export interface TicketNote {
-  id: number;
-  ticketId: number;
-  notes: string;
-  oasisComment: boolean;
-  createdById: number;
-  createdBy: string;
-  createdOn: Date;
+  id?: number;
+  ticketId?: number;
+  notes?: string;
+  oasisComment?: boolean;
+  createdById?: number;
+  createdBy?: string;
+  createdOn?: Date;
 }
 
 

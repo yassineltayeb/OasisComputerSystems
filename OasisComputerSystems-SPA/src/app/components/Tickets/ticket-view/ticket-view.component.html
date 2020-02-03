@@ -1,0 +1,164 @@
+<div class="container-fluid">
+
+  <br />
+
+  <div nz-row nzGutter="24" nzType="flex" nzJustify="space-between">
+    <button nz-button type="button" nzType="primary" [routerLink]="['/tickets']">Back To List</button>
+  </div>
+
+  <br />
+  <div nz-row>
+    <div nz-col nzSpan="15">
+      <nz-card nzTitle="Ticket Details">
+        <form nz-form [nzLayout]="'inline'" class="ticket-form" #ticketForm="ngForm" (ngSubmit)="save()">
+
+          <div nz-row nzGutter="24">
+
+            <div nz-col [nzSpan]="24">
+              <nz-card nzType="inner" nzTitle="Ticket Details">
+
+                <nz-form-item nzFlex>
+                  <nz-form-label [nzSm]="5" nzNoColon nzFor="ticketNo">Ticket No.</nz-form-label>
+                  <nz-form-control [nzSm]="4">
+                    <input nz-input type="text" id="ticketNo" name="ticketNo" placeholder="Ticket No." readonly
+                      [(ngModel)]="ticket.ticketNo" />
+                  </nz-form-control>
+
+                  <nz-form-label [nzSm]="3" nzSm nzNoColon nzFor="status">Status</nz-form-label>
+                  <nz-form-control [nzSm]="4">
+                    <nz-select id="status" name="status" nzPlaceHolder="Status" nzFor="status"
+                      [(ngModel)]="ticket.status">
+                      <nz-option *ngFor="let status of statuses" [nzValue]="status" [nzLabel]="status"></nz-option>
+                    </nz-select>
+                  </nz-form-control>
+                </nz-form-item>
+
+                <nz-form-item nzFlex>
+                  <nz-form-label [nzSm]="5" nzNoColon nzFor="priorityId">Priority</nz-form-label>
+                  <nz-form-control [nzSm]="4">
+                    <input nz-input type="text" id="priorityId" name="priorityId" placeholder="Priority" readonly
+                      [(ngModel)]="ticket.priority" />
+                  </nz-form-control>
+
+                  <nz-form-label [nzSm]="3" nzSm nzNoColon nzFor="ticketTypeId">Ticket Type</nz-form-label>
+                  <nz-form-control [nzSm]="4">
+                    <nz-select id="ticketTypeId" name="ticketTypeId" nzPlaceHolder="Ticket Type" nzFor="ticketTypeId"
+                      required [(ngModel)]="ticket.ticketTypeId">
+                      <nz-option *ngFor="let ticketType of ticketTypes" [nzValue]="ticketType.id"
+                        [nzLabel]="ticketType.name">
+                      </nz-option>
+                    </nz-select>
+                  </nz-form-control>
+                </nz-form-item>
+
+                <nz-form-item nzFlex>
+                  <nz-form-label [nzSm]="5" nzNoColon nzFor="clientId">Client</nz-form-label>
+                  <nz-form-control [nzSm]="11">
+                    <input nz-input type="text" id="clientId" name="clientId" placeholder="Client Name" readonly
+                      [(ngModel)]="ticket.client.nameEn" />
+                  </nz-form-control>
+                </nz-form-item>
+
+                <nz-form-item nzFlex>
+                  <nz-form-label [nzSm]="5" nzNoColon nzFor="systemModuleId">Module</nz-form-label>
+                  <nz-form-control [nzSm]="11">
+                    <input nz-input type="text" id="systemModuleId" name="systemModuleId" placeholder="Module" readonly
+                      [(ngModel)]="ticket.systemModule" />
+                  </nz-form-control>
+                </nz-form-item>
+
+                <nz-form-item nzFlex>
+                  <nz-form-label [nzSm]="5" nzNoColon nzFor="subject">Subject
+                  </nz-form-label>
+                  <nz-form-control [nzSm]="11">
+                    <input nz-input type="text" id="subject" name="subject" placeholder="Subject" readonly
+                      [(ngModel)]="ticket.subject" />
+                  </nz-form-control>
+                </nz-form-item>
+
+                <nz-form-item nzFlex>
+                  <nz-form-label [nzSm]="5" nzNoColon nzFor="problemDescription">Problem Description
+                  </nz-form-label>
+                  <nz-form-control [nzSm]="11">
+                    <textarea nz-input type="text" id="problemDescription" name="problemDescription"
+                      placeholder="Problem Description" nzAutosize readonly
+                      [(ngModel)]="ticket.problemDescription"></textarea>
+                  </nz-form-control>
+                </nz-form-item>
+
+                <nz-form-item nzFlex>
+                  <nz-form-label [nzSm]="5" nzNoColon nzFor="assignedToId">Assigned To</nz-form-label>
+                  <nz-form-control [nzSm]="11">
+                    <nz-select id="assignedToId" name="assignedToId" nzPlaceHolder="Assigned To" nzFor="assignedToId"
+                      required [(ngModel)]="ticket.assignedToId">
+                      <nz-option *ngFor="let user of users" [nzValue]="user.id" [nzLabel]="user.fullNameEn">
+                      </nz-option>
+                    </nz-select>
+                  </nz-form-control>
+                </nz-form-item>
+
+              </nz-card>
+
+            </div>
+
+          </div>
+
+          <br />
+
+          <div nz-row nzGutter="24">
+            <div nz-col [nzSpan]="24">
+              <nz-card nzType="inner" nzTitle="Attachments">
+                <nz-upload nzType="drag" [nzMultiple]="true" [nzLimit]="10" [(nzFileList)]="attachments"
+                  [nzBeforeUpload]="beforeUpload" nzAction="">
+                  <p class="ant-upload-drag-icon">
+                    <i nz-icon nzType="inbox"></i>
+                  </p>
+                  <p class="ant-upload-text">Click or drag file to this area to upload</p>
+                  <p class="ant-upload-hint">
+                    Support for a single or bulk upload. Strictly prohibit from uploading company data or other band
+                    files
+                  </p>
+                </nz-upload>
+              </nz-card>
+
+            </div>
+          </div>
+
+          <nz-form-item nz-row nzFlex nzType="flex" nzJustify="end">
+            <nz-form-control>
+              <button [disabled]="!ticketForm.valid" nz-button nzType="primary" type="submit"
+                [nzLoading]="loading">Update</button>
+              <button nz-button type="button" (click)="clear()">Clear</button>
+            </nz-form-control>
+          </nz-form-item>
+
+        </form>
+      </nz-card>
+    </div>
+
+    <div nz-col nzSpan="9">
+      <nz-card class="ticketFollowUp" nzTitle="Ticket Follow Up" [nzActions]="[actionEdit]">
+        <div *ngFor="let ticketNote of ticket.ticketNotes">
+          <nz-comment nzAuthor="Oasis" [nzDatetime]="ticketNote.createdOn |  date: 'dd-MMM-yyyy hh:mm a'">
+            <nz-comment-content>
+              <p><strong>{{ ticketNote.notes }}</strong></p>
+            </nz-comment-content>
+          </nz-comment>
+        </div>
+      </nz-card>
+
+      <ng-template #actionEdit>
+        <div nz-row nzFlex>
+          <textarea nz-input type="text" id="problemDescription" name="problemDescription"
+            placeholder="Problem Description" nzAutosize [(ngModel)]="ticket.problemDescription"></textarea>
+        </div>
+        <br />
+        <div nz-row nzFlex nzType="flex" nzJustify="end">
+          <button [disabled]="!ticketForm.valid" nz-button nzType="primary" type="submit"
+            [nzLoading]="loading">Send</button>
+          <button nz-button type="button" (click)="clear()">Clear</button>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

@@ -59,7 +59,7 @@ namespace OasisComputerSystems.API.Controllers
             return Ok(clientsActiveTickets);
         }
 
-        // [HttpGet("{id}", Name = "GetTicket")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetTicket(int id)
         {
             var ticket = await _repo.Get(id);
@@ -96,9 +96,36 @@ namespace OasisComputerSystems.API.Controllers
             if (ticketForRegisterDto.Attachments != null)
                 Files.UploadFiles(ticket.Id, ticketForRegisterDto.Attachments);
 
-            Emails.SendEmail("Subject", "Body", "y.eltayeb@oasisoft.net", ticketForRegisterDto.Attachments, Emails.Priority.High);
+            Emails.SendEmail(ticket.Subject, ticket.ProblemDescription, "y.eltayeb@oasisoft.net", ticketForRegisterDto.Attachments, Emails.Priority.High);
 
             _repo.Commit();
+
+            var ticketToReturn = _mapper.Map<TicketForRegisterDto>(ticket);
+
+            return Ok(ticketToReturn);
+        }
+
+        [HttpPost("{id}")]
+        public async Task<IActionResult> AddTicketNote(int id, TicketNoteForRegisterDto ticketNoteForRegisterDto)
+        {
+            var ticket = await _repo.Get(id);
+
+            if (ticket == null)
+                return BadRequest("Invalid ticket");
+
+            var ticketNote = new TicketNote
+            {
+                TicketId = ticket.Id,
+                Notes = ticketNoteForRegisterDto.Notes,
+                OasisComment = ticketNoteForRegisterDto.OasisComment,
+                CreatedById = _authRepository.GetCurrentUserId()
+            };
+
+            ticket.TicketNotes.Add(ticketNote);
+
+            await _repo.SaveAll();
+
+            Emails.SendEmail(ticket.Subject, ticketNoteForRegisterDto.Notes, "y.eltayeb@oasisoft.net", null, Emails.Priority.High);
 
             var ticketToReturn = _mapper.Map<TicketForRegisterDto>(ticket);
 

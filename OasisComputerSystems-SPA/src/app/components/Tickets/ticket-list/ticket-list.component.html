@@ -90,15 +90,15 @@
 
   <div nz-row>
     <div nz-col nzSpan="6">
-      <nz-card style="width:95%;" nzTitle="Active Tickets (0)">
-        <nz-table nzSize="small" [nzShowPagination]="false" #activeTicketTable [nzData]="clientsActiveTickets">
+      <nz-card style="width:95%;" nzTitle="Active Tickets ({{ noOfActiveTickets}})" (click)="show($event, null)">
+        <nz-table nzSize="small" [nzShowPagination]="false" #activeTicketTable [nzData]="clientsActiveTickets" (click)="show($event, null)">
         <thead>
           <tr>
             <th *ngFor="let column of activeTicketColumns"> {{ column.columnName }}</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let activeTickets of activeTicketTable.data">
+          <tr *ngFor="let activeTickets of activeTicketTable.data" (click)="show($event, activeTickets.clientId)">
             <td>{{ activeTickets.clientId }}</td>
             <td>{{ activeTickets.clientName }}</td>
             <td>{{ activeTickets.noOfTickets | number }}</td>
@@ -136,7 +136,7 @@
             <td>{{ ticket.submittedOn | date }}</td>
             <td>
               <button nz-button [nzSize]="'small'" type="button" nzType="primary"
-                [routerLink]="['/clients', ticket.id]">Edit</button>
+                [routerLink]="['/tickets', ticket.id]">View</button>
             </td>
           </tr>
         </tbody>

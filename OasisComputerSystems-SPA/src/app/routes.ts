@@ -8,9 +8,10 @@ import { ClientListResolver } from './_resolvers/client-list.resolver';
 import { ClientNewComponent } from './components/clients/client-new/client-new.component';
 import { TicketNewComponent } from './components/Tickets/ticket-new/ticket-new.component';
 import { TicketListResolver } from './_resolvers/ticket-list.resolver';
+import { TicketViewComponent } from './components/Tickets/ticket-view/ticket-view.component';
 
 export const appRoutes: Routes = [
-    { path: '', component: LoginComponent },
+    { path: '', component: HomeComponent },
     { path: 'login', component: LoginComponent },
     {
         path: '',
@@ -29,7 +30,7 @@ export const appRoutes: Routes = [
                 resolve: { tickets: TicketListResolver }
             },
             { path: 'tickets/new', component: TicketNewComponent },
-            { path: 'tickets/:id', component: TicketNewComponent },
+            { path: 'tickets/:id', component: TicketViewComponent },
             // {
             //     path: 'member/edit', component: MemberEditComponent,
             //     resolve: {user: MemberEditResolver},

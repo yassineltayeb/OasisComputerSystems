@@ -26,6 +26,7 @@ import { TicketService } from './_services/ticket.service';
 import { TicketNewComponent } from './components/Tickets/ticket-new/ticket-new.component';
 import { TicketListResolver } from './_resolvers/ticket-list.resolver';
 import { MessageService } from './_services/message.service';
+import { TicketViewComponent } from './components/Tickets/ticket-view/ticket-view.component';
 
 
 export function tokenGetter() {
@@ -41,7 +42,8 @@ export function tokenGetter() {
       ClientListComponent,
       ClientNewComponent,
       TicketListComponent,
-      TicketNewComponent
+      TicketNewComponent,
+      TicketViewComponent
    ],
    imports: [
       BrowserModule,

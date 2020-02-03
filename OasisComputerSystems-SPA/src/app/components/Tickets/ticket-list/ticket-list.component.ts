@@ -33,6 +33,7 @@ export class TicketListComponent implements OnInit {
     pageNumber: 1,
     itemsPerPage: 10
   };
+  noOfActiveTickets: number;
   loading = false;
   activeTicketColumns: any[] = [
     { columnName: 'Client ID', sortKey: '' },
@@ -176,6 +177,14 @@ export class TicketListComponent implements OnInit {
     this.ticketService.getClientsActiveTickets()
       .subscribe((res: ClientsActiveTickets[]) => {
         this.clientsActiveTickets = res;
+
+        // Get No Of Active Tickets
+        this.noOfActiveTickets = 0;
+
+        this.clientsActiveTickets.forEach((item: ClientsActiveTickets) => {
+          this.noOfActiveTickets += item.noOfTickets;
+        });
+
         this.loadToggle();
 
       }, error => {
@@ -192,7 +201,6 @@ export class TicketListComponent implements OnInit {
     this.ticketService.getAllWithPagination(this.ticketParams)
       .subscribe((res: PaginatedResult<Ticket[]>) => {
         this.tickets = res.result;
-        console.log(this.tickets);
         this.pagination = res.pagination;
         this.loadToggle();
 
@@ -201,6 +209,12 @@ export class TicketListComponent implements OnInit {
         this.alertify.error(error);
 
       });
+  }
+
+  show($event, clientId) {
+    event.stopPropagation();
+    this.ticketParams.clientId = clientId;
+    this.getTicketList();
   }
 
   // Show Delete Confirm
@@ -214,7 +228,6 @@ export class TicketListComponent implements OnInit {
       this.alertify.success('Ticket Deleted Successfully');
       this.getTicketList();
     }, error => {
-      console.log(error);
       this.alertify.error(error);
     });
   }

@@ -5,6 +5,7 @@ import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzCommentModule } from 'ng-zorro-antd/comment';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzFormModule } from 'ng-zorro-antd/form';
@@ -40,6 +41,7 @@ const ngZorroConfig: NzConfig = {
     NzButtonModule,
     NzBreadCrumbModule,
     NzCardModule,
+    NzCommentModule,
     NzDividerModule,
     NzGridModule,
     NzFormModule,
